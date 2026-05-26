@@ -96,12 +96,12 @@ function Footer() {
             </p>
             <p className="text-sm text-gray-400 max-w-xs">
               Headless eCommerce template dành cho thương hiệu thời trang Việt Nam.
-              Powered by Odoo v19 + Next.js 14.
+              Powered by Odoo v19 + Next.js 15.
             </p>
           </div>
           <div className="text-sm text-gray-500">
             <p>Backend: <span className="text-gray-300">Odoo v19 + OCA FastAPI</span></p>
-            <p>Frontend: <span className="text-gray-300">Next.js 14 App Router</span></p>
+            <p>Frontend: <span className="text-gray-300">Next.js 15 App Router</span></p>
             <p className="mt-4 text-xs">MVP v0.1 — FashionOS 2026</p>
           </div>
         </div>

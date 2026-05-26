@@ -249,8 +249,37 @@ Convention: `{odoo_major}.0.{major}.{minor}.{patch}` — ví dụ: `19.0.1.0.0`.
 | POST | `/cart/items` | JWT | Thêm sản phẩm vào cart |
 | PUT | `/cart/items/<line_id>` | JWT | Cập nhật quantity (0 = xóa) |
 | DELETE | `/cart/items/<line_id>` | JWT | Xóa item khỏi cart |
+| POST | `/cart/checkout` | JWT | ✅ Chốt đơn — convert cart → confirmed sale order |
 
 **Cart pattern:** `sale.order` (state=`draft`, `x_is_cart=True`) — 1 cart/khách.
+
+**Checkout body:**
+```json
+{
+  "delivery_address_id": 42,        // required — res.partner ID thuộc về account này
+  "gender_title": "anh",            // optional — 'anh' hoặc 'chi'
+  "alt_receiver_name": "Nguyễn B",  // optional — phải đi kèm alt_receiver_phone
+  "alt_receiver_phone": "0901234567",
+  "note": "Giao giờ hành chính",    // optional
+  "referral_code": "FRIEND10"       // optional
+}
+```
+
+**Checkout response (200):**
+```json
+{
+  "success": true,
+  "data": {
+    "order_id": 123,
+    "order_name": "S00042",
+    "amount_total": 350000.0,
+    "amount_untaxed": 318181.82,
+    "amount_tax": 31818.18,
+    "state": "sale",
+    "partner_shipping_id": 42
+  }
+}
+```
 
 #### Account (`/fashionos/api/v1/account/`)
 | Method | Path | Auth | Mô tả |

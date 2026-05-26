@@ -1,6 +1,6 @@
 {
     'name': 'FashionOS - Sale',
-    'version': '17.0.1.0.0',
+    'version': '19.0.1.0.0',
     'category': 'eCommerce',
     'summary': 'Fashion-specific sale order fields: CoolCash, referral, smart routing',
     'description': '''

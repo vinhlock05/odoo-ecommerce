@@ -1325,35 +1325,317 @@ def _expand_combo_lines(self):
 
 **Test case:** Tạo combo COMBO-SUM-001 → confirm order → verify 2 component lines được tạo với `price_unit=0`
 
-### Task S6-04: KF-4 P&L Dashboard (`fashion_store_dashboard`)
+### Task S6-04: KF-4 AI Financial Dashboard Agent (`fashion_store_dashboard`)
 
-**SQL aggregate query:**
-```python
-def get_hourly_pl(self, date_from, date_to):
-    query = """
-        SELECT
-            DATE_TRUNC('hour', so.date_order) AS hour,
-            SUM(so.amount_total - COALESCE(so.x_coolcash_amount_used, 0)) AS gross_revenue,
-            SUM(scl.price_subtotal) AS shipping_cost,
-            COUNT(so.id) AS order_count,
-            SUM(svl.value) AS cogs
-        FROM sale_order so
-        LEFT JOIN delivery_carrier dc ON dc.id = so.carrier_id
-        LEFT JOIN sale_order_line scl ON scl.order_id = so.id
-            AND scl.is_delivery = TRUE
-        LEFT JOIN stock_valuation_layer svl ON svl.stock_move_id IN (
-            SELECT sm.id FROM stock_move sm
-            JOIN stock_picking sp ON sp.id = sm.picking_id
-            WHERE sp.sale_id = so.id
-        )
-        WHERE so.state IN ('sale', 'done')
-          AND so.date_order BETWEEN %s AND %s
-        GROUP BY DATE_TRUNC('hour', so.date_order)
-        ORDER BY hour
-    """
-    self.env.cr.execute(query, [date_from, date_to])
-    return self.env.cr.dictfetchall()
+> **Triết lý thiết kế:** CEO không thiếu biểu đồ — họ thiếu *câu trả lời*. Module này hoạt động như một **CFO ảo**: nhận câu hỏi tiếng Việt từ CEO, tự động chui vào dữ liệu ERP Odoo để phân tích, rồi trả về nhận định chuyên sâu bằng văn bản thay vì chỉ hiện con số tĩnh.
+
+---
+
+#### Bản chất kỹ thuật: AI Data Agent = 3 lớp
+
 ```
+┌──────────────────────────────────────────────────────────────┐
+│  Lớp 1 — Single Source of Truth (Odoo PostgreSQL)            │
+│  Doanh thu, COGS, phí ship GHN/GHTK, CoolCash, đổi trả,     │
+│  tỷ lệ hoàn hàng, giá vốn theo SKU, chi phí marketing        │
+└─────────────────────┬────────────────────────────────────────┘
+                      │ ORM query (async)
+                      ▼
+┌──────────────────────────────────────────────────────────────┐
+│  Lớp 2 — FastAPI Async Middleware                            │
+│  POST /api/v1/ai/query                                       │
+│  Nhận câu hỏi → truy vấn ORM → build context → gọi LLM      │
+│  Không block Odoo core (chạy ngoài worker chính)             │
+└─────────────────────┬────────────────────────────────────────┘
+                      │ prompt + raw data context
+                      ▼
+┌──────────────────────────────────────────────────────────────┐
+│  Lớp 3 — LLM (OpenAI GPT-4o hoặc Google Gemini)             │
+│  Đọc dữ liệu ERP thô → suy luận → trả Narrative Insight     │
+│  bằng tiếng Việt                                             │
+└──────────────────────────────────────────────────────────────┘
+```
+
+---
+
+#### Luồng dữ liệu khi CEO đặt câu hỏi (4 bước)
+
+**Bước 1 — Frontend (Next.js)**
+CEO gõ câu hỏi tiếng Việt và bấm **[ASK AI]**:
+> *"Tại sao tuần này biên lợi nhuận của Box Combo 3 áo thun lại giảm mạnh?"*
+
+```typescript
+// frontend/fashionos-web/app/dashboard/page.tsx
+const response = await fetch('/api/v1/ai/query', {
+  method: 'POST',
+  headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    question: "Tại sao tuần này biên lợi nhuận của Box Combo 3 áo thun lại giảm mạnh?",
+    date_from: "2025-05-19",
+    date_to:   "2025-05-26",
+  }),
+});
+const { insight } = await response.json();
+// Render insight dưới dạng markdown trong chat bubble
+```
+
+**Bước 2 — FastAPI Middleware: Thu thập dữ liệu ERP**
+
+Endpoint nhận câu hỏi, dùng Odoo ORM quét 3 luồng dữ liệu tài chính liên quan:
+
+```python
+# backend/addons/fashion_store_dashboard/services/data_collector.py
+
+def collect_financial_context(env, product_keywords: list[str], date_from: str, date_to: str) -> dict:
+    """
+    Thu thập raw financial data từ Odoo làm ngữ cảnh cho LLM.
+    Trả về dict gồm 3 data source chính.
+    """
+    domain_base = [
+        ('state', 'in', ['sale', 'done']),
+        ('date_order', '>=', date_from),
+        ('date_order', '<=', date_to),
+    ]
+
+    # --- Data 1: Doanh thu & số lượng bán theo sản phẩm ---
+    lines = env['sale.order.line'].sudo().search([
+        ('order_id.state', 'in', ['sale', 'done']),
+        ('order_id.date_order', '>=', date_from),
+        ('order_id.date_order', '<=', date_to),
+        ('product_id.name', 'ilike', product_keywords[0]),  # lọc theo keyword
+    ])
+    sales_summary = {
+        'total_qty': sum(l.product_uom_qty for l in lines),
+        'gross_revenue': sum(l.price_subtotal for l in lines),
+        'avg_unit_price': (
+            sum(l.price_unit for l in lines) / len(lines) if lines else 0
+        ),
+        'cogs_total': sum(
+            l.product_id.standard_price * l.product_uom_qty for l in lines
+        ),
+    }
+
+    # --- Data 2: Chi phí vận chuyển thực tế từ GHN/GHTK ---
+    orders = env['sale.order'].sudo().search(domain_base)
+    shipping_lines = orders.mapped('order_line').filtered(lambda l: l.is_delivery)
+    shipping_summary = {
+        'total_shipping_cost': sum(l.price_subtotal for l in shipping_lines),
+        'avg_shipping_per_order': (
+            sum(l.price_subtotal for l in shipping_lines) / len(orders) if orders else 0
+        ),
+    }
+
+    # --- Data 3: Tỷ lệ & chi phí đổi trả/hoàn hàng ---
+    return_orders = env['sale.order'].sudo().search([
+        *domain_base,
+        ('x_has_return', '=', True),
+    ])
+    return_summary = {
+        'return_count': len(return_orders),
+        'return_rate_pct': round(len(return_orders) / max(len(orders), 1) * 100, 2),
+        'return_shipping_cost': sum(
+            o.x_return_shipping_cost for o in return_orders
+        ),
+    }
+
+    return {
+        'sales': sales_summary,
+        'shipping': shipping_summary,
+        'returns': return_summary,
+        'period': {'from': date_from, 'to': date_to},
+        'keyword': product_keywords[0],
+    }
+```
+
+**Bước 3 — Prompt Engineering: Bồi đắp ngữ cảnh cho LLM**
+
+```python
+# backend/addons/fashion_store_dashboard/services/prompt_builder.py
+
+SYSTEM_PROMPT = """
+Bạn là một Giám đốc Tài chính (CFO) ảo cho một thương hiệu thời trang Việt Nam.
+Bạn nhận được dữ liệu tài chính thực tế từ hệ thống ERP (Odoo) và câu hỏi của CEO.
+Hãy phân tích dữ liệu, chỉ ra nguyên nhân gốc rễ (root cause) và đưa ra khuyến nghị
+hành động cụ thể. Trả lời bằng tiếng Việt, ngắn gọn, dùng số liệu thực tế từ context.
+Không bịa số liệu. Nếu dữ liệu không đủ, hãy nói rõ.
+"""
+
+def build_prompt(question: str, raw_context: dict) -> str:
+    ctx = raw_context
+    return f"""
+=== DỮ LIỆU TÀI CHÍNH ERP (kỳ {ctx['period']['from']} → {ctx['period']['to']}) ===
+
+SẢN PHẨM: {ctx['keyword']}
+- Số lượng bán: {ctx['sales']['total_qty']} sản phẩm
+- Doanh thu gộp: {ctx['sales']['gross_revenue']:,.0f} VND
+- Giá vốn tổng (COGS): {ctx['sales']['cogs_total']:,.0f} VND
+- Biên lợi nhuận gộp: {
+    round((ctx['sales']['gross_revenue'] - ctx['sales']['cogs_total'])
+          / max(ctx['sales']['gross_revenue'], 1) * 100, 1)
+}%
+
+CHI PHÍ VẬN CHUYỂN (GHN/GHTK):
+- Tổng phí ship: {ctx['shipping']['total_shipping_cost']:,.0f} VND
+- Phí ship trung bình/đơn: {ctx['shipping']['avg_shipping_per_order']:,.0f} VND
+
+ĐỔI TRẢ / HOÀN HÀNG:
+- Số đơn hoàn: {ctx['returns']['return_count']} đơn
+- Tỷ lệ hoàn: {ctx['returns']['return_rate_pct']}%
+- Chi phí ship ngược (reverse logistics): {ctx['returns']['return_shipping_cost']:,.0f} VND
+
+=== CÂU HỎI CỦA CEO ===
+{question}
+
+=== YÊU CẦU ===
+Phân tích nguyên nhân, dùng số liệu trên để chứng minh. Kết thúc bằng 1-2 khuyến nghị hành động.
+"""
+```
+
+**Bước 4 — LLM suy luận & trả Narrative Insight**
+
+```python
+# backend/addons/fashion_store_dashboard/services/llm_client.py
+import httpx
+
+async def call_llm(system_prompt: str, user_prompt: str, provider: str = 'openai') -> str:
+    """
+    Gọi LLM (OpenAI GPT-4o hoặc Google Gemini).
+    Provider chọn qua ir.config_parameter 'fashionos.ai.llm_provider'.
+    """
+    if provider == 'openai':
+        async with httpx.AsyncClient() as client:
+            resp = await client.post(
+                'https://api.openai.com/v1/chat/completions',
+                headers={'Authorization': f"Bearer {_get_openai_key()}"},
+                json={
+                    'model': 'gpt-4o',
+                    'messages': [
+                        {'role': 'system', 'content': system_prompt},
+                        {'role': 'user',   'content': user_prompt},
+                    ],
+                    'temperature': 0.3,   # thấp → ít hallucinate, bám sát số liệu
+                    'max_tokens': 800,
+                },
+                timeout=30.0,
+            )
+        return resp.json()['choices'][0]['message']['content']
+
+    elif provider == 'gemini':
+        async with httpx.AsyncClient() as client:
+            resp = await client.post(
+                f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key={_get_gemini_key()}",
+                json={
+                    'contents': [{'parts': [{'text': system_prompt + '\n\n' + user_prompt}]}],
+                    'generationConfig': {'temperature': 0.3, 'maxOutputTokens': 800},
+                },
+                timeout=30.0,
+            )
+        return resp.json()['candidates'][0]['content']['parts'][0]['text']
+```
+
+---
+
+#### FastAPI Endpoint tổng hợp
+
+```python
+# backend/addons/fashion_store_dashboard/routers/ai_query.py
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
+from ..services.data_collector import collect_financial_context
+from ..services.prompt_builder import SYSTEM_PROMPT, build_prompt
+from ..services.llm_client import call_llm
+from ..deps import get_odoo_env, get_current_partner
+
+router = APIRouter(prefix='/api/v1/ai', tags=['AI Dashboard'])
+
+
+class AIQueryRequest(BaseModel):
+    question: str
+    date_from: str   # YYYY-MM-DD
+    date_to: str     # YYYY-MM-DD
+
+
+class AIQueryResponse(BaseModel):
+    insight: str          # Narrative từ LLM
+    raw_context: dict     # Dữ liệu ERP thô (để frontend hiển thị biểu đồ kèm theo)
+
+
+@router.post('/query', response_model=AIQueryResponse)
+async def ai_financial_query(
+    body: AIQueryRequest,
+    env=Depends(get_odoo_env),
+    partner=Depends(get_current_partner),
+):
+    # Trích xuất keyword sản phẩm từ câu hỏi (simple heuristic; upgrade sau)
+    keywords = _extract_keywords(body.question)
+    if not keywords:
+        raise HTTPException(400, 'Không nhận diện được sản phẩm trong câu hỏi')
+
+    # Bước 2: Thu thập dữ liệu ERP
+    raw = collect_financial_context(env, keywords, body.date_from, body.date_to)
+
+    # Bước 3: Build prompt
+    user_prompt = build_prompt(body.question, raw)
+
+    # Bước 4: Gọi LLM
+    provider = env['ir.config_parameter'].sudo().get_param(
+        'fashionos.ai.llm_provider', 'openai'
+    )
+    insight = await call_llm(SYSTEM_PROMPT, user_prompt, provider=provider)
+
+    return AIQueryResponse(insight=insight, raw_context=raw)
+
+
+def _extract_keywords(question: str) -> list[str]:
+    """MVP: tìm từ khoá sản phẩm đơn giản. Upgrade với NER sau."""
+    import re
+    # Tìm các cụm danh từ sau "của", "cho sản phẩm", "dòng"
+    patterns = [r'của\s+([^,\.]+)', r'sản phẩm\s+([^,\.]+)', r'dòng\s+([^,\.]+)']
+    for p in patterns:
+        m = re.search(p, question, re.IGNORECASE)
+        if m:
+            return [m.group(1).strip()]
+    return []
+```
+
+---
+
+#### Odoo Module: `fashion_store_dashboard`
+
+**Cấu trúc file:**
+```
+backend/addons/fashion_store_dashboard/
+├── __manifest__.py          # depends: fashionos_base, fashion_store_sale, fashion_store_product
+├── __init__.py
+├── routers/
+│   └── ai_query.py          # FastAPI router POST /api/v1/ai/query
+├── services/
+│   ├── data_collector.py    # Thu thập raw ERP data qua Odoo ORM
+│   ├── prompt_builder.py    # Ghép SYSTEM_PROMPT + ngữ cảnh ERP
+│   └── llm_client.py        # Gọi OpenAI / Gemini async
+├── models/
+│   └── res_config_settings.py  # ir.config_parameter: llm_provider, api_key
+└── views/
+    └── res_config_settings_views.xml
+```
+
+**Feature flags liên quan (`ir.config_parameter`):**
+
+| Key | Default | Mô tả |
+|-----|---------|-------|
+| `fashionos.ai.llm_provider` | `openai` | `openai` hoặc `gemini` |
+| `fashionos.ai.openai_api_key` | *(bắt buộc set)* | OpenAI secret key |
+| `fashionos.ai.gemini_api_key` | *(optional)* | Google Gemini key |
+| `fashionos.ai.max_tokens` | `800` | Giới hạn output token |
+| `fashionos.ai.temperature` | `0.3` | Độ sáng tạo (thấp = bám số liệu) |
+
+---
+
+#### Ví dụ output thực tế (Narrative Insight)
+
+> *"Thưa CEO, doanh thu Combo 3 áo thun tuần này tăng 20% (đạt 148.5 triệu VND) nhưng biên lợi nhuận ròng giảm 8.5% so với tuần trước. Nguyên nhân cốt lõi **không** nằm ở giá vốn hàng bán (COGS ổn định ở mức 62%). Vấn đề đến từ tỷ lệ đổi trả size tăng đột biến lên 15% sau chiến dịch Flash Sale — làm phát sinh 12.3 triệu VND chi phí vận chuyển ngược từ GHTK và chi phí xử lý kho bãi, trực tiếp bào mòn lợi nhuận ròng.*
+>
+> *Khuyến nghị: (1) Bổ sung bảng hướng dẫn chọn size trực quan trên trang sản phẩm combo trước Flash Sale tiếp theo. (2) Đàm phán lại gói cước reverse logistics với GHTK cho các đơn hoàn > 500k VND."*
 
 ### Task S6-05: KF-5 AI Catalog (`fashion_store_ai_catalog`)
 
@@ -1397,7 +1679,7 @@ def generate_recommendations(self, partner):
 - [ ] KF-1: Return request → CoolCash hoàn trả end-to-end
 - [ ] KF-2: Order từ Hà Nội → routing về Kho HN
 - [ ] KF-3: Combo order confirm → 2 component lines tạo với price=0
-- [ ] KF-4: P&L aggregate query trả đúng số liệu
+- [ ] KF-4: AI query endpoint nhận câu hỏi tiếng Việt → trả Narrative Insight chính xác từ ERP data
 - [ ] KF-5: Recommendation cho new user → trending products (cold start OK)
 - [ ] KF-5: Recommendation cho user có 5+ đơn → collaborative filtering
 

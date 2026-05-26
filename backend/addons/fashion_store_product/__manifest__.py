@@ -1,6 +1,6 @@
 {
     'name': 'FashionOS - Product',
-    'version': '17.0.1.0.0',
+    'version': '19.0.1.0.0',
     'category': 'eCommerce',
     'summary': 'Fashion-specific product fields, attributes and categories',
     'description': '''

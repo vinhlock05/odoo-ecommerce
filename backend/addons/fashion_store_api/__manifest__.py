@@ -8,7 +8,7 @@
         'Secret is read from ir.config_parameter key fashionos.jwt.secret_key.'
     ),
     'name': 'FashionOS — REST API',
-    'version': '17.0.1.0.0',
+    'version': '19.0.1.0.0',
     'category': 'Fashion Store',
     'summary': 'Full REST API: auth, catalog, cart, account endpoints',
     'author': 'TechNext',

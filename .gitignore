@@ -1,0 +1,48 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Python / Odoo
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+.npm
+.yarn/cache
+.pnp.*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker volumes / local data
+pgdata/
+odoo_data/
+*.log
+
+# Playwright
+.playwright-mcp/
+test-results/
+playwright-report/
+
+# Misc
+*.bak
+*.tmp

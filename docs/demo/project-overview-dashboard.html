@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fashion Store Odoo v19 — Project Overview</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Inter', sans-serif; }
+  body { background: #f8f9fc; color: #1a1d2e; }
+
+  .gradient-hero { background: linear-gradient(135deg, #1a1d2e 0%, #2d3561 50%, #1a2744 100%); }
+  .card { background: #fff; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04); }
+  .card-border { border: 1px solid #e8eaf0; }
+
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: .4px; }
+  .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+  .badge-indigo { background: #e0e7ff; color: #4338ca; }
+  .badge-violet { background: #ede9fe; color: #6d28d9; }
+  .badge-green  { background: #dcfce7; color: #15803d; }
+  .badge-amber  { background: #fef9c3; color: #a16207; }
+  .badge-pink   { background: #fce7f3; color: #be185d; }
+  .badge-slate  { background: #f1f5f9; color: #475569; }
+  .badge-red    { background: #fee2e2; color: #dc2626; }
+  .badge-teal   { background: #ccfbf1; color: #0f766e; }
+  .badge-orange { background: #ffedd5; color: #c2410c; }
+
+  /* Stat card */
+  .stat-card { background: #fff; border-radius: 14px; padding: 20px 24px; border: 1px solid #e8eaf0; transition: transform .15s, box-shadow .15s; }
+  .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .stat-number { font-size: 40px; font-weight: 800; line-height: 1; background: linear-gradient(135deg, #4f46e5, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+  /* Layer bar */
+  .layer { border-radius: 10px; padding: 12px 16px; margin-bottom: 6px; font-size: 13px; font-weight: 600; border-left: 4px solid; }
+  .layer-0 { background: #f0fdf4; border-color: #16a34a; color: #14532d; }
+  .layer-1 { background: #eff6ff; border-color: #2563eb; color: #1e3a8a; }
+  .layer-2 { background: #f5f3ff; border-color: #7c3aed; color: #4c1d95; }
+  .layer-3 { background: #fff7ed; border-color: #ea580c; color: #7c2d12; }
+  .layer-4 { background: #fdf2f8; border-color: #db2777; color: #831843; }
+  .layer-5 { background: #fefce8; border-color: #ca8a04; color: #713f12; }
+
+  /* Sprint timeline */
+  .sprint-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f1f5f9; }
+  .sprint-row:last-child { border-bottom: none; }
+  .sprint-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .sprint-bar { height: 6px; border-radius: 999px; background: linear-gradient(90deg, #4f46e5, #7c3aed); }
+  .sprint-meta { font-size: 12px; color: #94a3b8; white-space: nowrap; }
+
+  /* KF card */
+  .kf-card { border-radius: 14px; padding: 20px; border: 1px solid; transition: transform .15s; }
+  .kf-card:hover { transform: translateY(-3px); }
+
+  /* Coolmate finding row */
+  .finding-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px dashed #e2e8f0; }
+  .finding-row:last-child { border-bottom: none; }
+  .finding-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+
+  /* Endpoint group */
+  .ep-group { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-radius: 8px; margin-bottom: 4px; background: #f8f9fc; }
+  .ep-count { font-size: 18px; font-weight: 800; color: #4f46e5; }
+
+  /* Section title */
+  .section-title { font-size: 22px; font-weight: 800; color: #1a1d2e; margin-bottom: 4px; }
+  .section-sub { font-size: 14px; color: #64748b; margin-bottom: 24px; }
+
+  /* Progress bar */
+  .progress-wrap { background: #e2e8f0; border-radius: 999px; height: 6px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #4f46e5, #7c3aed); }
+
+  /* Flow arrow */
+  .flow-box { background: #fff; border: 2px solid #e2e8f0; border-radius: 10px; padding: 8px 14px; font-size: 12px; font-weight: 600; color: #1a1d2e; white-space: nowrap; }
+  .flow-arrow { color: #94a3b8; font-size: 18px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="gradient-hero text-white py-12 px-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-wrap items-start justify-between gap-6">
+      <div>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="badge" style="background:rgba(255,255,255,.15);color:#e2e8f0;">Odoo v19 Enterprise</span>
+          <span class="badge" style="background:rgba(255,255,255,.15);color:#e2e8f0;">OCA FastAPI</span>
+          <span class="badge" style="background:rgba(255,255,255,.15);color:#e2e8f0;">ShopInvader</span>
+          <span class="badge" style="background:rgba(255,255,255,.15);color:#e2e8f0;">Next.js Frontend</span>
+          <span class="badge" style="background:rgba(255,255,255,.15);color:#e2e8f0;">JWT Auth</span>
+        </div>
+        <h1 style="font-size:36px;font-weight:900;line-height:1.1;">Fashion Store eCommerce</h1>
+        <h2 style="font-size:20px;font-weight:400;color:#a5b4fc;margin-top:6px;">Headless Odoo v19 — Case Study: Coolmate</h2>
+        <p style="font-size:14px;color:#94a3b8;margin-top:10px;">Tài liệu thiết kế & roadmap thực thi — cập nhật 2026-05-26</p>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:16px 20px;text-align:center;min-width:90px;">
+          <div style="font-size:32px;font-weight:900;color:#a5b4fc;">5</div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:2px;">Tài liệu</div>
+        </div>
+        <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:16px 20px;text-align:center;min-width:90px;">
+          <div style="font-size:32px;font-weight:900;color:#6ee7b7;">30</div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:2px;">Modules</div>
+        </div>
+        <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:16px 20px;text-align:center;min-width:90px;">
+          <div style="font-size:32px;font-weight:900;color:#fbbf24;">~50</div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:2px;">Endpoints</div>
+        </div>
+        <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:16px 20px;text-align:center;min-width:90px;">
+          <div style="font-size:32px;font-weight:900;color:#f9a8d4;">42</div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:2px;">Ngày dev</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Architecture flow -->
+    <div class="flex flex-wrap items-center gap-2 mt-8 pt-8" style="border-top:1px solid rgba(255,255,255,.1);">
+      <div class="flow-box" style="background:rgba(99,102,241,.3);border-color:rgba(165,180,252,.4);color:#e0e7ff;">Next.js Frontend</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);color:#e2e8f0;font-size:11px;">JWT Bearer Token</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box" style="background:rgba(139,92,246,.3);border-color:rgba(196,181,253,.4);color:#ede9fe;">fastapi_auth_partner_jwt</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box" style="background:rgba(16,185,129,.2);border-color:rgba(110,231,183,.3);color:#d1fae5;">ShopInvader + Custom Router</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box" style="background:rgba(59,130,246,.2);border-color:rgba(147,197,253,.3);color:#dbeafe;">Odoo ORM / Business Logic</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);color:#e2e8f0;">PostgreSQL 16</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="max-w-6xl mx-auto px-6 py-10">
+
+  <!-- ─── ROW 1: Key stats ─── -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+    <div class="stat-card text-center">
+      <div class="stat-number">20</div>
+      <div style="font-size:13px;color:#64748b;margin-top:6px;font-weight:600;">Use Cases</div>
+      <div style="font-size:11px;color:#94a3b8;">UC01 – UC20</div>
+    </div>
+    <div class="stat-card text-center">
+      <div class="stat-number">28</div>
+      <div style="font-size:13px;color:#64748b;margin-top:6px;font-weight:600;">User Stories</div>
+      <div style="font-size:11px;color:#94a3b8;">US-001 – US-028</div>
+    </div>
+    <div class="stat-card text-center">
+      <div class="stat-number">5</div>
+      <div style="font-size:13px;color:#64748b;margin-top:6px;font-weight:600;">Killer Features</div>
+      <div style="font-size:11px;color:#94a3b8;">KF-1 → KF-5</div>
+    </div>
+    <div class="stat-card text-center">
+      <div class="stat-number">20</div>
+      <div style="font-size:13px;color:#64748b;margin-top:6px;font-weight:600;">Feature Flags</div>
+      <div style="font-size:11px;color:#94a3b8;">FF-01 – FF-20</div>
+    </div>
+  </div>
+
+  <!-- ─── ROW 2: Case Study + Architecture Decision ─── -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+
+    <!-- Coolmate Research -->
+    <div class="card card-border p-6">
+      <div class="section-title">Case Study: Coolmate</div>
+      <div class="section-sub">Những gì quan sát được từ coolmate.me — tháng 05/2026</div>
+
+      <div class="finding-row">
+        <div class="finding-icon" style="background:#eff6ff;">🛒</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;">Single-page Cart + Checkout</div>
+          <div style="font-size:12px;color:#64748b;">Form giao hàng + giỏ hàng trên 1 màn hình — URL <code class="bg-slate-100 px-1 rounded text-xs">/cart</code></div>
+        </div>
+      </div>
+      <div class="finding-row">
+        <div class="finding-icon" style="background:#f0fdf4;">🏷️</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;">Collection URL pattern</div>
+          <div style="font-size:12px;color:#64748b;"><code class="bg-slate-100 px-1 rounded text-xs">/collection/{slug}</code> → <code class="bg-slate-100 px-1 rounded text-xs">/product/{slug}?color={color-slug}</code></div>
+        </div>
+      </div>
+      <div class="finding-row">
+        <div class="finding-icon" style="background:#fdf2f8;">💰</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;">CoolCash — Loyalty Currency</div>
+          <div style="font-size:12px;color:#64748b;">1 CoolCash = 1 VNĐ thanh toán. Earn rate ~7% theo spending tier. Trang <code class="bg-slate-100 px-1 rounded text-xs">/coolclub</code></div>
+        </div>
+      </div>
+      <div class="finding-row">
+        <div class="finding-icon" style="background:#fefce8;">🏆</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;">CoolClub — 4 Membership Tiers</div>
+          <div style="font-size:12px;color:#64748b;">Bronze → Silver → Gold → Diamond · Auto-upgrade theo tổng chi tiêu</div>
+        </div>
+      </div>
+      <div class="finding-row">
+        <div class="finding-icon" style="background:#fff7ed;">📦</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;">Biến thể Size × Màu — Greyed-out OOS</div>
+          <div style="font-size:12px;color:#64748b;">Hết hàng không ẩn, hiển thị mờ + gạch ngang — giữ trải nghiệm UX tốt hơn</div>
+        </div>
+      </div>
+      <div class="finding-row">
+        <div class="finding-icon" style="background:#f5f3ff;">💳</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;">Đa kênh thanh toán</div>
+          <div style="font-size:12px;color:#64748b;">COD · VNPay HMAC-SHA512 · MoMo HMAC-SHA256 · ZaloPay · Chuyển khoản</div>
+        </div>
+      </div>
+      <div class="finding-row">
+        <div class="finding-icon" style="background:#ecfdf5;">🔗</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;">Social Login</div>
+          <div style="font-size:12px;color:#64748b;">Google OAuth2 · Facebook · Zalo QR (Mini App)</div>
+        </div>
+      </div>
+      <div class="finding-row">
+        <div class="finding-icon" style="background:#fff1f2;">🚚</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;">Giao hàng tích hợp</div>
+          <div style="font-size:12px;color:#64748b;">GHN + GHTK · webhook tracking realtime · Smart Routing theo tỉnh thành</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Architecture Decision -->
+    <div class="card card-border p-6">
+      <div class="section-title">Kiến trúc đã chọn</div>
+      <div class="section-sub">Headless Odoo v19 — Odoo là backend API server thuần túy</div>
+
+      <!-- Decision box -->
+      <div style="background:linear-gradient(135deg,#ede9fe,#e0e7ff);border-radius:12px;padding:16px;margin-bottom:16px;">
+        <div style="font-size:13px;font-weight:700;color:#4338ca;margin-bottom:8px;">Quyết định kiến trúc</div>
+        <div style="font-size:12px;color:#3730a3;line-height:1.6;">
+          Không dùng <code style="background:rgba(0,0,0,.1);padding:1px 5px;border-radius:4px;">website_sale</code>, QWeb templates, hay Odoo native <code style="background:rgba(0,0,0,.1);padding:1px 5px;border-radius:4px;">/shop</code>. <strong>Odoo chỉ là backend.</strong> Frontend hoàn toàn tách biệt bằng Next.js. Kết nối qua REST API + JWT.
+        </div>
+      </div>
+
+      <!-- Why not native -->
+      <div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:10px;">Tại sao không dùng Odoo Website native?</div>
+      <div style="font-size:12px;color:#64748b;line-height:1.8;">
+        ❌ QWeb templates khó tùy biến UX sâu<br>
+        ❌ Không tối ưu được performance frontend<br>
+        ❌ Khó tích hợp SSR/SSG cho SEO<br>
+        ❌ Phụ thuộc Odoo theme system<br>
+      </div>
+
+      <div style="border-top:1px solid #e2e8f0;margin:14px 0;"></div>
+
+      <!-- Why OCA stack -->
+      <div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:10px;">Stack OCA — "Không tự build lại bánh xe"</div>
+      <div class="space-y-2">
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+          <span class="badge badge-blue">OCA FastAPI</span>
+          <span style="color:#475569;">Expose Odoo models qua async FastAPI endpoints</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+          <span class="badge badge-violet">ShopInvader</span>
+          <span style="color:#475569;">Full eCommerce API: catalog, cart, checkout, orders, wishlist</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+          <span class="badge badge-indigo">JWT Auth</span>
+          <span style="color:#475569;"><code class="bg-slate-100 px-1 rounded">fastapi_auth_partner_jwt</code> — map token → res.partner</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+          <span class="badge badge-green">INHERIT</span>
+          <span style="color:#475569;">~38% endpoints dùng nguyên từ ShopInvader</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+          <span class="badge badge-amber">EXTEND</span>
+          <span style="color:#475569;">~20% endpoints mở rộng thêm trường tùy biến</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+          <span class="badge badge-pink">CUSTOM</span>
+          <span style="color:#475569;">~30% endpoints mới: Returns, P&L, Combo, Routing</span>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid #e2e8f0;margin:14px 0;"></div>
+
+      <!-- Multi-website -->
+      <div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:8px;">Multi-Website / Multi-Company</div>
+      <div style="font-size:12px;color:#64748b;background:#f8f9fc;border-radius:8px;padding:10px;font-family:monospace;line-height:1.6;">
+        1 Odoo Database<br>
+        ├── Website A: coolmate.me → CoolCash ON, CoolClub ON<br>
+        └── Website B: brand-b.com → Standard Loyalty
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ROW 3: Documentation Progress ─── -->
+  <div class="card card-border p-6 mb-10">
+    <div class="section-title">Tài liệu đã hoàn thành</div>
+    <div class="section-sub">5 tài liệu thiết kế — BRD → UC → US → API Map → Module Map → Implementation Plan</div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:16px;">
+        <div style="font-size:11px;font-weight:700;color:#16a34a;letter-spacing:.5px;margin-bottom:6px;">PHASE 1–2</div>
+        <div style="font-size:15px;font-weight:700;color:#14532d;">BRD v2.0</div>
+        <div style="font-size:12px;color:#166534;margin-top:4px;">Business Requirements Document<br>Dựa trên Coolmate case study</div>
+        <div style="margin-top:10px;" class="progress-wrap"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#16a34a,#22c55e);"></div></div>
+        <div style="font-size:11px;color:#16a34a;margin-top:4px;">✓ Hoàn thành · docs/brd/</div>
+      </div>
+
+      <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:16px;">
+        <div style="font-size:11px;font-weight:700;color:#2563eb;letter-spacing:.5px;margin-bottom:6px;">PHASE 3</div>
+        <div style="font-size:15px;font-weight:700;color:#1e3a8a;">Use Cases v1.0</div>
+        <div style="font-size:12px;color:#1d4ed8;margin-top:4px;">20 Use Cases · UC01–UC20<br>Catalog → Cart → Checkout → Loyalty</div>
+        <div style="margin-top:10px;" class="progress-wrap"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#2563eb,#3b82f6);"></div></div>
+        <div style="font-size:11px;color:#2563eb;margin-top:4px;">✓ Hoàn thành · docs/uc/</div>
+      </div>
+
+      <div style="background:#f5f3ff;border:1px solid #ddd6fe;border-radius:12px;padding:16px;">
+        <div style="font-size:11px;font-weight:700;color:#7c3aed;letter-spacing:.5px;margin-bottom:6px;">PHASE 3</div>
+        <div style="font-size:15px;font-weight:700;color:#4c1d95;">User Stories v1.0</div>
+        <div style="font-size:12px;color:#6d28d9;margin-top:4px;">28 User Stories · US-001–US-028<br>MH / SH / NH priority</div>
+        <div style="margin-top:10px;" class="progress-wrap"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#7c3aed,#8b5cf6);"></div></div>
+        <div style="font-size:11px;color:#7c3aed;margin-top:4px;">✓ Hoàn thành · docs/us/</div>
+      </div>
+
+      <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:16px;">
+        <div style="font-size:11px;font-weight:700;color:#ea580c;letter-spacing:.5px;margin-bottom:6px;">PHASE 4–5</div>
+        <div style="font-size:15px;font-weight:700;color:#7c2d12;">API Mapping v1.0</div>
+        <div style="font-size:12px;color:#c2410c;margin-top:4px;">~50 endpoints · 11 groups<br>INHERIT / EXTEND / CUSTOM classification</div>
+        <div style="margin-top:10px;" class="progress-wrap"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#ea580c,#f97316);"></div></div>
+        <div style="font-size:11px;color:#ea580c;margin-top:4px;">✓ Hoàn thành · docs/api/</div>
+      </div>
+
+      <div style="background:#fdf2f8;border:1px solid #fbcfe8;border-radius:12px;padding:16px;">
+        <div style="font-size:11px;font-weight:700;color:#db2777;letter-spacing:.5px;margin-bottom:6px;">PHASE 5</div>
+        <div style="font-size:15px;font-weight:700;color:#831843;">Module Mapping v1.0</div>
+        <div style="font-size:12px;color:#be185d;margin-top:4px;">30 modules · 5 layers<br>18 custom + 12 OCA/third-party</div>
+        <div style="margin-top:10px;" class="progress-wrap"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#db2777,#ec4899);"></div></div>
+        <div style="font-size:11px;color:#db2777;margin-top:4px;">✓ Hoàn thành · docs/mapping/</div>
+      </div>
+
+      <div style="background:#fefce8;border:1px solid #fde68a;border-radius:12px;padding:16px;">
+        <div style="font-size:11px;font-weight:700;color:#ca8a04;letter-spacing:.5px;margin-bottom:6px;">PHASE 6</div>
+        <div style="font-size:15px;font-weight:700;color:#713f12;">Implementation Plan</div>
+        <div style="font-size:12px;color:#a16207;margin-top:4px;">8 sprints · 42 ngày<br>Docker → Modules → Next.js → QA</div>
+        <div style="margin-top:10px;" class="progress-wrap"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,#ca8a04,#eab308);"></div></div>
+        <div style="font-size:11px;color:#ca8a04;margin-top:4px;">✓ Hoàn thành · docs/plan/</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ROW 4: Module Layers + API Groups ─── -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+
+    <!-- Module Architecture -->
+    <div class="card card-border p-6">
+      <div class="section-title">Module Architecture</div>
+      <div class="section-sub">5 layers · 30 modules · Bottom-up installation</div>
+
+      <div class="layer layer-5">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span>Layer 5 — Killer Features (5 modules)</span>
+          <span class="badge badge-amber">Custom</span>
+        </div>
+        <div style="font-size:11px;margin-top:4px;opacity:.8;">fashion_store_return · routing · combo · dashboard · ai_catalog</div>
+      </div>
+
+      <div class="layer layer-4">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span>Layer 4 — Business Logic (10 modules)</span>
+          <span class="badge badge-pink">Custom</span>
+        </div>
+        <div style="font-size:11px;margin-top:4px;opacity:.8;">coolcash · coolclub · referral · payment_vnpay · momo · zalopay · delivery_ghn · ghtk · return_api · fastapi_auth_zalo</div>
+      </div>
+
+      <div class="layer layer-3">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span>Layer 3 — Foundation Custom (3 modules)</span>
+          <span class="badge badge-orange">Custom</span>
+        </div>
+        <div style="font-size:11px;margin-top:4px;opacity:.8;">fashion_store_config · fashion_store_product · fashion_store_sale</div>
+      </div>
+
+      <div class="layer layer-2">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span>Layer 2 — ShopInvader Suite (8 modules)</span>
+          <span class="badge badge-violet">OCA</span>
+        </div>
+        <div style="font-size:11px;margin-top:4px;opacity:.8;">shopinvader · product · category · cart · sale · partner · wishlist · delivery</div>
+      </div>
+
+      <div class="layer layer-1">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span>Layer 1 — OCA REST Framework (4 modules)</span>
+          <span class="badge badge-blue">OCA</span>
+        </div>
+        <div style="font-size:11px;margin-top:4px;opacity:.8;">fastapi · fastapi_auth_jwt · fastapi_auth_partner_jwt · auth_oauth</div>
+      </div>
+
+      <div class="layer layer-0">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span>Layer 0 — Odoo v19 Enterprise Core</span>
+          <span class="badge badge-green">Pre-installed</span>
+        </div>
+        <div style="font-size:11px;margin-top:4px;opacity:.8;">base · mail · sale · stock · account · delivery · loyalty · purchase · mrp</div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid #f1f5f9;">
+        <div style="text-align:center;flex:1;">
+          <div style="font-size:22px;font-weight:800;color:#4f46e5;">18</div>
+          <div style="font-size:11px;color:#64748b;">Custom modules</div>
+        </div>
+        <div style="text-align:center;flex:1;">
+          <div style="font-size:22px;font-weight:800;color:#7c3aed;">12</div>
+          <div style="font-size:11px;color:#64748b;">OCA/3rd party</div>
+        </div>
+        <div style="text-align:center;flex:1;">
+          <div style="font-size:22px;font-weight:800;color:#0f766e;">30</div>
+          <div style="font-size:11px;color:#64748b;">Tổng cộng</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Endpoint Groups -->
+    <div class="card card-border p-6">
+      <div class="section-title">API Endpoint Groups</div>
+      <div class="section-sub">~50 endpoints · 11 nhóm · JWT Authentication</div>
+
+      <div class="ep-group"><span style="font-size:13px;font-weight:600;">Authentication <code class="text-xs bg-white px-1 rounded">/api/auth</code></span><div style="display:flex;align-items:center;gap:8px;"><span class="badge badge-green" style="font-size:10px;">INHERIT</span><span class="ep-count">4</span></div></div>
+      <div class="ep-group"><span style="font-size:13px;font-weight:600;">Catalog <code class="text-xs bg-white px-1 rounded">/api/catalog</code></span><div style="display:flex;align-items:center;gap:8px;"><span class="badge badge-green" style="font-size:10px;">INHERIT+EXTEND</span><span class="ep-count">6</span></div></div>
+      <div class="ep-group"><span style="font-size:13px;font-weight:600;">Cart <code class="text-xs bg-white px-1 rounded">/api/cart</code></span><div style="display:flex;align-items:center;gap:8px;"><span class="badge badge-amber" style="font-size:10px;">EXTEND</span><span class="ep-count">5</span></div></div>
+      <div class="ep-group"><span style="font-size:13px;font-weight:600;">Checkout <code class="text-xs bg-white px-1 rounded">/api/checkout</code></span><div style="display:flex;align-items:center;gap:8px;"><span class="badge badge-amber" style="font-size:10px;">EXTEND</span><span class="ep-count">4</span></div></div>
+      <div class="ep-group"><span style="font-size:13px;font-weight:600;">Payment <code class="text-xs bg-white px-1 rounded">/api/payment</code></span><div style="display:flex;align-items:center;gap:8px;"><span class="badge badge-pink" style="font-size:10px;">CUSTOM</span><span class="ep-count">6</span></div></div>
+      <div class="ep-group"><span style="font-size:13px;font-weight:600;">Orders <code class="text-xs bg-white px-1 rounded">/api/orders</code></span><div style="display:flex;align-items:center;gap:8px;"><span class="badge badge-green" style="font-size:10px;">INHERIT+EXTEND</span><span class="ep-count">5</span></div></div>
+      <div class="ep-group"><span style="font-size:13px;font-weight:600;">CoolCash <code class="text-xs bg-white px-1 rounded">/api/coolcash</code></span><div style="display:flex;align-items:center;gap:8px;"><span class="badge badge-pink" style="font-size:10px;">CUSTOM</span><span class="ep-count">4</span></div></div>
+      <div class="ep-group"><span style="font-size:13px;font-weight:600;">CoolClub <code class="text-xs bg-white px-1 rounded">/api/coolclub</code></span><div style="display:flex;align-items:center;gap:8px;"><span class="badge badge-pink" style="font-size:10px;">CUSTOM</span><span class="ep-count">3</span></div></div>
+      <div class="ep-group"><span style="font-size:13px;font-weight:600;">Referral <code class="text-xs bg-white px-1 rounded">/api/referral</code></span><div style="display:flex;align-items:center;gap:8px;"><span class="badge badge-pink" style="font-size:10px;">CUSTOM</span><span class="ep-count">3</span></div></div>
+      <div class="ep-group"><span style="font-size:13px;font-weight:600;">Account <code class="text-xs bg-white px-1 rounded">/api/account</code></span><div style="display:flex;align-items:center;gap:8px;"><span class="badge badge-green" style="font-size:10px;">INHERIT+EXTEND</span><span class="ep-count">5</span></div></div>
+      <div class="ep-group"><span style="font-size:13px;font-weight:600;">Wishlist <code class="text-xs bg-white px-1 rounded">/api/wishlist</code></span><div style="display:flex;align-items:center;gap:8px;"><span class="badge badge-green" style="font-size:10px;">INHERIT</span><span class="ep-count">4</span></div></div>
+
+      <div style="border-top:1px solid #f1f5f9;margin-top:12px;padding-top:12px;display:flex;gap:16px;">
+        <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><span style="width:10px;height:10px;border-radius:50%;background:#16a34a;display:inline-block;"></span><span style="color:#475569;">INHERIT ~38%</span></div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><span style="width:10px;height:10px;border-radius:50%;background:#ca8a04;display:inline-block;"></span><span style="color:#475569;">EXTEND ~20%</span></div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><span style="width:10px;height:10px;border-radius:50%;background:#db2777;display:inline-block;"></span><span style="color:#475569;">CUSTOM ~30%</span></div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8;display:inline-block;"></span><span style="color:#475569;">INTERNAL ~12%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ROW 5: Sprint Roadmap ─── -->
+  <div class="card card-border p-6 mb-10">
+    <div class="section-title">Sprint Roadmap</div>
+    <div class="section-sub">8 sprints · ~42 ngày làm việc · ~8.5 tuần</div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10">
+      <div>
+        <div class="sprint-row">
+          <div class="sprint-dot" style="background:#64748b;"></div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1a1d2e;">S0 — Environment Setup</div>
+            <div style="font-size:11px;color:#64748b;margin:3px 0;">Docker Compose · PostgreSQL 16 · Odoo v19 cài xong</div>
+            <div class="sprint-bar" style="width:40%;"></div>
+          </div>
+          <div class="sprint-meta">3 ngày</div>
+        </div>
+        <div class="sprint-row">
+          <div class="sprint-dot" style="background:#3b82f6;"></div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1a1d2e;">S1 — Master Data</div>
+            <div style="font-size:11px;color:#64748b;margin:3px 0;">Size · Color · Variants · Warehouse · Pricelist</div>
+            <div class="sprint-bar" style="width:50%;"></div>
+          </div>
+          <div class="sprint-meta">4 ngày</div>
+        </div>
+        <div class="sprint-row">
+          <div class="sprint-dot" style="background:#f97316;"></div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1a1d2e;">S2 — Foundation Layer 3</div>
+            <div style="font-size:11px;color:#64748b;margin:3px 0;">fashion_store_config · product · sale</div>
+            <div class="sprint-bar" style="width:60%;"></div>
+          </div>
+          <div class="sprint-meta">5 ngày</div>
+        </div>
+        <div class="sprint-row">
+          <div class="sprint-dot" style="background:#7c3aed;"></div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1a1d2e;">S3 — OCA + ShopInvader</div>
+            <div style="font-size:11px;color:#64748b;margin:3px 0;">Layer 1 + Layer 2 · API auth sống · JWT flow hoạt động</div>
+            <div class="sprint-bar" style="width:50%;"></div>
+          </div>
+          <div class="sprint-meta">4 ngày</div>
+        </div>
+      </div>
+      <div>
+        <div class="sprint-row">
+          <div class="sprint-dot" style="background:#db2777;"></div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1a1d2e;">S4 — CoolCash + CoolClub</div>
+            <div style="font-size:11px;color:#64748b;margin:3px 0;">coolcash.wallet · coolclub.tier · referral · cron auto-upgrade</div>
+            <div class="sprint-bar" style="width:60%;"></div>
+          </div>
+          <div class="sprint-meta">5 ngày</div>
+        </div>
+        <div class="sprint-row">
+          <div class="sprint-dot" style="background:#0f766e;"></div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1a1d2e;">S5 — Payments + Delivery</div>
+            <div style="font-size:11px;color:#64748b;margin:3px 0;">VNPay · MoMo · ZaloPay · GHN · GHTK webhook</div>
+            <div class="sprint-bar" style="width:60%;"></div>
+          </div>
+          <div class="sprint-meta">5 ngày</div>
+        </div>
+        <div class="sprint-row">
+          <div class="sprint-dot" style="background:#ca8a04;"></div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1a1d2e;">S6 — 5 Killer Features</div>
+            <div style="font-size:11px;color:#64748b;margin:3px 0;">Returns · Smart Routing · Combo · P&L Dashboard · AI Rec</div>
+            <div class="sprint-bar" style="width:70%;"></div>
+          </div>
+          <div class="sprint-meta">6 ngày</div>
+        </div>
+        <div class="sprint-row">
+          <div class="sprint-dot" style="background:#10b981;"></div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1a1d2e;">S7 — Frontend Next.js</div>
+            <div style="font-size:11px;color:#64748b;margin:3px 0;">Full storefront · SSR/SSG · kết nối toàn bộ API</div>
+            <div class="sprint-bar" style="width:85%;"></div>
+          </div>
+          <div class="sprint-meta">7 ngày</div>
+        </div>
+        <div class="sprint-row">
+          <div class="sprint-dot" style="background:#4f46e5;"></div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1a1d2e;">S8 — QA + Docs</div>
+            <div style="font-size:11px;color:#64748b;margin:3px 0;">80%+ test coverage · API docs · Final deploy</div>
+            <div class="sprint-bar" style="width:35%;"></div>
+          </div>
+          <div class="sprint-meta">3 ngày</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status indicator -->
+    <div style="background:#f8f9fc;border-radius:10px;padding:12px 16px;margin-top:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+      <div style="font-size:12px;font-weight:700;color:#374151;">Trạng thái hiện tại:</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><span style="width:8px;height:8px;border-radius:50%;background:#16a34a;display:inline-block;"></span><span style="color:#16a34a;font-weight:600;">S0–S1 Done</span><span style="color:#94a3b8;">(pre-planning)</span></div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><span style="width:8px;height:8px;border-radius:50%;background:#f97316;display:inline-block;"></span><span style="color:#f97316;font-weight:600;">S2 — Sắp bắt đầu build</span><span style="color:#94a3b8;">foundation modules</span></div>
+    </div>
+  </div>
+
+  <!-- ─── ROW 6: 5 Killer Features ─── -->
+  <div class="mb-10">
+    <div class="section-title">5 Killer Features</div>
+    <div class="section-sub">Tính năng khác biệt hóa — nâng giá trị thương mại khi chào hàng các brand lớn</div>
+
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div class="kf-card" style="background:#eff6ff;border-color:#bfdbfe;">
+        <div style="font-size:22px;margin-bottom:8px;">↩️</div>
+        <div style="font-size:11px;font-weight:700;color:#2563eb;letter-spacing:.5px;margin-bottom:4px;">KF-1</div>
+        <div style="font-size:14px;font-weight:800;color:#1e3a8a;line-height:1.3;">Automated Returns</div>
+        <div style="font-size:11px;color:#3b82f6;margin-top:6px;line-height:1.5;">fashion.return.request · reverse_picking · GHN API tự động lấy hàng</div>
+      </div>
+      <div class="kf-card" style="background:#f0fdf4;border-color:#bbf7d0;">
+        <div style="font-size:22px;margin-bottom:8px;">🗺️</div>
+        <div style="font-size:11px;font-weight:700;color:#16a34a;letter-spacing:.5px;margin-bottom:4px;">KF-2</div>
+        <div style="font-size:14px;font-weight:800;color:#14532d;line-height:1.3;">Smart Routing</div>
+        <div style="font-size:11px;color:#22c55e;margin-top:6px;line-height:1.5;">Province → Warehouse → Stock. Tự chọn kho gần nhất còn hàng</div>
+      </div>
+      <div class="kf-card" style="background:#fff7ed;border-color:#fed7aa;">
+        <div style="font-size:22px;margin-bottom:8px;">🎁</div>
+        <div style="font-size:11px;font-weight:700;color:#ea580c;letter-spacing:.5px;margin-bottom:4px;">KF-3</div>
+        <div style="font-size:14px;font-weight:800;color:#7c2d12;line-height:1.3;">Combo Engine</div>
+        <div style="font-size:11px;color:#f97316;margin-top:6px;line-height:1.5;">action_confirm hook · 1 combo line → 4 SKU lines · x_is_combo_component</div>
+      </div>
+      <div class="kf-card" style="background:#fdf2f8;border-color:#fbcfe8;">
+        <div style="font-size:22px;margin-bottom:8px;">📊</div>
+        <div style="font-size:11px;font-weight:700;color:#db2777;letter-spacing:.5px;margin-bottom:4px;">KF-4</div>
+        <div style="font-size:14px;font-weight:800;color:#831843;line-height:1.3;">Real-time P&L Dashboard</div>
+        <div style="font-size:11px;color:#ec4899;margin-top:6px;line-height:1.5;">PostgreSQL ROLLUP · Hourly P&L · CEO-only access</div>
+      </div>
+      <div class="kf-card" style="background:#f5f3ff;border-color:#ddd6fe;">
+        <div style="font-size:22px;margin-bottom:8px;">🤖</div>
+        <div style="font-size:11px;font-weight:700;color:#7c3aed;letter-spacing:.5px;margin-bottom:4px;">KF-5</div>
+        <div style="font-size:14px;font-weight:800;color:#4c1d95;line-height:1.3;">AI Recommendations</div>
+        <div style="font-size:11px;color:#8b5cf6;margin-top:6px;line-height:1.5;">Collaborative filtering · "Thường mua cùng" · behavior events</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ROW 7: Integrations + Feature Flags ─── -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+
+    <!-- Integrations -->
+    <div class="card card-border p-6">
+      <div class="section-title">Tích hợp bên thứ ba</div>
+      <div class="section-sub">Thanh toán Việt Nam · Giao hàng Việt Nam · Social Auth</div>
+
+      <div style="margin-bottom:16px;">
+        <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">Thanh toán</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <div style="background:#e0f2fe;border-radius:10px;padding:10px 14px;text-align:center;min-width:90px;">
+            <div style="font-size:13px;font-weight:800;color:#0369a1;">VNPay</div>
+            <div style="font-size:10px;color:#0284c7;margin-top:2px;">HMAC-SHA512</div>
+          </div>
+          <div style="background:#fae8ff;border-radius:10px;padding:10px 14px;text-align:center;min-width:90px;">
+            <div style="font-size:13px;font-weight:800;color:#a21caf;">MoMo</div>
+            <div style="font-size:10px;color:#c026d3;margin-top:2px;">HMAC-SHA256</div>
+          </div>
+          <div style="background:#d1fae5;border-radius:10px;padding:10px 14px;text-align:center;min-width:90px;">
+            <div style="font-size:13px;font-weight:800;color:#065f46;">ZaloPay</div>
+            <div style="font-size:10px;color:#047857;margin-top:2px;">HMAC-SHA256</div>
+          </div>
+          <div style="background:#f1f5f9;border-radius:10px;padding:10px 14px;text-align:center;min-width:90px;">
+            <div style="font-size:13px;font-weight:800;color:#374151;">COD</div>
+            <div style="font-size:10px;color:#64748b;margin-top:2px;">Built-in Odoo</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">Giao hàng</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <div style="background:#fef9c3;border-radius:10px;padding:10px 14px;text-align:center;min-width:90px;">
+            <div style="font-size:13px;font-weight:800;color:#713f12;">GHN</div>
+            <div style="font-size:10px;color:#a16207;margin-top:2px;">Webhook tracking</div>
+          </div>
+          <div style="background:#e0f2fe;border-radius:10px;padding:10px 14px;text-align:center;min-width:90px;">
+            <div style="font-size:13px;font-weight:800;color:#0369a1;">GHTK</div>
+            <div style="font-size:10px;color:#0284c7;margin-top:2px;">Webhook tracking</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">Social Login</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <div style="background:#fee2e2;border-radius:10px;padding:8px 14px;"><span style="font-size:13px;font-weight:700;color:#991b1b;">Google</span> <span style="font-size:10px;color:#dc2626;">OAuth2</span></div>
+          <div style="background:#dbeafe;border-radius:10px;padding:8px 14px;"><span style="font-size:13px;font-weight:700;color:#1d4ed8;">Facebook</span> <span style="font-size:10px;color:#2563eb;">OAuth2</span></div>
+          <div style="background:#dcfce7;border-radius:10px;padding:8px 14px;"><span style="font-size:13px;font-weight:700;color:#15803d;">Zalo</span> <span style="font-size:10px;color:#16a34a;">QR Mini App</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Flags -->
+    <div class="card card-border p-6">
+      <div class="section-title">Feature Flags</div>
+      <div class="section-sub">20 flags · Bật/tắt qua res.config.settings · Không sửa code</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-01 CoolCash</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-02 CoolClub Tiers</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-03 Referral Program</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-04 Guest Checkout</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-05 VNPay</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-06 MoMo</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-07 ZaloPay</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-08 GHN Integration</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-09 GHTK Integration</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-10 Smart Routing</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#ca8a04;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-11 Returns Module</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#ca8a04;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-12 Combo Engine</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#ca8a04;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-13 P&L Dashboard</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#94a3b8;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;left:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#94a3b8;">FF-14 AI Recommendations</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-15 Wishlist</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-16 Free Gift Promotion</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-17 Social Login Google</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-18 Social Login FB</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#94a3b8;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;left:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#94a3b8;">FF-19 Zalo QR Login</span>
+        </div>
+        <div style="background:#f8f9fc;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:16px;border-radius:999px;background:#16a34a;flex-shrink:0;position:relative;"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+          <span style="font-size:11px;font-weight:600;color:#374151;">FF-20 Multi-Website</span>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:12px;font-size:11px;">
+        <div style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:6px;border-radius:999px;background:#16a34a;display:inline-block;"></span><span style="color:#475569;">MVP (Sprint ≤ S5)</span></div>
+        <div style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:6px;border-radius:999px;background:#ca8a04;display:inline-block;"></span><span style="color:#475569;">Phase 2 (S6)</span></div>
+        <div style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:6px;border-radius:999px;background:#94a3b8;display:inline-block;"></span><span style="color:#475569;">Roadmap sau</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div style="background:#1a1d2e;color:#94a3b8;padding:24px;text-align:center;font-size:12px;">
+  <div style="font-weight:600;color:#e2e8f0;margin-bottom:4px;">Fashion Store Odoo v19 — Project Knowledge Board</div>
+  <div>Headless Architecture · OCA FastAPI · ShopInvader · Next.js · Case Study: Coolmate</div>
+  <div style="margin-top:8px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;font-size:11px;">
+    <span>docs/brd/fashion-store-brd.md</span>
+    <span>·</span>
+    <span>docs/uc/use-cases.md</span>
+    <span>·</span>
+    <span>docs/us/user-stories.md</span>
+    <span>·</span>
+    <span>docs/api/api-mapping.md</span>
+    <span>·</span>
+    <span>docs/mapping/odoo-module-mapping.md</span>
+    <span>·</span>
+    <span>docs/plan/implementation-plan.md</span>
+  </div>
+</div>
+
+</body>
+</html>

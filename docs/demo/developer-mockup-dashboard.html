@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Mockup Dashboard — Headless Odoo v19 + ShopInvader</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* JSON Syntax Highlighting */
+    .jk  { color: #7dd3fc; }   /* key        sky-300  */
+    .js  { color: #86efac; }   /* string     green-300 */
+    .jn  { color: #fbbf24; }   /* number     amber-400 */
+    .jb  { color: #f472b6; }   /* bool       pink-400  */
+    .jnl { color: #94a3b8; }   /* null       slate-400 */
+    .jc  { color: #6b7280; font-style: italic; } /* comment gray-500 */
+
+    /* Endpoint classification colors */
+    .k-inherit { color: #a78bfa; }  /* violet-400 */
+    .k-extend  { color: #34d399; }  /* emerald-400 */
+    .k-custom  { color: #f472b6; }  /* pink-400 */
+    .k-internal{ color: #6b7280; }  /* gray-500 */
+
+    /* Pill selectors */
+    .size-pill {
+      transition: all 0.12s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .size-pill:hover:not(.oos) {
+      background: #4f46e5;
+      color: #fff;
+      border-color: #4f46e5;
+    }
+    .size-pill.active {
+      background: #4f46e5;
+      color: #fff;
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.3);
+    }
+    .size-pill.oos {
+      opacity: 0.3;
+      cursor: not-allowed;
+      text-decoration: line-through;
+    }
+
+    /* Color swatches */
+    .c-swatch {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.12s;
+    }
+    .c-swatch:hover { transform: scale(1.15); }
+    .c-swatch.active {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 2px rgba(129,140,248,0.4);
+      transform: scale(1.1);
+    }
+
+    /* JSON panel scroll */
+    .jp::-webkit-scrollbar { width: 4px; }
+    .jp::-webkit-scrollbar-track { background: #0f172a; }
+    .jp::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+
+    /* Animations */
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeSlide 0.18s ease-out; }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+    .pulse-dot { animation: pulse-dot 2s infinite; }
+
+    /* KF card hover */
+    .kf-card {
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+    .kf-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .kf-card.active-card {
+      box-shadow: 0 0 0 2px rgba(99,102,241,0.4);
+    }
+
+    pre { font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', monospace; font-size: 0.76rem; line-height: 1.65; }
+
+    .badge { display: inline-flex; align-items: center; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em; padding: 1.5px 7px; border-radius: 9999px; }
+
+    .tab-btn { transition: color 0.12s, border-color 0.12s; }
+    .tab-active { border-bottom: 2px solid #6366f1 !important; color: #a5b4fc !important; }
+    .tab-inactive { border-bottom: 2px solid transparent; color: #6b7280; }
+    .tab-inactive:hover { color: #d1d5db; }
+  </style>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen">
+
+<!-- ═══════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════ -->
+<header class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
+  <div class="max-w-screen-xl mx-auto px-5 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <!-- Logo -->
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-bold text-sm text-white shadow-lg">CM</div>
+        <div>
+          <div class="text-sm font-bold text-white leading-tight">Coolmate Platform</div>
+          <div class="text-xs text-gray-500 leading-tight">Headless Odoo v19 Enterprise</div>
+        </div>
+      </div>
+      <!-- Stack badges -->
+      <div class="hidden sm:flex items-center gap-1.5 ml-2">
+        <span class="badge bg-indigo-900/70 text-indigo-300 border border-indigo-800">OCA FastAPI</span>
+        <span class="badge bg-purple-900/70 text-purple-300 border border-purple-800">ShopInvader</span>
+        <span class="badge bg-cyan-900/70 text-cyan-300 border border-cyan-800">JWT Auth</span>
+        <span class="badge bg-emerald-900/70 text-emerald-300 border border-emerald-800">Next.js</span>
+      </div>
+    </div>
+    <!-- Status -->
+    <div class="flex items-center gap-3 text-xs">
+      <div class="flex items-center gap-1.5 text-gray-400">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+        localhost:8069
+      </div>
+      <div class="bg-gray-800 border border-gray-700 px-2.5 py-1 rounded text-gray-300 text-xs font-mono">Demo v1.0</div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════
+     ARCHITECTURE FLOW BAR
+═══════════════════════════════════════════ -->
+<div class="bg-gray-900/60 border-b border-gray-800/60">
+  <div class="max-w-screen-xl mx-auto px-5 py-2.5 flex items-center gap-2 text-xs overflow-x-auto">
+    <span class="text-gray-500 font-medium shrink-0">Flow:</span>
+    <div class="flex items-center gap-1.5 shrink-0">
+      <span class="bg-blue-950 border border-blue-900/70 text-blue-300 px-2 py-0.5 rounded font-mono">Next.js Frontend</span>
+      <span class="text-gray-700">▸</span>
+      <span class="bg-amber-950 border border-amber-900/70 text-amber-300 px-2 py-0.5 rounded font-mono">JWT Bearer</span>
+      <span class="text-gray-700">▸</span>
+      <span class="bg-indigo-950 border border-indigo-900/70 text-indigo-300 px-2 py-0.5 rounded font-mono">fastapi_auth_partner_jwt</span>
+      <span class="text-gray-700">▸</span>
+      <span class="bg-purple-950 border border-purple-900/70 text-purple-300 px-2 py-0.5 rounded font-mono">ShopInvader / Custom Router</span>
+      <span class="text-gray-700">▸</span>
+      <span class="bg-emerald-950 border border-emerald-900/70 text-emerald-300 px-2 py-0.5 rounded font-mono">Odoo ORM</span>
+      <span class="text-gray-700">▸</span>
+      <span class="bg-sky-950 border border-sky-900/70 text-sky-300 px-2 py-0.5 rounded font-mono">PostgreSQL 16</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MAIN TABS
+═══════════════════════════════════════════ -->
+<div class="max-w-screen-xl mx-auto px-5 pt-5">
+  <div class="flex border-b border-gray-800 gap-1">
+    <button id="t1-btn" onclick="switchTab(1)"
+      class="tab-btn tab-active flex items-center gap-2 px-5 py-2.5 text-sm font-medium">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 11H4L5 9z"/>
+      </svg>
+      Tab 1 — Core Flow (Catalog &amp; Cart)
+    </button>
+    <button id="t2-btn" onclick="switchTab(2)"
+      class="tab-btn tab-inactive flex items-center gap-2 px-5 py-2.5 text-sm font-medium">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M13 10V3L4 14h7v7l9-11h-7z"/>
+      </svg>
+      Tab 2 — Killer Features Demo
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TAB 1: CORE FLOW
+═══════════════════════════════════════════ -->
+<div id="tab1" class="max-w-screen-xl mx-auto px-5 py-5">
+  <div class="grid grid-cols-5 gap-5">
+
+    <!-- ── LEFT: Product UI ── -->
+    <div class="col-span-2 flex flex-col gap-4">
+
+      <!-- Inherit notice -->
+      <div class="bg-indigo-950/50 border border-indigo-900/60 rounded-xl p-3 flex gap-3">
+        <svg class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <p class="text-xs text-indigo-200 leading-relaxed">
+          <strong class="text-indigo-300">[INHERIT]</strong> Variant logic, stock check, cart —
+          ShopInvader xử lý toàn bộ. Custom chỉ inject thêm
+          <code class="bg-indigo-950 px-1 rounded text-indigo-300">x_coolcash_earnable</code> vào response.
+        </p>
+      </div>
+
+      <!-- Product Card -->
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-5">
+        <!-- Header row -->
+        <div class="flex gap-4 mb-5">
+          <!-- Product image -->
+          <div class="w-24 h-24 bg-gradient-to-br from-indigo-900/80 to-purple-900/80 rounded-xl shrink-0 flex flex-col items-center justify-center border border-indigo-800/40">
+            <span class="text-3xl">👕</span>
+            <span class="text-xs font-bold text-indigo-300 mt-1 tracking-wider">BASIC</span>
+          </div>
+          <!-- Info -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start gap-2 mb-1">
+              <h3 class="text-sm font-bold text-white leading-snug flex-1">Áo thun Coolmate Basic Thoáng Mát</h3>
+              <span id="stock-badge" class="badge bg-emerald-950 text-emerald-400 border border-emerald-900 shrink-0">In Stock</span>
+            </div>
+            <div class="text-xl font-bold text-white mb-2">199.000₫</div>
+            <div class="flex flex-wrap gap-1.5">
+              <code class="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded border-l-2 border-emerald-500">GET /shopinvader/products/{slug}</code>
+            </div>
+            <div class="flex gap-1 mt-1.5">
+              <span class="badge bg-purple-950 text-purple-300 border border-purple-900">[INHERIT]</span>
+              <span class="badge bg-gray-800 text-gray-400">ShopInvader</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active SKU display -->
+        <div class="bg-gray-800/60 rounded-lg px-3 py-2 flex items-center justify-between mb-4">
+          <span class="text-xs text-gray-500">SKU đang chọn</span>
+          <span id="sku-display" class="font-mono text-xs text-amber-300 font-semibold">— chọn size &amp; màu —</span>
+        </div>
+
+        <!-- Size picker -->
+        <div class="mb-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold text-gray-300 uppercase tracking-widest">Size</span>
+            <span class="text-xs text-gray-600 italic">Gạch chân = hết hàng</span>
+          </div>
+          <div id="size-picker" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Color picker -->
+        <div class="mb-5">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold text-gray-300 uppercase tracking-widest">Màu</span>
+            <span id="color-label" class="text-xs text-gray-500">Chọn màu</span>
+          </div>
+          <div id="color-picker" class="flex gap-3 items-center"></div>
+        </div>
+
+        <!-- Qty + Cart button -->
+        <div class="flex gap-3 mb-3">
+          <div class="flex items-center bg-gray-800 border border-gray-700 rounded-lg">
+            <button onclick="adjustQty(-1)" class="w-9 h-10 text-gray-300 hover:text-white text-lg font-light flex items-center justify-center">−</button>
+            <span id="qty-val" class="w-10 text-center text-white font-semibold text-sm">1</span>
+            <button onclick="adjustQty(1)"  class="w-9 h-10 text-gray-300 hover:text-white text-lg font-light flex items-center justify-center">+</button>
+          </div>
+          <button id="cart-btn" onclick="doAddToCart()" disabled
+            class="flex-1 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm py-2.5 rounded-lg transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-9H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            Thêm vào Giỏ
+          </button>
+        </div>
+
+        <!-- CoolCash preview -->
+        <div id="coolcash-bar" class="hidden bg-amber-950/50 border border-amber-900/60 rounded-lg px-3 py-2 flex items-center gap-2">
+          <span class="text-base">🪙</span>
+          <span class="text-xs text-amber-200">Tích được <strong id="coolcash-val" class="text-amber-300 font-bold">0</strong> CoolCash <span class="text-amber-500">(7% = 1 CoolCash / 1₫)</span></span>
+        </div>
+      </div>
+
+      <!-- Endpoint reference -->
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+        <div class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Endpoints liên quan</div>
+        <div class="space-y-2 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="badge bg-emerald-950 text-emerald-400">GET</span>
+            <code class="text-gray-300 font-mono">/shopinvader/products/<span class="text-amber-400">{slug}</span></code>
+            <span class="badge bg-purple-950 text-purple-300 ml-auto border border-purple-900">[INHERIT]</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="badge bg-amber-950 text-amber-400">POST</span>
+            <code class="text-gray-300 font-mono">/shopinvader/cart/add_item</code>
+            <span class="badge bg-emerald-950 text-emerald-300 ml-auto border border-emerald-900">[EXTEND]</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="badge bg-emerald-950 text-emerald-400">GET</span>
+            <code class="text-gray-300 font-mono">/shopinvader/cart</code>
+            <span class="badge bg-purple-950 text-purple-300 ml-auto border border-purple-900">[INHERIT]</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="badge bg-amber-950 text-amber-400">POST</span>
+            <code class="text-gray-300 font-mono">/shopinvader/auth/login</code>
+            <span class="badge bg-purple-950 text-purple-300 ml-auto border border-purple-900">[INHERIT]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RIGHT: JSON Panel ── -->
+    <div class="col-span-3 flex flex-col gap-4">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden flex flex-col" style="min-height:600px">
+
+        <!-- Window chrome -->
+        <div class="bg-[#1a1f2e] border-b border-gray-800 px-4 py-2.5 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex gap-1.5">
+              <div class="w-3 h-3 rounded-full bg-red-500/70"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500/70"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500/70"></div>
+            </div>
+            <span id="t1-title" class="text-xs font-mono text-gray-400">// Chọn size + màu để thấy API response</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="t1-method" class="hidden badge text-xs font-bold"></span>
+            <span id="t1-status" class="hidden badge bg-emerald-950/60 text-emerald-400 border border-emerald-900/50 text-xs"></span>
+          </div>
+        </div>
+
+        <!-- Sub-tabs: Request / Response -->
+        <div id="t1-subtabs" class="hidden bg-[#141824] border-b border-gray-800 flex">
+          <button id="t1-req-btn" onclick="t1SubTab('req')"
+            class="px-4 py-2 text-xs font-semibold text-indigo-300 border-b-2 border-indigo-500 transition-all">REQUEST</button>
+          <button id="t1-res-btn" onclick="t1SubTab('res')"
+            class="px-4 py-2 text-xs font-semibold text-gray-600 border-b-2 border-transparent hover:text-gray-300 transition-all">RESPONSE</button>
+        </div>
+
+        <!-- JSON content -->
+        <div class="flex-1 relative overflow-auto jp bg-[#0d1117]">
+          <div id="t1-placeholder" class="absolute inset-0 flex flex-col items-center justify-center text-gray-700 select-none">
+            <svg class="w-14 h-14 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <p class="text-sm font-medium">Đang chờ tương tác…</p>
+            <p class="text-xs mt-1 text-gray-800">Chọn size / màu hoặc nhấn "Thêm vào Giỏ"</p>
+          </div>
+          <pre id="t1-json" class="hidden p-5 text-sm"></pre>
+        </div>
+
+        <!-- Meta bar -->
+        <div id="t1-meta" class="hidden bg-[#1a1f2e] border-t border-gray-800 px-4 py-2 flex items-center gap-4 text-xs text-gray-600">
+          <span>⏱ <span id="t1-time" class="text-gray-500">—</span></span>
+          <span>📦 <span id="t1-size" class="text-gray-500">—</span></span>
+          <span>🔐 JWT: <span class="text-emerald-400">✓ Valid</span></span>
+          <span class="ml-auto text-gray-700">fastapi_auth_partner_jwt → res.partner#42</span>
+        </div>
+      </div>
+
+      <!-- Classification legend -->
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+        <div class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Phân loại Endpoint</div>
+        <div class="grid grid-cols-3 gap-3 text-xs">
+          <div class="flex items-start gap-2">
+            <span class="badge bg-purple-950 text-purple-300 border border-purple-900 shrink-0 mt-0.5">[INHERIT]</span>
+            <span class="text-gray-500">Dùng nguyên ShopInvader, không cần custom (~38%)</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="badge bg-emerald-950 text-emerald-300 border border-emerald-900 shrink-0 mt-0.5">[EXTEND]</span>
+            <span class="text-gray-500">Kế thừa + thêm field CoolCash / CoolClub (~20%)</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="badge bg-pink-950 text-pink-300 border border-pink-900 shrink-0 mt-0.5">[CUSTOM]</span>
+            <span class="text-gray-500">Viết mới: Returns, P&L, Combo, Routing (~30%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TAB 2: KILLER FEATURES
+═══════════════════════════════════════════ -->
+<div id="tab2" class="hidden max-w-screen-xl mx-auto px-5 py-5">
+  <div class="grid grid-cols-5 gap-5">
+
+    <!-- ── LEFT: Feature Cards ── -->
+    <div class="col-span-2 flex flex-col gap-4">
+
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+        <h3 class="font-bold text-white text-sm">5 Killer Features</h3>
+        <p class="text-xs text-gray-500 mt-1">Tính năng thương mại tạo lợi thế cạnh tranh — xây trên Odoo v19 Custom Modules</p>
+      </div>
+
+      <!-- KF-1: Returns -->
+      <div id="card-returns" class="kf-card bg-gray-900 border border-gray-800 rounded-xl p-4 cursor-pointer" onclick="showKF('returns')">
+        <div class="flex items-start gap-3 mb-3">
+          <div class="w-10 h-10 bg-pink-950/70 border border-pink-900/60 rounded-xl flex items-center justify-center text-xl shrink-0">↩️</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+              <span class="text-sm font-bold text-white">KF-1: Automated Returns</span>
+              <span class="badge bg-pink-950 text-pink-300 border border-pink-900">[CUSTOM]</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Quy trình đổi trả tự động: tạo reverse picking + gọi GHN pickup + xử lý refund/replacement</p>
+          </div>
+        </div>
+        <div class="space-y-1 mb-3">
+          <div class="flex items-center gap-2 text-xs text-gray-600"><span class="text-pink-500">▸</span> <code class="text-pink-400">fashion.return.request</code> model mới</div>
+          <div class="flex items-center gap-2 text-xs text-gray-600"><span class="text-pink-500">▸</span> <code class="text-pink-400">stock.picking</code> reverse + GHN API call</div>
+          <div class="flex items-center gap-2 text-xs text-gray-600"><span class="text-pink-500">▸</span> Refund via <code class="text-pink-400">account.move</code> credit note</div>
+        </div>
+        <button onclick="showKF('returns'); event.stopPropagation();"
+          class="w-full bg-pink-950/40 hover:bg-pink-900/40 border border-pink-900/60 text-pink-300 text-xs font-semibold py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          Yêu cầu đổi trả → Xem JSON
+        </button>
+      </div>
+
+      <!-- KF-3: Combo Engine -->
+      <div id="card-combo" class="kf-card bg-gray-900 border border-gray-800 rounded-xl p-4 cursor-pointer" onclick="showKF('combo')">
+        <div class="flex items-start gap-3 mb-3">
+          <div class="w-10 h-10 bg-amber-950/70 border border-amber-900/60 rounded-xl flex items-center justify-center text-xl shrink-0">📦</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+              <span class="text-sm font-bold text-white">KF-3: Combo Engine</span>
+              <span class="badge bg-amber-950 text-amber-300 border border-amber-900">[CUSTOM]</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">Tự động phân rã combo → SKU thành phần khi confirm đơn. Giá combo giữ nguyên, SKU phụ price_unit = 0₫</p>
+          </div>
+        </div>
+        <div class="space-y-1 mb-3">
+          <div class="flex items-center gap-2 text-xs text-gray-600"><span class="text-amber-500">▸</span> Hook vào <code class="text-amber-400">sale.order.action_confirm()</code></div>
+          <div class="flex items-center gap-2 text-xs text-gray-600"><span class="text-amber-500">▸</span> <code class="text-amber-400">x_is_combo=True</code> → expand component lines</div>
+          <div class="flex items-center gap-2 text-xs text-gray-600"><span class="text-amber-500">▸</span> Inventory deducted per SKU, không theo combo</div>
+        </div>
+        <button onclick="showKF('combo'); event.stopPropagation();"
+          class="w-full bg-amber-950/40 hover:bg-amber-900/40 border border-amber-900/60 text-amber-300 text-xs font-semibold py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+          Tính toán Combo động → Xem JSON
+        </button>
+      </div>
+
+      <!-- KF-4: P&L Dashboard -->
+      <div id="card-pnl" class="kf-card bg-gray-900 border border-gray-800 rounded-xl p-4 cursor-pointer" onclick="showKF('pnl')">
+        <div class="flex items-start gap-3 mb-3">
+          <div class="w-10 h-10 bg-emerald-950/70 border border-emerald-900/60 rounded-xl flex items-center justify-center text-xl shrink-0">📊</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+              <span class="text-sm font-bold text-white">KF-4: Real-time P&L Dashboard</span>
+              <span class="badge bg-emerald-950 text-emerald-300 border border-emerald-900">[CUSTOM]</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">CEO xem doanh thu / lợi nhuận theo giờ real-time. PostgreSQL ROLLUP từ sale.order + account.move + stock.valuation</p>
+          </div>
+        </div>
+        <div class="space-y-1 mb-3">
+          <div class="flex items-center gap-2 text-xs text-gray-600"><span class="text-emerald-500">▸</span> PostgreSQL <code class="text-emerald-400">GROUP BY ROLLUP(hour)</code></div>
+          <div class="flex items-center gap-2 text-xs text-gray-600"><span class="text-emerald-500">▸</span> COGS từ <code class="text-emerald-400">stock.valuation.layer</code></div>
+          <div class="flex items-center gap-2 text-xs text-gray-600"><span class="text-emerald-500">▸</span> Quyền truy cập: CEO role only (<code class="text-emerald-400">group_fashion_analytics_ceo</code>)</div>
+        </div>
+        <button onclick="showKF('pnl'); event.stopPropagation();"
+          class="w-full bg-emerald-950/40 hover:bg-emerald-900/40 border border-emerald-900/60 text-emerald-300 text-xs font-semibold py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Xem Real-time P&L Dashboard → Xem JSON
+        </button>
+      </div>
+
+      <!-- Other KFs -->
+      <div class="bg-gray-900 border border-gray-800 rounded-xl p-4">
+        <div class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">2 KF còn lại</div>
+        <div class="space-y-2.5">
+          <div class="flex items-center gap-3 text-xs">
+            <span class="w-7 h-7 bg-blue-950/60 border border-blue-900/50 rounded-lg flex items-center justify-center text-sm shrink-0">🗺️</span>
+            <div>
+              <div class="text-white font-semibold">KF-2: Smart Warehouse Routing</div>
+              <div class="text-gray-600 mt-0.5">Province → nearest WH → stock check → split order</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 text-xs">
+            <span class="w-7 h-7 bg-violet-950/60 border border-violet-900/50 rounded-lg flex items-center justify-center text-sm shrink-0">🤖</span>
+            <div>
+              <div class="text-white font-semibold">KF-5: AI Catalog Recommendations</div>
+              <div class="text-gray-600 mt-0.5">Collaborative filtering từ sale.order.line history</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RIGHT: JSON Panel ── -->
+    <div class="col-span-3 flex flex-col gap-4">
+      <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden flex flex-col" style="min-height:640px">
+
+        <!-- Window chrome -->
+        <div class="bg-[#1a1f2e] border-b border-gray-800 px-4 py-2.5 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex gap-1.5">
+              <div class="w-3 h-3 rounded-full bg-red-500/70"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500/70"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500/70"></div>
+            </div>
+            <span id="t2-title" class="text-xs font-mono text-gray-400">// Nhấn vào Killer Feature bên trái để xem mock API</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="t2-method" class="hidden badge text-xs font-bold"></span>
+            <span id="t2-status" class="hidden badge bg-emerald-950/60 text-emerald-400 border border-emerald-900/50 text-xs"></span>
+          </div>
+        </div>
+
+        <!-- Sub-tabs -->
+        <div id="t2-subtabs" class="hidden bg-[#141824] border-b border-gray-800 flex">
+          <button id="t2-req-btn" onclick="t2SubTab('req')"
+            class="px-4 py-2 text-xs font-semibold text-indigo-300 border-b-2 border-indigo-500 transition-all">REQUEST</button>
+          <button id="t2-res-btn" onclick="t2SubTab('res')"
+            class="px-4 py-2 text-xs font-semibold text-gray-600 border-b-2 border-transparent hover:text-gray-300 transition-all">RESPONSE</button>
+        </div>
+
+        <!-- JSON content -->
+        <div class="flex-1 relative overflow-auto jp bg-[#0d1117]">
+          <div id="t2-placeholder" class="absolute inset-0 flex flex-col items-center justify-center text-gray-700 select-none">
+            <svg class="w-14 h-14 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            <p class="text-sm font-medium">Chọn Killer Feature…</p>
+            <p class="text-xs mt-1 text-gray-800">Nhấn một trong 3 nút bên trái</p>
+          </div>
+          <pre id="t2-json" class="hidden p-5 text-sm"></pre>
+        </div>
+
+        <!-- Meta bar -->
+        <div id="t2-meta" class="hidden bg-[#1a1f2e] border-t border-gray-800 px-4 py-2 flex items-center gap-4 text-xs text-gray-600">
+          <span>⏱ <span id="t2-time" class="text-gray-500">—</span></span>
+          <span>📦 <span id="t2-size-val" class="text-gray-500">—</span></span>
+          <span>🔐 JWT: <span class="text-emerald-400">✓ Valid</span></span>
+          <span id="t2-module" class="ml-auto text-gray-700">—</span>
+        </div>
+      </div>
+
+      <!-- Impl note -->
+      <div id="t2-note" class="hidden bg-gray-900 border border-gray-800 rounded-xl p-4">
+        <div class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2">Implementation Note</div>
+        <p id="t2-note-text" class="text-xs text-gray-400 leading-relaxed"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="max-w-screen-xl mx-auto px-5 py-5 mt-2 border-t border-gray-800/60">
+  <div class="flex items-center justify-between text-xs text-gray-700">
+    <span>Coolmate Fashion Store — Headless Odoo v19 Architecture Demo</span>
+    <span>Odoo v19 Enterprise · OCA FastAPI · ShopInvader · Next.js · PostgreSQL 16</span>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script>
+// ─── DATA ───────────────────────────────────────────────────
+const SIZES = [
+  { label:'XS',  qty:15, id:101, sku:'AT-BASIC-XS' },
+  { label:'S',   qty:8,  id:102, sku:'AT-BASIC-S'  },
+  { label:'M',   qty:0,  id:103, sku:'AT-BASIC-M'  },  // out of stock
+  { label:'L',   qty:3,  id:104, sku:'AT-BASIC-L'  },
+  { label:'XL',  qty:0,  id:105, sku:'AT-BASIC-XL' },  // out of stock
+  { label:'2XL', qty:4,  id:106, sku:'AT-BASIC-2XL'},
+  { label:'3XL', qty:2,  id:107, sku:'AT-BASIC-3XL'},
+];
+
+const COLORS = [
+  { name:'Trắng',    hex:'#f3f4f6', border:'#d1d5db', code:'W' },
+  { name:'Xanh Navy',hex:'#1e3a5f', border:'#2d4a73', code:'N' },
+  { name:'Xám',      hex:'#6b7280', border:'#9ca3af', code:'G' },
+  { name:'Đen',      hex:'#111827', border:'#374151', code:'B' },
+];
+
+const PRICE = 199000;
+const EARN_RATE = 0.07;
+
+let selSize  = null;
+let selColor = null;
+let qty = 1;
+let t1Mode = 'product';  // 'product' | 'cart'
+let t1SubMode = 'req';
+let t2SubMode = 'req';
+let activeKF = null;
+
+// ─── INIT ────────────────────────────────────────────────────
+(function init() {
+  buildSizes();
+  buildColors();
+  // Auto-select first available color for immediate feedback
+  selectColor(COLORS[0]);
+})();
+
+function buildSizes() {
+  const wrap = document.getElementById('size-picker');
+  wrap.innerHTML = '';
+  SIZES.forEach(s => {
+    const btn = document.createElement('button');
+    const oos = s.qty === 0;
+    btn.className = `size-pill border rounded-lg px-3 py-1.5 text-xs font-semibold
+      ${oos ? 'oos border-gray-800 text-gray-700 bg-gray-900/50'
+             : 'border-gray-700 text-gray-300 bg-gray-800/50'}`;
+    btn.textContent = s.label;
+    btn.dataset.sizeLabel = s.label;
+    if (!oos) btn.addEventListener('click', () => selectSize(s));
+    else      btn.title = 'Hết hàng';
+    wrap.appendChild(btn);
+  });
+}
+
+function buildColors() {
+  const wrap = document.getElementById('color-picker');
+  wrap.innerHTML = '';
+  COLORS.forEach(c => {
+    const outer = document.createElement('div');
+    outer.className = 'flex flex-col items-center gap-1 cursor-pointer';
+    outer.onclick = () => selectColor(c);
+
+    const sw = document.createElement('div');
+    sw.className = 'c-swatch';
+    sw.style.backgroundColor = c.hex;
+    sw.style.borderColor = c.border;
+    sw.dataset.colorName = c.name;
+
+    const lbl = document.createElement('span');
+    lbl.className = 'text-xs text-gray-600 whitespace-nowrap';
+    lbl.textContent = c.name;
+
+    outer.appendChild(sw); outer.appendChild(lbl);
+    wrap.appendChild(outer);
+  });
+}
+
+// ─── SELECTIONS ──────────────────────────────────────────────
+function selectSize(s) {
+  selSize = s;
+  document.querySelectorAll('.size-pill:not(.oos)').forEach(b => {
+    b.classList.toggle('active', b.dataset.sizeLabel === s.label);
+  });
+  refreshSKU();
+  refreshCoolCash();
+  refreshCartBtn();
+  showProductRequest();
+}
+
+function selectColor(c) {
+  selColor = c;
+  document.querySelectorAll('.c-swatch').forEach(sw => {
+    sw.classList.toggle('active', sw.dataset.colorName === c.name);
+  });
+  document.getElementById('color-label').textContent = c.name;
+  refreshSKU();
+  if (selSize) showProductRequest();
+}
+
+function refreshSKU() {
+  const el = document.getElementById('sku-display');
+  if (selSize && selColor) el.textContent = `${selSize.sku}-${selColor.code}`;
+  else if (selSize)         el.textContent = `${selSize.sku}-?`;
+  else                      el.textContent  = '— chọn size & màu —';
+}
+
+function refreshCoolCash() {
+  const cc = document.getElementById('coolcash-bar');
+  const cv = document.getElementById('coolcash-val');
+  if (selSize && selColor) {
+    const earn = Math.floor(PRICE * qty * EARN_RATE);
+    cv.textContent = earn.toLocaleString('vi-VN');
+    cc.classList.remove('hidden');
+    cc.classList.add('flex');
+  }
+}
+
+function refreshCartBtn() {
+  const btn = document.getElementById('cart-btn');
+  const ok  = selSize && selColor && selSize.qty > 0;
+  btn.disabled = !ok;
+}
+
+function adjustQty(d) {
+  qty = Math.max(1, Math.min(10, qty + d));
+  document.getElementById('qty-val').textContent = qty;
+  refreshCoolCash();
+}
+
+// ─── TAB 1: PRODUCT / CART JSON ─────────────────────────────
+function showProductRequest() {
+  t1Mode = 'product';
+  t1SubMode = 'req';
+
+  const reqPayload = {
+    "_endpoint":       "GET /shopinvader/products/ao-thun-coolmate-basic",
+    "_classification": "[INHERIT] ShopInvader — không cần custom code",
+    "_auth":           "Authorization: Bearer <jwt_token>",
+    "params": {
+      "slug":    "ao-thun-coolmate-basic",
+      "_expand": "variants,images,attributes"
+    }
+  };
+
+  const resPayload = buildProductResponse();
+
+  window._t1Data = { req: reqPayload, res: resPayload };
+  renderT1(reqPayload, 'GET', '/shopinvader/products/{slug}', '200 OK', '44ms', '2.1 KB');
+  showT1SubTabs();
+  setSubTabActive('t1', 'req');
+}
+
+function buildProductResponse() {
+  const sku = (selSize && selColor) ? `${selSize.sku}-${selColor.code}` : null;
+  return {
+    "_endpoint": "Response — ShopInvader base + [EXTEND] thêm x_ fields",
+    "data": {
+      "id":          42,
+      "name":        "Áo thun Coolmate Basic Thoáng Mát",
+      "slug":        "ao-thun-coolmate-basic",
+      "x_gender_type [EXTEND]":  "unisex",
+      "x_material [EXTEND]":     "100% Cotton Combed",
+      "x_is_combo":  false,
+      "price":       PRICE,
+      "selected_variant": selSize ? {
+        "id":       selSize.id,
+        "sku":      sku,
+        "size":     selSize.label,
+        "color":    selColor ? selColor.name : null,
+        "stock_qty":selSize.qty,
+        "in_stock": selSize.qty > 0
+      } : null,
+      "all_variants": SIZES.map(s => ({
+        "size":     s.label,
+        "in_stock": s.qty > 0,
+        "stock_qty":s.qty,
+        "sku":      selColor ? `${s.sku}-${selColor.code}` : s.sku
+      })),
+      "coolcash_earn_rate [EXTEND]":      EARN_RATE,
+      "coolcash_earnable_preview [EXTEND]": Math.floor(PRICE * EARN_RATE)
+    }
+  };
+}
+
+function doAddToCart() {
+  if (!selSize || !selColor) return;
+  t1Mode = 'cart';
+  t1SubMode = 'req';
+
+  const sku   = `${selSize.sku}-${selColor.code}`;
+  const total = PRICE * qty;
+  const cc    = Math.floor(total * EARN_RATE);
+  const free  = total >= 350000;
+
+  const reqPayload = {
+    "_endpoint":       "POST /shopinvader/cart/add_item",
+    "_classification": "[EXTEND] ShopInvader base + inject CoolCash fields",
+    "_auth":           "Authorization: Bearer <jwt_token>",
+    "body": {
+      "product_id": selSize.id,
+      "item_qty":   qty,
+      "options":    {}
+    }
+  };
+
+  const resPayload = {
+    "_endpoint": "Cart response — ShopInvader cart + [EXTEND] CoolCash / Shipping",
+    "cart_id":     "CART-2024-00789",
+    "lines": [
+      {
+        "id":            1,
+        "product_id":    selSize.id,
+        "sku":           sku,
+        "name":          `Áo thun Coolmate Basic / ${selSize.label} / ${selColor.name}`,
+        "qty":           qty,
+        "price_unit":    PRICE,
+        "price_subtotal":total,
+        "in_stock":      true
+      }
+    ],
+    "amount_untaxed":  total,
+    "amount_tax":      0,
+    "amount_total":    total,
+    "item_count":      qty,
+    "x_coolcash_earnable [EXTEND]":     cc,
+    "x_free_shipping_eligible [EXTEND]":free,
+    "shipping_fee_preview [EXTEND]":    free ? 0 : 30000,
+    "_note": free
+      ? "✓ Đơn hàng đủ điều kiện FREE SHIPPING (≥ 350.000₫)"
+      : `Còn ${(350000 - total).toLocaleString('vi-VN')}₫ nữa để FREE SHIPPING`
+  };
+
+  window._t1Data = { req: reqPayload, res: resPayload };
+  renderT1(reqPayload, 'POST', '/shopinvader/cart/add_item', '201 Created', '61ms', '1.4 KB');
+  showT1SubTabs();
+  setSubTabActive('t1', 'req');
+
+  // Visual feedback on button
+  const btn = document.getElementById('cart-btn');
+  btn.textContent = '✓ Đã thêm!';
+  btn.classList.add('bg-emerald-600');
+  btn.classList.remove('bg-indigo-600');
+  setTimeout(() => {
+    btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-9H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg> Thêm vào Giỏ`;
+    btn.classList.remove('bg-emerald-600');
+    btn.classList.add('bg-indigo-600');
+  }, 1800);
+}
+
+function t1SubTab(mode) {
+  t1SubMode = mode;
+  const data = window._t1Data;
+  if (!data) return;
+  displayT1JSON(mode === 'req' ? data.req : data.res);
+  setSubTabActive('t1', mode);
+}
+
+function renderT1(payload, method, endpoint, status, time, size) {
+  displayT1JSON(payload);
+  document.getElementById('t1-placeholder').classList.add('hidden');
+  setMethodBadge('t1-method', method);
+  const sb = document.getElementById('t1-status');
+  sb.classList.remove('hidden');
+  sb.textContent = status;
+  document.getElementById('t1-title').textContent = `// ${method} ${endpoint}`;
+  document.getElementById('t1-meta').classList.remove('hidden');
+  document.getElementById('t1-time').textContent = time;
+  document.getElementById('t1-size').textContent = size;
+}
+
+function displayT1JSON(data) {
+  const el = document.getElementById('t1-json');
+  el.classList.remove('hidden');
+  el.innerHTML = highlight(JSON.stringify(data, null, 2));
+  animateEl(el);
+}
+
+function showT1SubTabs() {
+  const st = document.getElementById('t1-subtabs');
+  st.classList.remove('hidden');
+  st.classList.add('flex');
+}
+
+// ─── KF DATA ─────────────────────────────────────────────────
+const KF = {
+  returns: {
+    title:   '// KF-1: Returns — POST /api/v1/returns/create',
+    method:  'POST',
+    ep:      '/api/v1/returns/create',
+    status:  '201 Created',
+    time:    '234ms',
+    size:    '2.3 KB',
+    module:  'fashion_store_returns',
+    note:    'Khi customer gửi yêu cầu: (1) Tạo fashion.return.request record, (2) Tự động tạo reverse stock.picking từ customer → warehouse, (3) Gọi GHN API để lên lịch pickup tại nhà, (4) Cron xử lý refund / replacement sau khi nhận hàng. Trạng thái theo dõi qua webhook GHN POST /api/v1/returns/webhook.',
+    req: {
+      "_endpoint":       "POST /api/v1/returns/create",
+      "_classification": "[CUSTOM] — Không có trong ShopInvader base",
+      "_auth":           "Authorization: Bearer <customer_jwt_token>",
+      "_odoo_module":    "fashion_store_returns",
+      "body": {
+        "original_order_id": "SO-2024-00123",
+        "items": [
+          {
+            "product_id":      104,
+            "qty":             1,
+            "reason":          "wrong_size",
+            "size_received":   "L",
+            "size_preferred":  "XL",
+            "condition":       "unworn_with_tags"
+          }
+        ],
+        "return_method":     "pickup",
+        "customer_address": {
+          "street":   "123 Nguyễn Huệ",
+          "ward":     "Bến Nghé",
+          "district": "Quận 1",
+          "province": "Hồ Chí Minh"
+        },
+        "preferred_resolution": "exchange",
+        "customer_note":        "Mua nhầm size, áo còn nguyên tag"
+      }
+    },
+    res: {
+      "_endpoint": "Return created — Odoo tự động tạo reverse picking + call GHN",
+      "return_request": {
+        "id":         "RR-2024-00045",
+        "status":     "pending_pickup",
+        "created_at": "2024-06-14T10:23:45+07:00"
+      },
+      "logistics": {
+        "carrier":            "GHN",
+        "pickup_type":        "home_pickup",
+        "pickup_scheduled":   "2024-06-15T09:00:00+07:00",
+        "tracking_code":      "GHN-RETURN-789456123",
+        "ghn_order_code":     "5E78XGM3",
+        "_ghn_api_called [internal]": "POST https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create"
+      },
+      "odoo_objects": {
+        "reverse_picking_id":    "RP/2024/00045",
+        "reverse_picking_state": "waiting",
+        "_stock_move_ids [internal]": [1842, 1843],
+        "return_warehouse":      "WH-HCM-01"
+      },
+      "resolution": {
+        "type":                              "exchange",
+        "replacement_order":                 null,
+        "_replacement_created_on_receipt":   true,
+        "estimated_resolution_days":         3
+      },
+      "customer_notification": {
+        "sms_sent":   true,
+        "email_sent": true,
+        "message":    "Yêu cầu đổi hàng đã xác nhận. GHN đến lấy ngày 15/06 từ 9:00–12:00."
+      }
+    }
+  },
+
+  combo: {
+    title:   '// KF-3: Combo Engine — Trigger: sale.order.action_confirm()',
+    method:  'INTERNAL',
+    ep:      'sale.order._expand_combo_lines()',
+    status:  'Triggered',
+    time:    '156ms',
+    size:    '3.1 KB',
+    module:  'fashion_store_product + fashion_store_sale',
+    note:    'Override action_confirm() trong fashion_store_sale. Với mỗi order line có x_is_combo=True: (1) Lấy x_combo_component_ids từ product.template, (2) Xóa dòng combo, (3) Tạo dòng mới cho từng SKU thành phần với price_unit=0 và x_is_combo_component=True, (4) Tổng giá bằng giá combo gốc. Kho trừ hàng theo từng SKU riêng, không theo combo product.',
+    req: {
+      "_trigger":        "sale.order.action_confirm() — ORM call khi sale rep confirm đơn",
+      "_classification": "[CUSTOM] — override action_confirm trong fashion_store_sale",
+      "_python_hook":    "class SaleOrder(models.Model): _inherit = 'sale.order'",
+      "order_before_confirm": {
+        "id":    "SO-2024-00150",
+        "state": "draft",
+        "order_lines": [
+          {
+            "id":           301,
+            "product_id":   200,
+            "name":         "Combo Mùa Hè 2024 (3 áo + 1 quần)",
+            "x_is_combo":   true,
+            "qty":          1,
+            "price_unit":   590000,
+            "_combo_component_ids [internal]": [101, 102, 103, 201],
+            "price_subtotal": 590000
+          }
+        ],
+        "amount_total": 590000
+      }
+    },
+    res: {
+      "_trigger": "Sau action_confirm() — combo đã expand thành 4 SKU riêng lẻ",
+      "order_after_confirm": {
+        "id":           "SO-2024-00150",
+        "state":        "sale",
+        "x_has_combo":  true,
+        "order_lines": [
+          { "id":301, "product_id":101, "sku":"AT-BASIC-M-W",  "name":"Áo thun Basic Trắng / M",     "qty":1, "price_unit":0,      "x_is_combo_component":true, "x_combo_parent_id":200, "price_subtotal":0      },
+          { "id":302, "product_id":102, "sku":"AT-BASIC-M-N",  "name":"Áo thun Basic Xanh Navy / M", "qty":1, "price_unit":0,      "x_is_combo_component":true, "x_combo_parent_id":200, "price_subtotal":0      },
+          { "id":303, "product_id":103, "sku":"AT-TANK-M-B",   "name":"Áo tank top Đen / M",         "qty":1, "price_unit":0,      "x_is_combo_component":true, "x_combo_parent_id":200, "price_subtotal":0      },
+          { "id":304, "product_id":201, "sku":"QS-BASIC-M-N",  "name":"Quần short Basic / M",        "qty":1, "price_unit":590000, "x_is_combo_component":true, "x_combo_parent_id":200, "price_subtotal":590000,
+            "_note": "Giá combo gán vào dòng cuối để amount_total không đổi" }
+        ],
+        "amount_total": 590000,
+        "inventory_impact": {
+          "warehouse":           "WH-HCM-01",
+          "stock_moves_created": 4,
+          "deducted_skus":       ["AT-BASIC-M-W","AT-BASIC-M-N","AT-TANK-M-B","QS-BASIC-M-N"],
+          "smart_routing_applied": true
+        }
+      }
+    }
+  },
+
+  pnl: {
+    title:   '// KF-4: P&L Real-time — GET /api/v1/analytics/pnl/realtime',
+    method:  'GET',
+    ep:      '/api/v1/analytics/pnl/realtime',
+    status:  '200 OK',
+    time:    '312ms',
+    size:    '4.2 KB',
+    module:  'fashion_store_analytics',
+    note:    'PostgreSQL ROLLUP query JOIN giữa sale.order + account.move (invoice) + stock.valuation.layer (COGS). Chỉ CEO role (group_fashion_analytics_ceo) mới có quyền gọi. Cache Redis 60 giây. COGS = AVG(standard_price) × qty_done từ stock.valuation.layer. Margin% = (Revenue − COGS − Shipping) / Revenue × 100.',
+    req: {
+      "_endpoint":       "GET /api/v1/analytics/pnl/realtime",
+      "_classification": "[CUSTOM] — BI endpoint, CEO only",
+      "_auth":           "Authorization: Bearer <ceo_jwt_token>",
+      "_required_group": "group_fashion_analytics_ceo",
+      "params": {
+        "date":           "2024-06-14",
+        "granularity":    "hourly",
+        "warehouse_ids":  [1, 2, 3],
+        "include_pending": false
+      }
+    },
+    res: {
+      "_endpoint": "P&L real-time — PostgreSQL ROLLUP: sale.order + account.move + stock.valuation",
+      "report": {
+        "date":         "2024-06-14",
+        "generated_at": "2024-06-14T15:30:22+07:00",
+        "granularity":  "hourly",
+        "currency":     "VND",
+        "warehouses":   ["WH-HN-01","WH-HCM-01","WH-DAN-01"]
+      },
+      "hourly_data": [
+        {"hour":"08:00","orders":12, "gross_revenue":2850000,  "shipping_cost":120000,"cogs":1140000, "discounts":0,      "net_profit":1590000, "margin_pct":55.8},
+        {"hour":"09:00","orders":28, "gross_revenue":6720000,  "shipping_cost":280000,"cogs":2688000, "discounts":150000, "net_profit":3442000, "margin_pct":51.2},
+        {"hour":"10:00","orders":45, "gross_revenue":10350000, "shipping_cost":450000,"cogs":4140000, "discounts":520000, "net_profit":5240000, "margin_pct":50.6},
+        {"hour":"11:00","orders":67, "gross_revenue":15890000, "shipping_cost":670000,"cogs":6356000, "discounts":890000, "net_profit":7974000, "margin_pct":50.2},
+        {"hour":"12:00","orders":89, "gross_revenue":19670000, "shipping_cost":890000,"cogs":7868000, "discounts":1240000,"net_profit":10042000,"margin_pct":51.1},
+        {"hour":"13:00","orders":54, "gross_revenue":11340000, "shipping_cost":540000,"cogs":4536000, "discounts":350000, "net_profit":6214000, "margin_pct":54.8},
+        {"hour":"14:00","orders":71, "gross_revenue":14920000, "shipping_cost":710000,"cogs":5968000, "discounts":720000, "net_profit":7522000, "margin_pct":50.4},
+        {"hour":"15:30 [realtime]","orders":34,"gross_revenue":7140000,"shipping_cost":340000,"cogs":2856000,"discounts":210000,"net_profit":3754000,"margin_pct":52.6}
+      ],
+      "daily_totals": {
+        "total_orders":          400,
+        "gross_revenue":         88880000,
+        "total_shipping_cost":   4000000,
+        "total_cogs":            35552000,
+        "total_discounts":       4080000,
+        "coolcash_redeemed":     1250000,
+        "net_profit":            44998000,
+        "avg_margin_pct":        50.6,
+        "avg_order_value":       222200,
+        "top_category":          "Áo thun Basic",
+        "top_warehouse":         "WH-HCM-01"
+      },
+      "_sql_hint [debug]": "SELECT date_trunc('hour', so.date_order) as hr, COUNT(*), SUM(so.amount_total), SUM(svl.value) as cogs FROM sale_order so JOIN stock_valuation_layer svl ON ... WHERE so.date_order::date = %s GROUP BY ROLLUP(hr) ORDER BY hr"
+    }
+  }
+};
+
+// ─── KILLER FEATURES ─────────────────────────────────────────
+function showKF(key) {
+  const kf = KF[key];
+  if (!kf) return;
+  activeKF = key;
+  t2SubMode = 'req';
+
+  // Highlight active card
+  ['returns','combo','pnl'].forEach(k => {
+    const card = document.getElementById(`card-${k}`);
+    if (k === key) {
+      card.classList.add('active-card', 'border-indigo-800/60');
+      card.classList.remove('border-gray-800');
+    } else {
+      card.classList.remove('active-card', 'border-indigo-800/60');
+      card.classList.add('border-gray-800');
+    }
+  });
+
+  document.getElementById('t2-placeholder').classList.add('hidden');
+  document.getElementById('t2-title').textContent = kf.title;
+
+  setMethodBadge('t2-method', kf.method);
+  const sb = document.getElementById('t2-status');
+  sb.classList.remove('hidden');
+  sb.textContent = kf.status;
+
+  const st = document.getElementById('t2-subtabs');
+  st.classList.remove('hidden');
+  st.classList.add('flex');
+
+  displayT2JSON(kf.req);
+  setSubTabActive('t2', 'req');
+
+  document.getElementById('t2-meta').classList.remove('hidden');
+  document.getElementById('t2-time').textContent = kf.time;
+  document.getElementById('t2-size-val').textContent = kf.size;
+  document.getElementById('t2-module').textContent = `Module: ${kf.module}`;
+
+  const noteBox = document.getElementById('t2-note');
+  document.getElementById('t2-note-text').textContent = kf.note;
+  noteBox.classList.remove('hidden');
+}
+
+function t2SubTab(mode) {
+  t2SubMode = mode;
+  if (!activeKF) return;
+  const kf = KF[activeKF];
+  displayT2JSON(mode === 'req' ? kf.req : kf.res);
+  setSubTabActive('t2', mode);
+}
+
+function displayT2JSON(data) {
+  const el = document.getElementById('t2-json');
+  el.classList.remove('hidden');
+  el.innerHTML = highlight(JSON.stringify(data, null, 2));
+  animateEl(el);
+}
+
+// ─── TAB SWITCHING ───────────────────────────────────────────
+function switchTab(n) {
+  document.getElementById('tab1').classList.toggle('hidden', n !== 1);
+  document.getElementById('tab2').classList.toggle('hidden', n !== 2);
+  document.getElementById('t1-btn').className = `tab-btn ${n===1?'tab-active':'tab-inactive'} flex items-center gap-2 px-5 py-2.5 text-sm font-medium`;
+  document.getElementById('t2-btn').className = `tab-btn ${n===2?'tab-active':'tab-inactive'} flex items-center gap-2 px-5 py-2.5 text-sm font-medium`;
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────
+function setMethodBadge(id, method) {
+  const el = document.getElementById(id);
+  el.classList.remove('hidden');
+  const map = {
+    'GET':      'bg-emerald-950 text-emerald-300 border border-emerald-900',
+    'POST':     'bg-amber-950   text-amber-300   border border-amber-900',
+    'INTERNAL': 'bg-violet-950  text-violet-300  border border-violet-900',
+  };
+  el.className = `badge text-xs font-bold ${map[method] || map['GET']}`;
+  el.textContent = method;
+}
+
+function setSubTabActive(prefix, mode) {
+  const rBtn = document.getElementById(`${prefix}-req-btn`);
+  const sBtn = document.getElementById(`${prefix}-res-btn`);
+  rBtn.className = `px-4 py-2 text-xs font-semibold transition-all border-b-2 ${mode==='req' ? 'text-indigo-300 border-indigo-500' : 'text-gray-600 border-transparent hover:text-gray-300'}`;
+  sBtn.className = `px-4 py-2 text-xs font-semibold transition-all border-b-2 ${mode==='res' ? 'text-indigo-300 border-indigo-500' : 'text-gray-600 border-transparent hover:text-gray-300'}`;
+}
+
+function animateEl(el) {
+  el.style.animation = 'none';
+  void el.offsetHeight;
+  el.style.animation = '';
+  el.classList.add('fade-in');
+}
+
+// ─── JSON SYNTAX HIGHLIGHT ───────────────────────────────────
+function highlight(json) {
+  const esc = json
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
+
+  return esc.replace(
+    /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+    m => {
+      if (/^"/.test(m)) {
+        if (/:$/.test(m)) {
+          // It's a key
+          const raw = m.slice(1, m.length - 2).trim(); // strip quotes + colon
+          if (raw.includes('[INHERIT]')) return `<span class="k-inherit">${m}</span>`;
+          if (raw.includes('[EXTEND]'))  return `<span class="k-extend">${m}</span>`;
+          if (raw.includes('[CUSTOM]'))  return `<span class="k-custom">${m}</span>`;
+          if (raw.startsWith('_'))       return `<span class="jc">${m}</span>`;
+          return `<span class="jk">${m}</span>`;
+        }
+        return `<span class="js">${m}</span>`;
+      }
+      if (/true|false/.test(m)) return `<span class="jb">${m}</span>`;
+      if (/null/.test(m))       return `<span class="jnl">${m}</span>`;
+      return `<span class="jn">${m}</span>`;
+    }
+  );
+}
+</script>
+</body>
+</html>

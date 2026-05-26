@@ -1,0 +1,364 @@
+- generic [active] [ref=e1]:
+  - navigation "Site Navigation" [ref=e2]:
+    - list [ref=e3]:
+      - listitem [ref=e4]:
+        - link "NEW" [ref=e5] [cursor=pointer]:
+          - /url: /collection/san-pham-moi?itm_source=navbar
+      - listitem [ref=e6]:
+        - link "SALE" [ref=e7] [cursor=pointer]:
+          - /url: /collection/giam-gia?itm_source=navbar
+      - listitem [ref=e8]:
+        - link "Khám phá đồ nam" [ref=e9] [cursor=pointer]:
+          - /url: /nam
+      - listitem [ref=e10]:
+        - link "Tất cả sản phẩm" [ref=e11] [cursor=pointer]:
+          - /url: /collection/do-nam
+      - listitem [ref=e12]:
+        - link "Sản phẩm mới" [ref=e13] [cursor=pointer]:
+          - /url: /collection/san-pham-moi?gender_type=male
+      - listitem [ref=e14]:
+        - link "Bán chạy nhất" [ref=e15] [cursor=pointer]:
+          - /url: /collection/ban-chay-nhat?gender_type=male
+      - listitem [ref=e16]:
+        - link "Khám phá Bộ sưu tập" [ref=e17] [cursor=pointer]:
+          - /url: /highlight-collections
+      - listitem [ref=e18]:
+        - link "Cool Set" [ref=e19] [cursor=pointer]:
+          - /url: /collection/set-do-nam
+      - listitem [ref=e20]:
+        - link "Tất cả Áo nam" [ref=e21] [cursor=pointer]:
+          - /url: /collection/ao-nam
+      - listitem [ref=e22]:
+        - link "Áo Tanktop" [ref=e23] [cursor=pointer]:
+          - /url: /collection/ao-ba-lo-tank-top-nam
+      - listitem [ref=e24]:
+        - link "Áo thun" [ref=e25] [cursor=pointer]:
+          - /url: /collection/ao-thun-nam
+      - listitem [ref=e26]:
+        - link "Áo Thể Thao" [ref=e27] [cursor=pointer]:
+          - /url: /collection/ao-nam-choi-the-thao
+      - listitem [ref=e28]:
+        - link "Áo Polo" [ref=e29] [cursor=pointer]:
+          - /url: /collection/ao-polo-nam
+      - listitem [ref=e30]:
+        - link "Áo Sơ Mi" [ref=e31] [cursor=pointer]:
+          - /url: /collection/ao-so-mi-nam
+      - listitem [ref=e32]:
+        - link "Áo Dài Tay" [ref=e33] [cursor=pointer]:
+          - /url: /collection/ao-nam-dai-tay
+      - listitem [ref=e34]:
+        - link "Áo Sweater" [ref=e35] [cursor=pointer]:
+          - /url: /collection/ao-sweater-len-ni-nam
+      - listitem [ref=e36]:
+        - link "Áo Khoác" [ref=e37] [cursor=pointer]:
+          - /url: /collection/ao-khoac-nam
+      - listitem [ref=e38]:
+        - link "Áo thun Graphic" [ref=e39] [cursor=pointer]:
+          - /url: /graphic-tee?itm_source=navbar
+      - listitem [ref=e40]:
+        - link "Tất cả Quần nam" [ref=e41] [cursor=pointer]:
+          - /url: /collection/quan-nam
+      - listitem [ref=e42]:
+        - link "Quần Short" [ref=e43] [cursor=pointer]:
+          - /url: /collection/quan-short-nam
+      - listitem [ref=e44]:
+        - link "Quần Jogger" [ref=e45] [cursor=pointer]:
+          - /url: /collection/quan-jogger-nam
+      - listitem [ref=e46]:
+        - link "Quần Thể Thao" [ref=e47] [cursor=pointer]:
+          - /url: /collection/quan-nam-choi-the-thao
+      - listitem [ref=e48]:
+        - link "Quần Dài" [ref=e49] [cursor=pointer]:
+          - /url: /collection/quan-dai-nam
+      - listitem [ref=e50]:
+        - link "Quần Pants" [ref=e51] [cursor=pointer]:
+          - /url: /collection/quan-pants-nam
+      - listitem [ref=e52]:
+        - link "Quần Jean" [ref=e53] [cursor=pointer]:
+          - /url: /collection/quan-jeans-nam
+      - listitem [ref=e54]:
+        - link "Quần Kaki" [ref=e55] [cursor=pointer]:
+          - /url: /collection/quan-kaki-nam
+      - listitem [ref=e56]:
+        - link "Đồ Bơi Nam" [ref=e57] [cursor=pointer]:
+          - /url: /collection/do-boi-nam
+      - listitem [ref=e58]:
+        - link "Đồ lót" [ref=e59] [cursor=pointer]:
+          - /url: /collection/quan-lot-nam
+      - listitem [ref=e60]:
+        - link "Brief (Tam giác)" [ref=e61] [cursor=pointer]:
+          - /url: /collection/quan-tam-giac-brief
+      - listitem [ref=e62]:
+        - link "Trunk (Boxer)" [ref=e63] [cursor=pointer]:
+          - /url: /collection/quan-boxer-trunk
+      - listitem [ref=e64]:
+        - link "Boxer Brief (Boxer dài)" [ref=e65] [cursor=pointer]:
+          - /url: /collection/quan-boxer-brief-dang-dai
+      - listitem [ref=e66]:
+        - link "Long Leg" [ref=e67] [cursor=pointer]:
+          - /url: /collection/quan-long-leg
+      - listitem [ref=e68]:
+        - link "Tất cả phụ kiện" [ref=e69] [cursor=pointer]:
+          - /url: /collection/phu-kien-nam
+      - listitem [ref=e70]:
+        - link "Áo thun chạy bộ \"Việt Nam tiến bước\"" [ref=e71] [cursor=pointer]:
+          - /url: /product/ao-thun-chay-bo-viet-nam-tien-buoc
+      - listitem [ref=e72]:
+        - link "Pickleball" [ref=e73] [cursor=pointer]:
+          - /url: /collection/pickleball-tennis?gender_type=male
+      - listitem [ref=e74]:
+        - link "Đồ thể thao" [ref=e75] [cursor=pointer]:
+          - /url: /collection/coolmate-activewear
+      - listitem [ref=e76]:
+        - link "Mặc hàng ngày" [ref=e77] [cursor=pointer]:
+          - /url: /collection/do-casual
+      - listitem [ref=e78]:
+        - link "Khám phá đồ nữ" [ref=e79] [cursor=pointer]:
+          - /url: /nu
+      - listitem [ref=e80]:
+        - link "COOLMATE ACTIVE FOR WOMEN" [ref=e81] [cursor=pointer]:
+          - /url: /collection/coolmate-activewear-nu
+      - listitem [ref=e82]:
+        - link "Sản phẩm mới" [ref=e83] [cursor=pointer]:
+          - /url: /collection/san-pham-moi?gender_type=female
+      - listitem [ref=e84]:
+        - link "Bán chạy nhất" [ref=e85] [cursor=pointer]:
+          - /url: /collection/ban-chay-nhat?gender_type=female
+      - listitem [ref=e86]:
+        - link "Cool Set" [ref=e87] [cursor=pointer]:
+          - /url: /collection/combo-do-nu
+      - listitem [ref=e88]:
+        - link "Tất cả Áo nữ" [ref=e89] [cursor=pointer]:
+          - /url: /collection/ao-nu
+      - listitem [ref=e90]:
+        - link "Đồ bơi liền thân" [ref=e91] [cursor=pointer]:
+          - /url: /collection/wave-motion-collection?danh-muc=do-boi-lien-than
+      - listitem [ref=e92]:
+        - link "Áo Sport Bra" [ref=e93] [cursor=pointer]:
+          - /url: /collection/ao-bra-nu
+      - listitem [ref=e94]:
+        - link "Áo Croptop" [ref=e95] [cursor=pointer]:
+          - /url: /collection/ao-cropped-top
+      - listitem [ref=e96]:
+        - link "Áo Polo" [ref=e97] [cursor=pointer]:
+          - /url: /collection/ao-polo-nu
+      - listitem [ref=e98]:
+        - link "Áo Singlet" [ref=e99] [cursor=pointer]:
+          - /url: /collection/ao-singlet-nu
+      - listitem [ref=e100]:
+        - link "Áo Dài Tay" [ref=e101] [cursor=pointer]:
+          - /url: /collection/ao-dai-tay-nu
+      - listitem [ref=e102]:
+        - link "Áo Khoác" [ref=e103] [cursor=pointer]:
+          - /url: /collection/ao-khoac-nu
+      - listitem [ref=e104]:
+        - link "Áo Thun" [ref=e105] [cursor=pointer]:
+          - /url: /collection/ao-thun-nu
+      - listitem [ref=e106]:
+        - link "Tất cả Quần nữ" [ref=e107] [cursor=pointer]:
+          - /url: /collection/quan-nu
+      - listitem [ref=e108]:
+        - link "Quần Legging" [ref=e109] [cursor=pointer]:
+          - /url: /collection/quan-legging
+      - listitem [ref=e110]:
+        - link "Quần Shorts" [ref=e111] [cursor=pointer]:
+          - /url: /collection/quan-short-nu
+      - listitem [ref=e112]:
+        - link "Quần Biker Shorts" [ref=e113] [cursor=pointer]:
+          - /url: /collection/quan-biker-short
+      - listitem [ref=e114]:
+        - link "Váy - Đầm" [ref=e115] [cursor=pointer]:
+          - /url: /collection/vay-dam-nu
+      - listitem [ref=e116]:
+        - link "Quần Dài" [ref=e117] [cursor=pointer]:
+          - /url: /collection/quan-dai-nu
+      - listitem [ref=e118]:
+        - link "Tất cả phụ kiện" [ref=e119] [cursor=pointer]:
+          - /url: /collection/phu-kien-nu
+      - listitem [ref=e120]:
+        - link "#2 Amazon Best Seller" [ref=e121] [cursor=pointer]:
+          - /url: /collection/amazon-best-seller
+      - listitem [ref=e122]:
+        - link "Hướng dẫn chọn Size nữ" [ref=e123] [cursor=pointer]:
+          - /url: /huong-dan-chon-size-do-nu
+      - listitem [ref=e124]:
+        - link "Community Threads" [ref=e125] [cursor=pointer]:
+          - /url: /community-threads
+      - listitem [ref=e126]:
+        - link "Pickleball" [ref=e127] [cursor=pointer]:
+          - /url: /collection/pickleball-tennis?gender_type=female
+      - listitem [ref=e128]:
+        - link "Chạy bộ" [ref=e129] [cursor=pointer]:
+          - /url: /collection/quan-ao-chay-bo-nu
+      - listitem [ref=e130]:
+        - link "Yoga & Pilates" [ref=e131] [cursor=pointer]:
+          - /url: /collection/yoga-pilates
+      - listitem [ref=e132]:
+        - link "Đồ bơi nữ" [ref=e133] [cursor=pointer]:
+          - /url: /collection/wave-motion-collection?gender_type=female
+      - listitem [ref=e134]:
+        - link "THỂ THAO" [ref=e135] [cursor=pointer]:
+          - /url: /collection/do-the-thao
+      - listitem [ref=e136]:
+        - link "Thể thao chung" [ref=e137] [cursor=pointer]:
+          - /url: /collection/the-thao-chung?gender_type=male
+      - listitem [ref=e138]:
+        - link "Chạy bộ" [ref=e139] [cursor=pointer]:
+          - /url: /collection/quan-ao-chay-bo
+      - listitem [ref=e140]:
+        - link "Gym" [ref=e141] [cursor=pointer]:
+          - /url: /collection/quan-ao-phu-kien-tap-gym
+      - listitem [ref=e142]:
+        - link "Bóng đá" [ref=e143] [cursor=pointer]:
+          - /url: /collection/quan-ao-da-bong-coolmate
+      - listitem [ref=e144]:
+        - link "Cầu lông & Bóng bàn" [ref=e145] [cursor=pointer]:
+          - /url: /collection/racquet-sports-collection
+      - listitem [ref=e146]:
+        - link "Outdoor" [ref=e147] [cursor=pointer]:
+          - /url: /collection/outdoor-collection
+      - listitem [ref=e148]:
+        - link "Thể thao chung" [ref=e149] [cursor=pointer]:
+          - /url: /collection/the-thao-chung-nu
+      - listitem [ref=e150]:
+        - link "Gym" [ref=e151] [cursor=pointer]:
+          - /url: /collection/quan-ao-phu-kien-tap-gym-nu
+      - listitem [ref=e152]:
+        - link "C&S" [ref=e153] [cursor=pointer]:
+          - /url: /collection/care-and-share
+      - listitem [ref=e154]:
+        - link "Áo ấm cho em" [ref=e155] [cursor=pointer]:
+          - /url: /collection/ao-am-cho-em
+      - listitem [ref=e156]:
+        - link "Vụn Art" [ref=e157] [cursor=pointer]:
+          - /url: /collection/vun-art-du-an-chung-tay-xay-nha-moi
+      - listitem [ref=e158]:
+        - link "Cung Hoàng Đạo" [ref=e159] [cursor=pointer]:
+          - /url: /collection/cung-hoang-dao-collection
+      - listitem [ref=e160]:
+        - link "SALE -50%" [ref=e161] [cursor=pointer]:
+          - /url: /collection/giam-gia?gender_type=male
+      - listitem [ref=e162]:
+        - link "Áo thun Graphic" [ref=e163] [cursor=pointer]:
+          - /url: /graphic-tee
+      - listitem [ref=e164]:
+        - link "Áo Sơ Mi" [ref=e165] [cursor=pointer]:
+          - /url: /product/ao-so-mi-essentials-100-cotton-dai-tay-mem-mai2?color=trang
+      - listitem [ref=e166]:
+        - link "Quần Jogger" [ref=e167] [cursor=pointer]:
+          - /url: /product/quan-jeans-nam-dang-straight-sieu-nhe?color=xanh-wash
+      - listitem [ref=e168]:
+        - link "SALE -30%" [ref=e169] [cursor=pointer]:
+          - /url: /collection/giam-gia?gender_type=female
+      - listitem [ref=e170]:
+        - link "Bra & Legging" [ref=e171] [cursor=pointer]:
+          - /url: /collection/bra-legging-collection
+      - listitem [ref=e172]:
+        - link "Quần thể thao nữ" [ref=e173] [cursor=pointer]:
+          - /url: /collection/quan-nu-choi-the-thao
+      - listitem [ref=e174]:
+        - link "Vital Seamless" [ref=e175] [cursor=pointer]:
+          - /url: /collection/vital-seamless
+      - listitem [ref=e176]:
+        - link "Áo Polo Nam Thể Thao Promax-S1" [ref=e177] [cursor=pointer]:
+          - /url: /product/ao-polo-the-thao-nam-promax-s1-logo-1?color=nau-coffee-quartz
+      - listitem [ref=e178]:
+        - link "Quần Shorts Nam Thể Thao Promax-S1" [ref=e179] [cursor=pointer]:
+          - /url: /product/quan-the-thao-nam-promax-s1?color=den
+      - listitem [ref=e180]:
+        - link "Cửa hàng" [ref=e181] [cursor=pointer]:
+          - /url: /stores?itm_source=navbar
+      - listitem [ref=e182]:
+        - link "Coolclub" [ref=e183] [cursor=pointer]:
+          - /url: /coolclub
+      - listitem [ref=e184]:
+        - link "CSKH" [ref=e185] [cursor=pointer]:
+          - /url: /page/trung-tam-dich-vu-khach-hang?itm_source=navbar
+      - listitem [ref=e186]:
+        - link "Về Coolmate" [ref=e187] [cursor=pointer]:
+          - /url: /page/coolmate-story
+      - listitem [ref=e188]:
+        - link "Tuyển dụng" [ref=e189] [cursor=pointer]:
+          - /url: /lp/coolmate-101?itm_source=footer
+      - listitem [ref=e190]:
+        - link "Đăng nhập" [ref=e191] [cursor=pointer]:
+          - /url: /login
+      - listitem [ref=e192]:
+        - link "Blog" [ref=e193] [cursor=pointer]:
+          - /url: /blog
+  - banner "Site header" [ref=e194]:
+    - generic [ref=e197]:
+      - figure [ref=e198]:
+        - link "Logo Coolmate" [ref=e199] [cursor=pointer]:
+          - /url: /
+          - img "Logo Coolmate" [ref=e200]
+      - navigation "Thanh điều hướng chính" [ref=e201]:
+        - navigation "Main" [ref=e202]:
+          - menu [ref=e204]:
+            - menuitem "NEW" [ref=e205]
+            - 'menuitem "Mở Trang: nav.category.male" [ref=e207]'
+            - 'menuitem "Mở Trang: nav.category.female" [ref=e209]'
+            - 'menuitem "Mở menu danh mục: nav.section.sport" [ref=e211]'
+            - 'menuitem "Mở Trang: nav.category.accessories" [ref=e213]'
+            - menuitem "-50% SALE" [ref=e215]
+      - generic [ref=e218]:
+        - generic [ref=e221] [cursor=pointer]:
+          - textbox "Tìm kiếm..." [ref=e225]
+          - img [ref=e226]
+        - button "account" [ref=e641] [cursor=pointer]:
+          - img "account" [ref=e642]
+        - link "Giỏ hàng" [ref=e232] [cursor=pointer]:
+          - /url: /cart
+          - img "cart" [ref=e234]
+  - main [ref=e236]:
+    - generic [ref=e238]:
+      - generic [ref=e239]:
+        - generic [ref=e240]:
+          - generic [ref=e242]:
+            - generic [ref=e243]
+            - button "Gia nhập Coolclub ngay" [ref=e246] [cursor=pointer]
+          - generic [ref=e248]:
+            - generic [ref=e249]
+            - generic "Gọi người khác nhận hàng (nếu có)" [ref=e306]
+            - generic [ref=e311]
+          - generic [ref=e318]:
+            - region "Hình thức thanh toán" [ref=e319]
+            - paragraph [ref=e365]
+        - generic [ref=e367]:
+          - generic [ref=e644]:
+            - paragraph [ref=e645]: Giỏ hàng của bạn trống, hãy mua thêm nhé
+            - button "Mua sắm ngay" [ref=e646] [cursor=pointer]
+          - generic [ref=e518]:
+            - generic [ref=e649]
+            - generic [ref=e667]
+            - generic [ref=e685]
+            - generic [ref=e703]
+            - generic [ref=e721]
+            - generic [ref=e739]
+            - generic [ref=e757]
+            - generic [ref=e775]
+          - generic [ref=e793]:
+            - generic [ref=e796]
+            - button "Áp dụng" [ref=e799] [cursor=pointer]
+          - generic [ref=e592]:
+            - text: Mã giới thiệu bạn bè
+            - button "Nhập mã" [ref=e593] [cursor=pointer]
+          - region "Chi tiết thanh toán" [ref=e595]:
+            - heading "Chi tiết thanh toán" [level=2] [ref=e596]
+            - list [ref=e597]
+            - contentinfo [ref=e606]
+      - generic [ref=e611]:
+        - generic [ref=e612]:
+          - generic [ref=e613]:
+            - img "cart_page.payment_method.cod.title123" [ref=e614]
+            - strong [ref=e616]: Thanh toán khi nhận hàng
+          - generic [ref=e618]:
+            - generic [ref=e619]
+            - paragraph
+        - generic [ref=e622]:
+          - generic [ref=e623]:
+            - generic [ref=e624]
+            - generic [ref=e628]
+          - button "Đặt hàng" [ref=e638] [cursor=pointer]
+    - region "Notifications alt+T"
+  - alert [ref=e639]

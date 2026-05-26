@@ -1,0 +1,475 @@
+- generic [active] [ref=e1]:
+  - navigation "Site Navigation" [ref=e2]:
+    - list [ref=e3]:
+      - listitem [ref=e4]:
+        - link "NEW" [ref=e5] [cursor=pointer]:
+          - /url: /collection/san-pham-moi?itm_source=navbar
+      - listitem [ref=e6]:
+        - link "SALE" [ref=e7] [cursor=pointer]:
+          - /url: /collection/giam-gia?itm_source=navbar
+      - listitem [ref=e8]:
+        - link "Khám phá đồ nam" [ref=e9] [cursor=pointer]:
+          - /url: /nam
+      - listitem [ref=e10]:
+        - link "Tất cả sản phẩm" [ref=e11] [cursor=pointer]:
+          - /url: /collection/do-nam
+      - listitem [ref=e12]:
+        - link "Sản phẩm mới" [ref=e13] [cursor=pointer]:
+          - /url: /collection/san-pham-moi?gender_type=male
+      - listitem [ref=e14]:
+        - link "Bán chạy nhất" [ref=e15] [cursor=pointer]:
+          - /url: /collection/ban-chay-nhat?gender_type=male
+      - listitem [ref=e16]:
+        - link "Khám phá Bộ sưu tập" [ref=e17] [cursor=pointer]:
+          - /url: /highlight-collections
+      - listitem [ref=e18]:
+        - link "Cool Set" [ref=e19] [cursor=pointer]:
+          - /url: /collection/set-do-nam
+      - listitem [ref=e20]:
+        - link "Tất cả Áo nam" [ref=e21] [cursor=pointer]:
+          - /url: /collection/ao-nam
+      - listitem [ref=e22]:
+        - link "Áo Tanktop" [ref=e23] [cursor=pointer]:
+          - /url: /collection/ao-ba-lo-tank-top-nam
+      - listitem [ref=e24]:
+        - link "Áo thun" [ref=e25] [cursor=pointer]:
+          - /url: /collection/ao-thun-nam
+      - listitem [ref=e26]:
+        - link "Áo Thể Thao" [ref=e27] [cursor=pointer]:
+          - /url: /collection/ao-nam-choi-the-thao
+      - listitem [ref=e28]:
+        - link "Áo Polo" [ref=e29] [cursor=pointer]:
+          - /url: /collection/ao-polo-nam
+      - listitem [ref=e30]:
+        - link "Áo Sơ Mi" [ref=e31] [cursor=pointer]:
+          - /url: /collection/ao-so-mi-nam
+      - listitem [ref=e32]:
+        - link "Áo Dài Tay" [ref=e33] [cursor=pointer]:
+          - /url: /collection/ao-nam-dai-tay
+      - listitem [ref=e34]:
+        - link "Áo Sweater" [ref=e35] [cursor=pointer]:
+          - /url: /collection/ao-sweater-len-ni-nam
+      - listitem [ref=e36]:
+        - link "Áo Khoác" [ref=e37] [cursor=pointer]:
+          - /url: /collection/ao-khoac-nam
+      - listitem [ref=e38]:
+        - link "Áo thun Graphic" [ref=e39] [cursor=pointer]:
+          - /url: /graphic-tee?itm_source=navbar
+      - listitem [ref=e40]:
+        - link "Tất cả Quần nam" [ref=e41] [cursor=pointer]:
+          - /url: /collection/quan-nam
+      - listitem [ref=e42]:
+        - link "Quần Short" [ref=e43] [cursor=pointer]:
+          - /url: /collection/quan-short-nam
+      - listitem [ref=e44]:
+        - link "Quần Jogger" [ref=e45] [cursor=pointer]:
+          - /url: /collection/quan-jogger-nam
+      - listitem [ref=e46]:
+        - link "Quần Thể Thao" [ref=e47] [cursor=pointer]:
+          - /url: /collection/quan-nam-choi-the-thao
+      - listitem [ref=e48]:
+        - link "Quần Dài" [ref=e49] [cursor=pointer]:
+          - /url: /collection/quan-dai-nam
+      - listitem [ref=e50]:
+        - link "Quần Pants" [ref=e51] [cursor=pointer]:
+          - /url: /collection/quan-pants-nam
+      - listitem [ref=e52]:
+        - link "Quần Jean" [ref=e53] [cursor=pointer]:
+          - /url: /collection/quan-jeans-nam
+      - listitem [ref=e54]:
+        - link "Quần Kaki" [ref=e55] [cursor=pointer]:
+          - /url: /collection/quan-kaki-nam
+      - listitem [ref=e56]:
+        - link "Đồ Bơi Nam" [ref=e57] [cursor=pointer]:
+          - /url: /collection/do-boi-nam
+      - listitem [ref=e58]:
+        - link "Đồ lót" [ref=e59] [cursor=pointer]:
+          - /url: /collection/quan-lot-nam
+      - listitem [ref=e60]:
+        - link "Brief (Tam giác)" [ref=e61] [cursor=pointer]:
+          - /url: /collection/quan-tam-giac-brief
+      - listitem [ref=e62]:
+        - link "Trunk (Boxer)" [ref=e63] [cursor=pointer]:
+          - /url: /collection/quan-boxer-trunk
+      - listitem [ref=e64]:
+        - link "Boxer Brief (Boxer dài)" [ref=e65] [cursor=pointer]:
+          - /url: /collection/quan-boxer-brief-dang-dai
+      - listitem [ref=e66]:
+        - link "Long Leg" [ref=e67] [cursor=pointer]:
+          - /url: /collection/quan-long-leg
+      - listitem [ref=e68]:
+        - link "Tất cả phụ kiện" [ref=e69] [cursor=pointer]:
+          - /url: /collection/phu-kien-nam
+      - listitem [ref=e70]:
+        - link "Áo thun chạy bộ \"Việt Nam tiến bước\"" [ref=e71] [cursor=pointer]:
+          - /url: /product/ao-thun-chay-bo-viet-nam-tien-buoc
+      - listitem [ref=e72]:
+        - link "Pickleball" [ref=e73] [cursor=pointer]:
+          - /url: /collection/pickleball-tennis?gender_type=male
+      - listitem [ref=e74]:
+        - link "Đồ thể thao" [ref=e75] [cursor=pointer]:
+          - /url: /collection/coolmate-activewear
+      - listitem [ref=e76]:
+        - link "Mặc hàng ngày" [ref=e77] [cursor=pointer]:
+          - /url: /collection/do-casual
+      - listitem [ref=e78]:
+        - link "Khám phá đồ nữ" [ref=e79] [cursor=pointer]:
+          - /url: /nu
+      - listitem [ref=e80]:
+        - link "COOLMATE ACTIVE FOR WOMEN" [ref=e81] [cursor=pointer]:
+          - /url: /collection/coolmate-activewear-nu
+      - listitem [ref=e82]:
+        - link "Sản phẩm mới" [ref=e83] [cursor=pointer]:
+          - /url: /collection/san-pham-moi?gender_type=female
+      - listitem [ref=e84]:
+        - link "Bán chạy nhất" [ref=e85] [cursor=pointer]:
+          - /url: /collection/ban-chay-nhat?gender_type=female
+      - listitem [ref=e86]:
+        - link "Cool Set" [ref=e87] [cursor=pointer]:
+          - /url: /collection/combo-do-nu
+      - listitem [ref=e88]:
+        - link "Tất cả Áo nữ" [ref=e89] [cursor=pointer]:
+          - /url: /collection/ao-nu
+      - listitem [ref=e90]:
+        - link "Đồ bơi liền thân" [ref=e91] [cursor=pointer]:
+          - /url: /collection/wave-motion-collection?danh-muc=do-boi-lien-than
+      - listitem [ref=e92]:
+        - link "Áo Sport Bra" [ref=e93] [cursor=pointer]:
+          - /url: /collection/ao-bra-nu
+      - listitem [ref=e94]:
+        - link "Áo Croptop" [ref=e95] [cursor=pointer]:
+          - /url: /collection/ao-cropped-top
+      - listitem [ref=e96]:
+        - link "Áo Polo" [ref=e97] [cursor=pointer]:
+          - /url: /collection/ao-polo-nu
+      - listitem [ref=e98]:
+        - link "Áo Singlet" [ref=e99] [cursor=pointer]:
+          - /url: /collection/ao-singlet-nu
+      - listitem [ref=e100]:
+        - link "Áo Dài Tay" [ref=e101] [cursor=pointer]:
+          - /url: /collection/ao-dai-tay-nu
+      - listitem [ref=e102]:
+        - link "Áo Khoác" [ref=e103] [cursor=pointer]:
+          - /url: /collection/ao-khoac-nu
+      - listitem [ref=e104]:
+        - link "Áo Thun" [ref=e105] [cursor=pointer]:
+          - /url: /collection/ao-thun-nu
+      - listitem [ref=e106]:
+        - link "Tất cả Quần nữ" [ref=e107] [cursor=pointer]:
+          - /url: /collection/quan-nu
+      - listitem [ref=e108]:
+        - link "Quần Legging" [ref=e109] [cursor=pointer]:
+          - /url: /collection/quan-legging
+      - listitem [ref=e110]:
+        - link "Quần Shorts" [ref=e111] [cursor=pointer]:
+          - /url: /collection/quan-short-nu
+      - listitem [ref=e112]:
+        - link "Quần Biker Shorts" [ref=e113] [cursor=pointer]:
+          - /url: /collection/quan-biker-short
+      - listitem [ref=e114]:
+        - link "Váy - Đầm" [ref=e115] [cursor=pointer]:
+          - /url: /collection/vay-dam-nu
+      - listitem [ref=e116]:
+        - link "Quần Dài" [ref=e117] [cursor=pointer]:
+          - /url: /collection/quan-dai-nu
+      - listitem [ref=e118]:
+        - link "Tất cả phụ kiện" [ref=e119] [cursor=pointer]:
+          - /url: /collection/phu-kien-nu
+      - listitem [ref=e120]:
+        - link "#2 Amazon Best Seller" [ref=e121] [cursor=pointer]:
+          - /url: /collection/amazon-best-seller
+      - listitem [ref=e122]:
+        - link "Hướng dẫn chọn Size nữ" [ref=e123] [cursor=pointer]:
+          - /url: /huong-dan-chon-size-do-nu
+      - listitem [ref=e124]:
+        - link "Community Threads" [ref=e125] [cursor=pointer]:
+          - /url: /community-threads
+      - listitem [ref=e126]:
+        - link "Pickleball" [ref=e127] [cursor=pointer]:
+          - /url: /collection/pickleball-tennis?gender_type=female
+      - listitem [ref=e128]:
+        - link "Chạy bộ" [ref=e129] [cursor=pointer]:
+          - /url: /collection/quan-ao-chay-bo-nu
+      - listitem [ref=e130]:
+        - link "Yoga & Pilates" [ref=e131] [cursor=pointer]:
+          - /url: /collection/yoga-pilates
+      - listitem [ref=e132]:
+        - link "Đồ bơi nữ" [ref=e133] [cursor=pointer]:
+          - /url: /collection/wave-motion-collection?gender_type=female
+      - listitem [ref=e134]:
+        - link "THỂ THAO" [ref=e135] [cursor=pointer]:
+          - /url: /collection/do-the-thao
+      - listitem [ref=e136]:
+        - link "Thể thao chung" [ref=e137] [cursor=pointer]:
+          - /url: /collection/the-thao-chung?gender_type=male
+      - listitem [ref=e138]:
+        - link "Chạy bộ" [ref=e139] [cursor=pointer]:
+          - /url: /collection/quan-ao-chay-bo
+      - listitem [ref=e140]:
+        - link "Gym" [ref=e141] [cursor=pointer]:
+          - /url: /collection/quan-ao-phu-kien-tap-gym
+      - listitem [ref=e142]:
+        - link "Bóng đá" [ref=e143] [cursor=pointer]:
+          - /url: /collection/quan-ao-da-bong-coolmate
+      - listitem [ref=e144]:
+        - link "Cầu lông & Bóng bàn" [ref=e145] [cursor=pointer]:
+          - /url: /collection/racquet-sports-collection
+      - listitem [ref=e146]:
+        - link "Outdoor" [ref=e147] [cursor=pointer]:
+          - /url: /collection/outdoor-collection
+      - listitem [ref=e148]:
+        - link "Thể thao chung" [ref=e149] [cursor=pointer]:
+          - /url: /collection/the-thao-chung-nu
+      - listitem [ref=e150]:
+        - link "Gym" [ref=e151] [cursor=pointer]:
+          - /url: /collection/quan-ao-phu-kien-tap-gym-nu
+      - listitem [ref=e152]:
+        - link "C&S" [ref=e153] [cursor=pointer]:
+          - /url: /collection/care-and-share
+      - listitem [ref=e154]:
+        - link "Áo ấm cho em" [ref=e155] [cursor=pointer]:
+          - /url: /collection/ao-am-cho-em
+      - listitem [ref=e156]:
+        - link "Vụn Art" [ref=e157] [cursor=pointer]:
+          - /url: /collection/vun-art-du-an-chung-tay-xay-nha-moi
+      - listitem [ref=e158]:
+        - link "Cung Hoàng Đạo" [ref=e159] [cursor=pointer]:
+          - /url: /collection/cung-hoang-dao-collection
+      - listitem [ref=e160]:
+        - link "SALE -50%" [ref=e161] [cursor=pointer]:
+          - /url: /collection/giam-gia?gender_type=male
+      - listitem [ref=e162]:
+        - link "Áo thun Graphic" [ref=e163] [cursor=pointer]:
+          - /url: /graphic-tee
+      - listitem [ref=e164]:
+        - link "Áo Sơ Mi" [ref=e165] [cursor=pointer]:
+          - /url: /product/ao-so-mi-essentials-100-cotton-dai-tay-mem-mai2?color=trang
+      - listitem [ref=e166]:
+        - link "Quần Jogger" [ref=e167] [cursor=pointer]:
+          - /url: /product/quan-jeans-nam-dang-straight-sieu-nhe?color=xanh-wash
+      - listitem [ref=e168]:
+        - link "SALE -30%" [ref=e169] [cursor=pointer]:
+          - /url: /collection/giam-gia?gender_type=female
+      - listitem [ref=e170]:
+        - link "Bra & Legging" [ref=e171] [cursor=pointer]:
+          - /url: /collection/bra-legging-collection
+      - listitem [ref=e172]:
+        - link "Quần thể thao nữ" [ref=e173] [cursor=pointer]:
+          - /url: /collection/quan-nu-choi-the-thao
+      - listitem [ref=e174]:
+        - link "Vital Seamless" [ref=e175] [cursor=pointer]:
+          - /url: /collection/vital-seamless
+      - listitem [ref=e176]:
+        - link "Áo Polo Nam Thể Thao Promax-S1" [ref=e177] [cursor=pointer]:
+          - /url: /product/ao-polo-the-thao-nam-promax-s1-logo-1?color=nau-coffee-quartz
+      - listitem [ref=e178]:
+        - link "Quần Shorts Nam Thể Thao Promax-S1" [ref=e179] [cursor=pointer]:
+          - /url: /product/quan-the-thao-nam-promax-s1?color=den
+      - listitem [ref=e180]:
+        - link "Cửa hàng" [ref=e181] [cursor=pointer]:
+          - /url: /stores?itm_source=navbar
+      - listitem [ref=e182]:
+        - link "Coolclub" [ref=e183] [cursor=pointer]:
+          - /url: /coolclub
+      - listitem [ref=e184]:
+        - link "CSKH" [ref=e185] [cursor=pointer]:
+          - /url: /page/trung-tam-dich-vu-khach-hang?itm_source=navbar
+      - listitem [ref=e186]:
+        - link "Về Coolmate" [ref=e187] [cursor=pointer]:
+          - /url: /page/coolmate-story
+      - listitem [ref=e188]:
+        - link "Tuyển dụng" [ref=e189] [cursor=pointer]:
+          - /url: /lp/coolmate-101?itm_source=footer
+      - listitem [ref=e190]:
+        - link "Đăng nhập" [ref=e191] [cursor=pointer]:
+          - /url: /login
+      - listitem [ref=e192]:
+        - link "Blog" [ref=e193] [cursor=pointer]:
+          - /url: /blog
+  - banner "Site header" [ref=e194]:
+    - generic [ref=e196]:
+      - list [ref=e197]:
+        - listitem [ref=e198]:
+          - link "topbar.left.about" [ref=e199] [cursor=pointer]:
+            - /url: /lp/coolmate-101?itm_source=navbar
+        - listitem [ref=e201]:
+          - link "topbar.left.coolxprint" [ref=e202] [cursor=pointer]:
+            - /url: /cxp
+        - listitem [ref=e204]:
+          - link "topbar.left.care&share" [ref=e205] [cursor=pointer]:
+            - /url: /collection/care-and-share
+      - list [ref=e206]:
+        - listitem [ref=e207]:
+          - link "Coolclub" [ref=e208] [cursor=pointer]:
+            - /url: /coolclub?itm_source=navbar
+        - listitem [ref=e212]:
+          - link "Cửa hàng" [ref=e213] [cursor=pointer]:
+            - /url: /stores?itm_source=navbar
+        - listitem [ref=e215]:
+          - link "Blog" [ref=e216] [cursor=pointer]:
+            - /url: /blog
+        - listitem [ref=e218]:
+          - link "CSKH" [ref=e219] [cursor=pointer]:
+            - /url: /page/trung-tam-dich-vu-khach-hang?itm_source=navbar
+        - listitem [ref=e221]:
+          - link "Đăng nhập" [ref=e222] [cursor=pointer]:
+            - /url: "#"
+        - combobox [ref=e225] [cursor=pointer]:
+          - generic
+          - img [ref=e226]
+    - generic [ref=e231]:
+      - figure [ref=e232]:
+        - link "Logo Coolmate" [ref=e233] [cursor=pointer]:
+          - /url: /
+          - img "Logo Coolmate" [ref=e234]
+      - navigation "Thanh điều hướng chính" [ref=e235]:
+        - navigation "Main" [ref=e236]:
+          - menu [ref=e238]
+      - generic [ref=e252]:
+        - generic [ref=e255] [cursor=pointer]:
+          - textbox "Tìm kiếm..." [ref=e259]
+          - img [ref=e260]
+        - button "account" [ref=e693] [cursor=pointer]:
+          - img "account" [ref=e694]
+        - link "Giỏ hàng" [ref=e266] [cursor=pointer]:
+          - /url: /cart
+          - img "cart" [ref=e268]
+    - generic [ref=e272]:
+      - link:
+        - /url: /collection/fifa-worldcup-2026-collection
+      - link "MIỄN PHÍ VẬN CHUYỂN ĐƠN TỪ 200K":
+        - /url: ""
+        - generic [ref=e696] [cursor=pointer]: MIỄN PHÍ VẬN CHUYỂN ĐƠN TỪ 200K
+  - main [ref=e275]:
+    - generic [ref=e276]:
+      - generic [ref=e278]:
+        - img "Coolclub banner" [ref=e280]
+        - button "Tham gia ngay Arrow right" [ref=e281] [cursor=pointer]:
+          - text: Tham gia ngay
+          - img "Arrow right" [ref=e282]
+      - generic [ref=e283]:
+        - heading "Tại sao nên tham gia CoolClub?" [level=2] [ref=e284]
+        - region [ref=e285]:
+          - generic [ref=e287]
+          - button "Next slide" [ref=e697] [cursor=pointer]
+      - generic [ref=e308]:
+        - generic [ref=e309]: CoolCash
+        - generic [ref=e310]: CoolCash có giá trị như tiền mặt dùng để mua hàng tại website.
+        - button "XEM CHI TIẾT" [ref=e311] [cursor=pointer]
+      - generic [ref=e312]:
+        - heading "Nhóm hạng hội viên" [level=2] [ref=e313]
+        - paragraph [ref=e314]: Thăng hạng và tận hưởng hàng loạt đặc quyền hấp dẫn ngay khi mua sắm đạt hạn mức.
+        - generic [ref=e315]:
+          - generic [ref=e316]
+          - generic [ref=e326]
+          - link "ĐẾN TRANG CHÍNH SÁCH" [ref=e414] [cursor=pointer]:
+            - /url: /page/coolclub-chinh-sach-khach-hang-than-thiet
+      - generic [ref=e415]:
+        - img "CoolClub Moments" [ref=e416]
+        - region [ref=e418]:
+          - generic
+      - generic [ref=e699]:
+        - region [ref=e701]:
+          - generic [ref=e703]
+          - generic
+        - generic [ref=e1210]:
+          - paragraph [ref=e1211]: Hãy chia sẻ trải nghiệm của bạn với CoolClub nhé!
+          - button "icon share Chia sẻ cảm nhận" [ref=e1212] [cursor=pointer]
+      - generic [ref=e420]:
+        - heading "Giới thiệu bạn bè - Nhận ngay 10% CoolCash" [level=3] [ref=e421]
+        - paragraph [ref=e422]: Giới thiệu bạn bè đến với Coolmate, bạn sẽ nhận được ngay 10% giá trị đơn hàng được hoàn trả bằng CoolCash ngay sau khi đơn hàng được giao thành công - Không yêu mới lạ!
+        - generic [ref=e423]:
+          - button "Share CHIA SẺ" [ref=e424] [cursor=pointer]
+          - link "TÌM HIỂU THÊM" [ref=e426] [cursor=pointer]:
+            - /url: /account/refer-friend
+      - img "Thêm nhiều quyền lợi khác sẽ được Coolmate cập nhật thường xuyên." [ref=e428]
+      - generic [ref=e430]:
+        - heading "FAQ - Câu hỏi thường gặp" [level=2] [ref=e431]
+        - generic [ref=e432]:
+          - heading "Tại sao tôi nên tham gia CoolClub?" [level=3] [ref=e434]
+          - heading "Đăng ký làm Hội viên CoolClub có mất phí không? Cách đăng ký như thế nào?" [level=3] [ref=e439]
+          - heading "Chương trình CoolClub cũ ngừng áp dụng khi nào? CoolClub mới có nâng cấp gì khác?" [level=3] [ref=e444]
+          - heading "CoolCash có thời hạn không? Nếu có, thời hạn là bao lâu?" [level=3] [ref=e449]
+          - heading "Tôi có thể kết hợp ưu đãi theo Hạng Hội viên và ưu đãi khác không?" [level=3] [ref=e454]
+          - heading "Hạng Hội viên khi nào sẽ được cập nhật? Bao lâu sẽ được cập nhật lại?" [level=3] [ref=e459]
+          - heading "Làm sao để tích luỹ CoolCash?" [level=3] [ref=e464]
+          - heading "Tôi có thể dùng CoolCash để giảm giá trực tiếp không?" [level=3] [ref=e469]
+          - heading "Đổi/trả hàng có ảnh hưởng đến CoolCash và hạng Hội viên không?" [level=3] [ref=e474]
+          - heading "Tôi mua hàng trên các sàn thương mại điện tử có được tích lũy chi tiêu CoolClub không?" [level=3] [ref=e479]
+    - region "Notifications alt+T"
+  - contentinfo [ref=e483]:
+    - generic [ref=e484]:
+      - generic [ref=e485]:
+        - list [ref=e486]:
+          - listitem [ref=e487]
+          - listitem [ref=e493]
+        - generic [ref=e497]:
+          - heading "COOLMATE lắng nghe bạn!" [level=2] [ref=e498]
+          - paragraph [ref=e499]: Chúng tôi luôn trân trọng và mong đợi nhận được mọi ý kiến đóng góp từ khách hàng để có thể nâng cấp trải nghiệm dịch vụ và sản phẩm tốt hơn nữa.
+          - link "Đóng góp ý kiến" [ref=e500] [cursor=pointer]:
+            - /url: https://form.omicrm.io/4115e15i615115107e556i53?lng=vi
+      - list [ref=e501]:
+        - listitem [ref=e502]:
+          - link "Theo dõi chúng tôi trên socials.facebook" [ref=e503] [cursor=pointer]:
+            - /url: https://www.facebook.com/coolmate.me
+        - listitem [ref=e505]:
+          - link "Theo dõi chúng tôi trên socials.zalo" [ref=e506] [cursor=pointer]:
+            - /url: https://zalo.me/1517736583279228381
+        - listitem [ref=e508]:
+          - link "Theo dõi chúng tôi trên socials.tiktok" [ref=e509] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@cool.coolmate
+        - listitem [ref=e511]:
+          - link "Theo dõi chúng tôi trên socials.instagram" [ref=e512] [cursor=pointer]:
+            - /url: https://www.instagram.com/coolmate.me/
+        - listitem [ref=e514]:
+          - link "Theo dõi chúng tôi trên socials.youtube" [ref=e515] [cursor=pointer]:
+            - /url: https://www.youtube.com/channel/UCWw8wLlodKBtEvVt1tTAsMA
+    - navigation "Chính sách & Liên kết" [ref=e519]:
+      - generic [ref=e520]:
+        - generic [ref=e521]:
+          - list "CoolClub" [ref=e522]
+          - list "CoolClub" [ref=e531]
+        - generic [ref=e538]:
+          - list "Chính sách" [ref=e539]
+          - list "Chính sách" [ref=e552]
+        - generic [ref=e557]:
+          - list "Chăm sóc khách hàng" [ref=e558]
+          - list "Chăm sóc khách hàng" [ref=e565]
+        - list "Về COOLMATE" [ref=e575]:
+          - listitem [ref=e576]
+          - listitem [ref=e578]
+          - listitem [ref=e580]
+          - listitem [ref=e582]
+          - listitem [ref=e584]
+          - listitem [ref=e586]
+          - listitem [ref=e588]
+          - listitem [ref=e590]
+          - listitem [ref=e592]
+      - generic [ref=e594]:
+        - heading "Địa chỉ liên hệ" [level=2] [ref=e595]
+        - list [ref=e596]:
+          - listitem [ref=e597]
+          - listitem [ref=e599]
+          - listitem [ref=e601]
+          - listitem [ref=e603]
+          - listitem [ref=e605]
+    - generic [ref=e608]:
+      - generic [ref=e609]:
+        - text: "@ CÔNG TY TNHH FASTECH ASIA"
+        - paragraph [ref=e610]: "Mã số doanh nghiệp: 0108617038. Giấy chứng nhận đăng ký doanh nghiệp do Sở Kế hoạch và Đầu tư TP Hà Nội cấp lần đầu ngày 20/02/2019."
+      - list [ref=e611]:
+        - listitem [ref=e612]:
+          - link "companyInfo.certifications.trust" [ref=e613] [cursor=pointer]:
+            - /url: https://tinnhiemmang.vn/danh-ba-tin-nhiem/coolmateme-1646213826
+        - listitem [ref=e615]:
+          - link "companyInfo.certifications.iso9001" [ref=e616] [cursor=pointer]:
+            - /url: https://www.dmca.com/Protection/Status.aspx?ID=c6fdbdee-127c-4cf1-923d-7efe75201df6&refurl=https://www.coolmate.me/
+        - listitem [ref=e618]:
+          - link "companyInfo.certifications.iso14001" [ref=e619] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=e621]:
+          - link "companyInfo.certifications.hvnclc" [ref=e622] [cursor=pointer]:
+            - /url: http://online.gov.vn/(X(1)S(3e0hkhscv5zs101mhuopx43a))/Home/WebDetails/53184?AspxAutoDetectCookieSupport=1
+  - alert [ref=e624]
+  - button "icon-float-fab" [ref=e1216] [cursor=pointer]:
+    - img "icon-float-fab" [ref=e1217]

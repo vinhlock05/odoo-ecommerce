@@ -1,0 +1,1639 @@
+- generic [active] [ref=e1]:
+  - navigation "Site Navigation" [ref=e2]:
+    - list [ref=e3]:
+      - listitem [ref=e4]:
+        - link "NEW" [ref=e5] [cursor=pointer]:
+          - /url: /collection/san-pham-moi?itm_source=navbar
+      - listitem [ref=e6]:
+        - link "SALE" [ref=e7] [cursor=pointer]:
+          - /url: /collection/giam-gia?itm_source=navbar
+      - listitem [ref=e8]:
+        - link "Khám phá đồ nam" [ref=e9] [cursor=pointer]:
+          - /url: /nam
+      - listitem [ref=e10]:
+        - link "Tất cả sản phẩm" [ref=e11] [cursor=pointer]:
+          - /url: /collection/do-nam
+      - listitem [ref=e12]:
+        - link "Sản phẩm mới" [ref=e13] [cursor=pointer]:
+          - /url: /collection/san-pham-moi?gender_type=male
+      - listitem [ref=e14]:
+        - link "Bán chạy nhất" [ref=e15] [cursor=pointer]:
+          - /url: /collection/ban-chay-nhat?gender_type=male
+      - listitem [ref=e16]:
+        - link "Khám phá Bộ sưu tập" [ref=e17] [cursor=pointer]:
+          - /url: /highlight-collections
+      - listitem [ref=e18]:
+        - link "Cool Set" [ref=e19] [cursor=pointer]:
+          - /url: /collection/set-do-nam
+      - listitem [ref=e20]:
+        - link "Tất cả Áo nam" [ref=e21] [cursor=pointer]:
+          - /url: /collection/ao-nam
+      - listitem [ref=e22]:
+        - link "Áo Tanktop" [ref=e23] [cursor=pointer]:
+          - /url: /collection/ao-ba-lo-tank-top-nam
+      - listitem [ref=e24]:
+        - link "Áo thun" [ref=e25] [cursor=pointer]:
+          - /url: /collection/ao-thun-nam
+      - listitem [ref=e26]:
+        - link "Áo Thể Thao" [ref=e27] [cursor=pointer]:
+          - /url: /collection/ao-nam-choi-the-thao
+      - listitem [ref=e28]:
+        - link "Áo Polo" [ref=e29] [cursor=pointer]:
+          - /url: /collection/ao-polo-nam
+      - listitem [ref=e30]:
+        - link "Áo Sơ Mi" [ref=e31] [cursor=pointer]:
+          - /url: /collection/ao-so-mi-nam
+      - listitem [ref=e32]:
+        - link "Áo Dài Tay" [ref=e33] [cursor=pointer]:
+          - /url: /collection/ao-nam-dai-tay
+      - listitem [ref=e34]:
+        - link "Áo Sweater" [ref=e35] [cursor=pointer]:
+          - /url: /collection/ao-sweater-len-ni-nam
+      - listitem [ref=e36]:
+        - link "Áo Khoác" [ref=e37] [cursor=pointer]:
+          - /url: /collection/ao-khoac-nam
+      - listitem [ref=e38]:
+        - link "Áo thun Graphic" [ref=e39] [cursor=pointer]:
+          - /url: /graphic-tee?itm_source=navbar
+      - listitem [ref=e40]:
+        - link "Tất cả Quần nam" [ref=e41] [cursor=pointer]:
+          - /url: /collection/quan-nam
+      - listitem [ref=e42]:
+        - link "Quần Short" [ref=e43] [cursor=pointer]:
+          - /url: /collection/quan-short-nam
+      - listitem [ref=e44]:
+        - link "Quần Jogger" [ref=e45] [cursor=pointer]:
+          - /url: /collection/quan-jogger-nam
+      - listitem [ref=e46]:
+        - link "Quần Thể Thao" [ref=e47] [cursor=pointer]:
+          - /url: /collection/quan-nam-choi-the-thao
+      - listitem [ref=e48]:
+        - link "Quần Dài" [ref=e49] [cursor=pointer]:
+          - /url: /collection/quan-dai-nam
+      - listitem [ref=e50]:
+        - link "Quần Pants" [ref=e51] [cursor=pointer]:
+          - /url: /collection/quan-pants-nam
+      - listitem [ref=e52]:
+        - link "Quần Jean" [ref=e53] [cursor=pointer]:
+          - /url: /collection/quan-jeans-nam
+      - listitem [ref=e54]:
+        - link "Quần Kaki" [ref=e55] [cursor=pointer]:
+          - /url: /collection/quan-kaki-nam
+      - listitem [ref=e56]:
+        - link "Đồ Bơi Nam" [ref=e57] [cursor=pointer]:
+          - /url: /collection/do-boi-nam
+      - listitem [ref=e58]:
+        - link "Đồ lót" [ref=e59] [cursor=pointer]:
+          - /url: /collection/quan-lot-nam
+      - listitem [ref=e60]:
+        - link "Brief (Tam giác)" [ref=e61] [cursor=pointer]:
+          - /url: /collection/quan-tam-giac-brief
+      - listitem [ref=e62]:
+        - link "Trunk (Boxer)" [ref=e63] [cursor=pointer]:
+          - /url: /collection/quan-boxer-trunk
+      - listitem [ref=e64]:
+        - link "Boxer Brief (Boxer dài)" [ref=e65] [cursor=pointer]:
+          - /url: /collection/quan-boxer-brief-dang-dai
+      - listitem [ref=e66]:
+        - link "Long Leg" [ref=e67] [cursor=pointer]:
+          - /url: /collection/quan-long-leg
+      - listitem [ref=e68]:
+        - link "Tất cả phụ kiện" [ref=e69] [cursor=pointer]:
+          - /url: /collection/phu-kien-nam
+      - listitem [ref=e70]:
+        - link "Áo thun chạy bộ \"Việt Nam tiến bước\"" [ref=e71] [cursor=pointer]:
+          - /url: /product/ao-thun-chay-bo-viet-nam-tien-buoc
+      - listitem [ref=e72]:
+        - link "Pickleball" [ref=e73] [cursor=pointer]:
+          - /url: /collection/pickleball-tennis?gender_type=male
+      - listitem [ref=e74]:
+        - link "Đồ thể thao" [ref=e75] [cursor=pointer]:
+          - /url: /collection/coolmate-activewear
+      - listitem [ref=e76]:
+        - link "Mặc hàng ngày" [ref=e77] [cursor=pointer]:
+          - /url: /collection/do-casual
+      - listitem [ref=e78]:
+        - link "Khám phá đồ nữ" [ref=e79] [cursor=pointer]:
+          - /url: /nu
+      - listitem [ref=e80]:
+        - link "COOLMATE ACTIVE FOR WOMEN" [ref=e81] [cursor=pointer]:
+          - /url: /collection/coolmate-activewear-nu
+      - listitem [ref=e82]:
+        - link "Sản phẩm mới" [ref=e83] [cursor=pointer]:
+          - /url: /collection/san-pham-moi?gender_type=female
+      - listitem [ref=e84]:
+        - link "Bán chạy nhất" [ref=e85] [cursor=pointer]:
+          - /url: /collection/ban-chay-nhat?gender_type=female
+      - listitem [ref=e86]:
+        - link "Cool Set" [ref=e87] [cursor=pointer]:
+          - /url: /collection/combo-do-nu
+      - listitem [ref=e88]:
+        - link "Tất cả Áo nữ" [ref=e89] [cursor=pointer]:
+          - /url: /collection/ao-nu
+      - listitem [ref=e90]:
+        - link "Đồ bơi liền thân" [ref=e91] [cursor=pointer]:
+          - /url: /collection/wave-motion-collection?danh-muc=do-boi-lien-than
+      - listitem [ref=e92]:
+        - link "Áo Sport Bra" [ref=e93] [cursor=pointer]:
+          - /url: /collection/ao-bra-nu
+      - listitem [ref=e94]:
+        - link "Áo Croptop" [ref=e95] [cursor=pointer]:
+          - /url: /collection/ao-cropped-top
+      - listitem [ref=e96]:
+        - link "Áo Polo" [ref=e97] [cursor=pointer]:
+          - /url: /collection/ao-polo-nu
+      - listitem [ref=e98]:
+        - link "Áo Singlet" [ref=e99] [cursor=pointer]:
+          - /url: /collection/ao-singlet-nu
+      - listitem [ref=e100]:
+        - link "Áo Dài Tay" [ref=e101] [cursor=pointer]:
+          - /url: /collection/ao-dai-tay-nu
+      - listitem [ref=e102]:
+        - link "Áo Khoác" [ref=e103] [cursor=pointer]:
+          - /url: /collection/ao-khoac-nu
+      - listitem [ref=e104]:
+        - link "Áo Thun" [ref=e105] [cursor=pointer]:
+          - /url: /collection/ao-thun-nu
+      - listitem [ref=e106]:
+        - link "Tất cả Quần nữ" [ref=e107] [cursor=pointer]:
+          - /url: /collection/quan-nu
+      - listitem [ref=e108]:
+        - link "Quần Legging" [ref=e109] [cursor=pointer]:
+          - /url: /collection/quan-legging
+      - listitem [ref=e110]:
+        - link "Quần Shorts" [ref=e111] [cursor=pointer]:
+          - /url: /collection/quan-short-nu
+      - listitem [ref=e112]:
+        - link "Quần Biker Shorts" [ref=e113] [cursor=pointer]:
+          - /url: /collection/quan-biker-short
+      - listitem [ref=e114]:
+        - link "Váy - Đầm" [ref=e115] [cursor=pointer]:
+          - /url: /collection/vay-dam-nu
+      - listitem [ref=e116]:
+        - link "Quần Dài" [ref=e117] [cursor=pointer]:
+          - /url: /collection/quan-dai-nu
+      - listitem [ref=e118]:
+        - link "Tất cả phụ kiện" [ref=e119] [cursor=pointer]:
+          - /url: /collection/phu-kien-nu
+      - listitem [ref=e120]:
+        - link "#2 Amazon Best Seller" [ref=e121] [cursor=pointer]:
+          - /url: /collection/amazon-best-seller
+      - listitem [ref=e122]:
+        - link "Hướng dẫn chọn Size nữ" [ref=e123] [cursor=pointer]:
+          - /url: /huong-dan-chon-size-do-nu
+      - listitem [ref=e124]:
+        - link "Community Threads" [ref=e125] [cursor=pointer]:
+          - /url: /community-threads
+      - listitem [ref=e126]:
+        - link "Pickleball" [ref=e127] [cursor=pointer]:
+          - /url: /collection/pickleball-tennis?gender_type=female
+      - listitem [ref=e128]:
+        - link "Chạy bộ" [ref=e129] [cursor=pointer]:
+          - /url: /collection/quan-ao-chay-bo-nu
+      - listitem [ref=e130]:
+        - link "Yoga & Pilates" [ref=e131] [cursor=pointer]:
+          - /url: /collection/yoga-pilates
+      - listitem [ref=e132]:
+        - link "Đồ bơi nữ" [ref=e133] [cursor=pointer]:
+          - /url: /collection/wave-motion-collection?gender_type=female
+      - listitem [ref=e134]:
+        - link "THỂ THAO" [ref=e135] [cursor=pointer]:
+          - /url: /collection/do-the-thao
+      - listitem [ref=e136]:
+        - link "Thể thao chung" [ref=e137] [cursor=pointer]:
+          - /url: /collection/the-thao-chung?gender_type=male
+      - listitem [ref=e138]:
+        - link "Chạy bộ" [ref=e139] [cursor=pointer]:
+          - /url: /collection/quan-ao-chay-bo
+      - listitem [ref=e140]:
+        - link "Gym" [ref=e141] [cursor=pointer]:
+          - /url: /collection/quan-ao-phu-kien-tap-gym
+      - listitem [ref=e142]:
+        - link "Bóng đá" [ref=e143] [cursor=pointer]:
+          - /url: /collection/quan-ao-da-bong-coolmate
+      - listitem [ref=e144]:
+        - link "Cầu lông & Bóng bàn" [ref=e145] [cursor=pointer]:
+          - /url: /collection/racquet-sports-collection
+      - listitem [ref=e146]:
+        - link "Outdoor" [ref=e147] [cursor=pointer]:
+          - /url: /collection/outdoor-collection
+      - listitem [ref=e148]:
+        - link "Thể thao chung" [ref=e149] [cursor=pointer]:
+          - /url: /collection/the-thao-chung-nu
+      - listitem [ref=e150]:
+        - link "Gym" [ref=e151] [cursor=pointer]:
+          - /url: /collection/quan-ao-phu-kien-tap-gym-nu
+      - listitem [ref=e152]:
+        - link "C&S" [ref=e153] [cursor=pointer]:
+          - /url: /collection/care-and-share
+      - listitem [ref=e154]:
+        - link "Áo ấm cho em" [ref=e155] [cursor=pointer]:
+          - /url: /collection/ao-am-cho-em
+      - listitem [ref=e156]:
+        - link "Vụn Art" [ref=e157] [cursor=pointer]:
+          - /url: /collection/vun-art-du-an-chung-tay-xay-nha-moi
+      - listitem [ref=e158]:
+        - link "Cung Hoàng Đạo" [ref=e159] [cursor=pointer]:
+          - /url: /collection/cung-hoang-dao-collection
+      - listitem [ref=e160]:
+        - link "SALE -50%" [ref=e161] [cursor=pointer]:
+          - /url: /collection/giam-gia?gender_type=male
+      - listitem [ref=e162]:
+        - link "Áo thun Graphic" [ref=e163] [cursor=pointer]:
+          - /url: /graphic-tee
+      - listitem [ref=e164]:
+        - link "Áo Sơ Mi" [ref=e165] [cursor=pointer]:
+          - /url: /product/ao-so-mi-essentials-100-cotton-dai-tay-mem-mai2?color=trang
+      - listitem [ref=e166]:
+        - link "Quần Jogger" [ref=e167] [cursor=pointer]:
+          - /url: /product/quan-jeans-nam-dang-straight-sieu-nhe?color=xanh-wash
+      - listitem [ref=e168]:
+        - link "SALE -30%" [ref=e169] [cursor=pointer]:
+          - /url: /collection/giam-gia?gender_type=female
+      - listitem [ref=e170]:
+        - link "Bra & Legging" [ref=e171] [cursor=pointer]:
+          - /url: /collection/bra-legging-collection
+      - listitem [ref=e172]:
+        - link "Quần thể thao nữ" [ref=e173] [cursor=pointer]:
+          - /url: /collection/quan-nu-choi-the-thao
+      - listitem [ref=e174]:
+        - link "Vital Seamless" [ref=e175] [cursor=pointer]:
+          - /url: /collection/vital-seamless
+      - listitem [ref=e176]:
+        - link "Áo Polo Nam Thể Thao Promax-S1" [ref=e177] [cursor=pointer]:
+          - /url: /product/ao-polo-the-thao-nam-promax-s1-logo-1?color=nau-coffee-quartz
+      - listitem [ref=e178]:
+        - link "Quần Shorts Nam Thể Thao Promax-S1" [ref=e179] [cursor=pointer]:
+          - /url: /product/quan-the-thao-nam-promax-s1?color=den
+      - listitem [ref=e180]:
+        - link "Cửa hàng" [ref=e181] [cursor=pointer]:
+          - /url: /stores?itm_source=navbar
+      - listitem [ref=e182]:
+        - link "Coolclub" [ref=e183] [cursor=pointer]:
+          - /url: /coolclub
+      - listitem [ref=e184]:
+        - link "CSKH" [ref=e185] [cursor=pointer]:
+          - /url: /page/trung-tam-dich-vu-khach-hang?itm_source=navbar
+      - listitem [ref=e186]:
+        - link "Về Coolmate" [ref=e187] [cursor=pointer]:
+          - /url: /page/coolmate-story
+      - listitem [ref=e188]:
+        - link "Tuyển dụng" [ref=e189] [cursor=pointer]:
+          - /url: /lp/coolmate-101?itm_source=footer
+      - listitem [ref=e190]:
+        - link "Đăng nhập" [ref=e191] [cursor=pointer]:
+          - /url: /login
+      - listitem [ref=e192]:
+        - link "Blog" [ref=e193] [cursor=pointer]:
+          - /url: /blog
+  - banner "Site header" [ref=e194]:
+    - generic [ref=e196]:
+      - list [ref=e197]:
+        - listitem [ref=e198]:
+          - link "topbar.left.about" [ref=e199] [cursor=pointer]:
+            - /url: /lp/coolmate-101?itm_source=navbar
+            - text: VỀ COOLMATE
+        - listitem [ref=e201]:
+          - link "topbar.left.coolxprint" [ref=e202] [cursor=pointer]:
+            - /url: /cxp
+            - text: CXP BY COOLMATE
+        - listitem [ref=e204]:
+          - link "topbar.left.care&share" [ref=e205] [cursor=pointer]:
+            - /url: /collection/care-and-share
+            - text: CARE&SHARE
+      - list [ref=e206]:
+        - listitem [ref=e207]:
+          - link "Coolclub" [ref=e208] [cursor=pointer]:
+            - /url: /coolclub?itm_source=navbar
+            - img [ref=e209]
+            - text: Coolclub
+        - listitem [ref=e212]:
+          - link "Cửa hàng" [ref=e213] [cursor=pointer]:
+            - /url: /stores?itm_source=navbar
+        - listitem [ref=e215]:
+          - link "Blog" [ref=e216] [cursor=pointer]:
+            - /url: /blog
+        - listitem [ref=e218]:
+          - link "CSKH" [ref=e219] [cursor=pointer]:
+            - /url: /page/trung-tam-dich-vu-khach-hang?itm_source=navbar
+        - listitem [ref=e221]:
+          - link "Đăng nhập" [ref=e222] [cursor=pointer]:
+            - /url: "#"
+        - combobox [ref=e225] [cursor=pointer]:
+          - generic:
+            - generic:
+              - img "vi"
+              - text: VN
+          - img [ref=e226]
+    - generic [ref=e231]:
+      - figure [ref=e232]:
+        - link "Logo Coolmate" [ref=e233] [cursor=pointer]:
+          - /url: /
+          - img "Logo Coolmate" [ref=e234]
+      - navigation "Thanh điều hướng chính" [ref=e235]:
+        - navigation "Main" [ref=e236]:
+          - menu [ref=e238]:
+            - menuitem "NEW" [ref=e239]:
+              - link "NEW" [ref=e240] [cursor=pointer]:
+                - /url: /collection/san-pham-moi?itm_source=navbar
+            - 'menuitem "Mở Trang: nav.category.male" [ref=e241]':
+              - 'link "Mở Trang: nav.category.male" [ref=e242] [cursor=pointer]':
+                - /url: /nam
+                - text: Nam
+            - 'menuitem "Mở Trang: nav.category.female" [ref=e243]':
+              - 'link "Mở Trang: nav.category.female" [ref=e244] [cursor=pointer]':
+                - /url: /nu
+                - text: Nữ
+            - 'menuitem "Mở menu danh mục: nav.section.sport" [ref=e245]':
+              - 'link "Mở menu danh mục: nav.section.sport" [ref=e246] [cursor=pointer]':
+                - /url: /collection/do-the-thao
+                - text: THỂ THAO
+            - 'menuitem "Mở Trang: nav.category.accessories" [ref=e247]':
+              - 'link "Mở Trang: nav.category.accessories" [ref=e248] [cursor=pointer]':
+                - /url: /collection/phu-kien
+                - text: PHỤ KIỆN
+            - menuitem "-50% SALE" [ref=e249]:
+              - link "-50% SALE" [ref=e250] [cursor=pointer]:
+                - /url: /collection/giam-gia?itm_source=navbar
+                - paragraph [ref=e251]: "-50%"
+                - text: SALE
+      - generic [ref=e252]:
+        - generic [ref=e255] [cursor=pointer]:
+          - textbox "Tìm kiếm..." [ref=e259]
+          - img [ref=e260]
+        - button "account" [ref=e861] [cursor=pointer]:
+          - img "account" [ref=e862]
+        - link "Giỏ hàng" [ref=e266] [cursor=pointer]:
+          - /url: /cart
+          - img "cart" [ref=e268]
+    - generic [ref=e272]:
+      - link:
+        - /url: /collection/fifa-worldcup-2026-collection
+      - link "MIỄN PHÍ VẬN CHUYỂN ĐƠN TỪ 200K":
+        - /url: ""
+        - generic [ref=e1618] [cursor=pointer]: MIỄN PHÍ VẬN CHUYỂN ĐƠN TỪ 200K
+  - main [ref=e275]:
+    - generic [ref=e276]:
+      - generic [ref=e277]:
+        - navigation "breadcrumb" [ref=e279]:
+          - list [ref=e280]:
+            - listitem [ref=e281]:
+              - link "Trang chủ" [ref=e282] [cursor=pointer]:
+                - /url: /
+                - img [ref=e283]
+                - generic [ref=e286]: Trang chủ
+            - listitem [ref=e287]:
+              - generic [ref=e288]: /
+              - link "Đồ Nam" [ref=e289] [cursor=pointer]:
+                - /url: /collection/do-nam
+            - listitem [ref=e290]:
+              - generic [ref=e291]: /
+              - link "Áo Nam" [ref=e292] [cursor=pointer]:
+                - /url: /collection/ao-nam
+        - generic [ref=e293]:
+          - generic [ref=e294]:
+            - generic [ref=e295]:
+              - button "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e865] [cursor=pointer]:
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e866]
+              - button "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e867] [cursor=pointer]:
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e868]
+              - button "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e869] [cursor=pointer]:
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e870]
+              - button "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e871] [cursor=pointer]:
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e872]
+              - button "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e873] [cursor=pointer]:
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e874]
+              - button "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e875] [cursor=pointer]:
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e876]
+            - generic [ref=e301]:
+              - link "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e877]:
+                - /url: https://n7media.coolmate.me/uploads/September2025/ao-thun-chay-bo-viet-nam-tien-buoc-16-do-cxp.jpg
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e878]
+              - link "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e879]:
+                - /url: https://n7media.coolmate.me/uploads/September2025/ao-thun-chay-bo-viet-nam-tien-buoc-17-do-cxp.jpg
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e880]
+              - link "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e881]:
+                - /url: https://n7media.coolmate.me/uploads/September2025/ao-thun-chay-bo-viet-nam-tien-buoc-322-do-cxp_59.jpg
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e882]
+              - link "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e883]:
+                - /url: https://n7media.coolmate.me/uploads/September2025/ao-thun-chay-bo-viet-nam-tien-buoc-321-do-cxp.jpg
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e884]
+              - link "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e885]:
+                - /url: https://n7media.coolmate.me/uploads/September2025/ao-thun-chay-bo-viet-nam-tien-buoc-330-do-cxp.jpg
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e886]
+              - link "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e887]:
+                - /url: https://n7media.coolmate.me/uploads/September2025/ao-thun-chay-bo-viet-nam-tien-buoc-344-do-cxp_2.jpg
+                - img "Áo thun chạy bộ \"Việt Nam tiến bước\" - Nữ - Không Logo" [ref=e888]
+            - generic [ref=e889]:
+              - button "Icon prev" [disabled] [ref=e890]:
+                - img "Icon prev" [ref=e891]
+              - button "Icon prev" [ref=e892] [cursor=pointer]:
+                - img "Icon prev" [ref=e893]
+          - region "Product Information" [ref=e306]:
+            - generic [ref=e307]:
+              - heading "Áo thun chạy bộ \"Việt Nam tiến bước\"" [level=1] [ref=e308]
+              - paragraph
+              - generic [ref=e309]:
+                - generic [ref=e311] [cursor=pointer]:
+                  - img "full-star" [ref=e312]
+                  - img "full-star" [ref=e313]
+                  - img "full-star" [ref=e314]
+                  - img "full-star" [ref=e315]
+                  - img "half-star" [ref=e316]
+                  - paragraph [ref=e317]: (4.8)
+                - button "icon share Chia sẻ" [ref=e318] [cursor=pointer]:
+                  - img "icon share" [ref=e319]
+                  - text: Chia sẻ
+              - generic [ref=e320]:
+                - deletion [ref=e894]: 239.000đ
+                - generic [ref=e895]:
+                  - paragraph [ref=e896]: 191.000đ
+                  - generic [ref=e898]: "-20%"
+            - region "Product Options" [ref=e326]:
+              - generic [ref=e328]:
+                - img "Miễn phí vận chuyển" [ref=e329]
+                - generic [ref=e330]: Freeship đơn trên 200K
+              - paragraph [ref=e331]: Không áp dụng chính sách đổi trả
+              - heading "Coolcash Được hoàn lên đến 14.000 CoolCash." [level=3] [ref=e336]:
+                - button "Coolcash Được hoàn lên đến 14.000 CoolCash." [ref=e337] [cursor=pointer]:
+                  - generic [ref=e338]:
+                    - img "Coolcash" [ref=e339]
+                    - generic [ref=e340]: Được hoàn lên đến 14.000 CoolCash.
+                  - img [ref=e341]
+              - generic [ref=e343]:
+                - paragraph [ref=e344]:
+                  - generic [ref=e345]: "Loại:"
+                  - text: Nữ - Không Logo
+                - list [ref=e347]:
+                  - listitem [ref=e348]:
+                    - link "color Nữ - Không Logo" [ref=e349] [cursor=pointer]:
+                      - /url: /product/ao-thun-chay-bo-viet-nam-tien-buoc?color=nu---khong-logo
+                      - img "color Nữ - Không Logo" [ref=e350]
+              - generic [ref=e351]:
+                - generic [ref=e352]:
+                  - generic [ref=e353]:
+                    - text: "Kích thước:"
+                    - paragraph [ref=e899]: L
+                  - button "Hướng dẫn chọn size" [ref=e356] [cursor=pointer]
+                - list [ref=e357]:
+                  - listitem [ref=e358]:
+                    - button "XS" [ref=e900] [cursor=pointer]
+                  - listitem [ref=e359]:
+                    - button "S" [ref=e901] [cursor=pointer]
+                  - listitem [ref=e360]:
+                    - button "M"
+                  - listitem [ref=e361]:
+                    - button "L" [ref=e902] [cursor=pointer]
+                  - listitem [ref=e362]:
+                    - button "XL"
+              - generic [ref=e363]:
+                - generic [ref=e364]:
+                  - button "Giảm số lượng" [ref=e365] [cursor=pointer]:
+                    - img [ref=e366]
+                  - generic [ref=e367]: Số lượng
+                  - textbox "Số lượng" [ref=e368]: "1"
+                  - button "Tăng số lượng" [ref=e369] [cursor=pointer]:
+                    - img [ref=e370]
+                - button "add cart icon Thêm vào giỏ" [ref=e371] [cursor=pointer]:
+                  - img "add cart icon" [ref=e372]
+                  - paragraph [ref=e373]:
+                    - generic [ref=e374]: Thêm vào giỏ
+              - alert [ref=e375]: "* Mã giảm giá không áp dụng với sản phẩm này"
+              - link "Mô tả sản phẩm" [ref=e376] [cursor=pointer]:
+                - /url: "#product-description"
+              - generic [ref=e377]:
+                - generic [ref=e378]:
+                  - img "Logo" [ref=e379]
+                  - generic [ref=e380]: Ưu đãi dành riêng cho bạn
+                - region [ref=e381]:
+                  - generic [ref=e383]:
+                    - group [ref=e384] [cursor=pointer]:
+                      - generic [ref=e385]:
+                        - generic [ref=e386]:
+                          - img "Ưu đãi - Áo Bra Coolflex Everyday Active" [ref=e387]
+                          - generic [ref=e389]: "-100%"
+                        - generic [ref=e390]:
+                          - generic [ref=e391]:
+                            - link "Ưu đãi - Áo Bra Coolflex Everyday Active" [ref=e392]:
+                              - /url: /product/bra-coolflex-everyday-active-copy
+                            - generic [ref=e393]: Cho đơn đồ nữ 899K
+                          - generic [ref=e394]:
+                            - generic [ref=e395]: 0đ
+                            - deletion [ref=e396]: 399.000đ
+                    - group [ref=e397] [cursor=pointer]:
+                      - generic [ref=e398]:
+                        - generic [ref=e399]:
+                          - img "Ưu đãi - Găng tay đa năng chống tia UV" [ref=e400]
+                          - generic [ref=e402]: "-100%"
+                        - generic [ref=e403]:
+                          - generic [ref=e404]:
+                            - link "Ưu đãi - Găng tay đa năng chống tia UV" [ref=e405]:
+                              - /url: /product/gang-tay-da-nang-chong-tia-uv-copy
+                            - generic [ref=e406]: Đơn từ 599K
+                          - generic [ref=e407]:
+                            - generic [ref=e408]: 0đ
+                            - deletion [ref=e409]: 99.000đ
+                  - button "Next slide" [ref=e903] [cursor=pointer]:
+                    - img
+                    - generic [ref=e904]: Next slide
+              - list [ref=e411]:
+                - listitem [ref=e412]:
+                  - img "Hotline 1900.27.27.37,[object Object],hỗ trợ từ 8h30 - 22h" [ref=e413]
+                  - paragraph [ref=e414]:
+                    - text: Hotline 1900.27.27.37
+                    - text: hỗ trợ từ 8h30 - 22h
+                - listitem [ref=e415]:
+                  - img "Đến tận nơi nhận hàng trả,,[object Object],hoàn tiền 2-3 ngày (trừ T7, CN)" [ref=e416]
+                  - paragraph [ref=e417]:
+                    - text: Đến tận nơi nhận hàng trả,
+                    - text: hoàn tiền 2-3 ngày (trừ T7, CN)
+      - region "Product Description" [ref=e419]:
+        - heading "Mô tả sản phẩm" [level=2] [ref=e420]
+        - generic [ref=e421]:
+          - generic [ref=e422]:
+            - list [ref=e423]:
+              - listitem [ref=e424]:
+                - img "Nhanh khô" [ref=e425]
+                - paragraph [ref=e426]: Nhanh khô
+              - listitem [ref=e427]:
+                - img "Siêu nhẹ" [ref=e428]
+                - paragraph [ref=e429]: Siêu nhẹ
+              - listitem [ref=e430]:
+                - img "Thấm hút" [ref=e431]
+                - paragraph [ref=e432]: Thấm hút
+            - generic [ref=e433]:
+              - generic [ref=e434]:
+                - paragraph [ref=e435]: "Hỗ trợ vận động:"
+                - list "Mức độ hỗ trợ vận động" [ref=e436]:
+                  - listitem "Mức độ hỗ trợ vận động Nhẹ" [ref=e437]:
+                    - paragraph [ref=e440]: Nhẹ
+                  - listitem "Mức độ hỗ trợ vận động Vừa" [ref=e441]:
+                    - paragraph [ref=e443]: Vừa
+                  - listitem "Mức độ hỗ trợ vận động Mạnh" [ref=e444]:
+                    - paragraph [ref=e447]: Mạnh
+              - list "Thông số sản phẩm" [ref=e905]:
+                - listitem [ref=e906]:
+                  - heading "Công nghệ" [level=4] [ref=e907]
+                  - paragraph [ref=e909]: Ex-Dry
+                - listitem [ref=e910]:
+                  - heading "Chất liệu" [level=4] [ref=e911]
+                  - paragraph [ref=e913]: 100% Polyester
+                - listitem [ref=e914]:
+                  - heading "Kiểu dáng" [level=4] [ref=e915]
+                  - paragraph [ref=e917]: Regular
+                - listitem [ref=e918]:
+                  - heading "Phù hợp" [level=4] [ref=e919]
+                  - paragraph [ref=e921]: Chạy bộ, leo núi, chạy trail
+                - listitem [ref=e922]:
+                  - heading "Tính năng" [level=4] [ref=e923]
+                  - paragraph [ref=e925]: Thấm hút và nhanh khô
+                - listitem [ref=e926]:
+                  - heading "Bảo quản" [level=4] [ref=e927]
+                  - generic [ref=e928]:
+                    - paragraph [ref=e929]: Giặt máy nhẹ - Sấy ở mức nhiệt thấp
+                    - paragraph [ref=e930]: Không dùng chất tẩy - Không giặt khô
+                - listitem [ref=e931]: "* Proudly Made In Vietnam"
+          - img "Áo thun chạy bộ \"Việt Nam tiến bước\"" [ref=e449]
+        - region "Công nghệ vải" [ref=e450]:
+          - region [ref=e451]:
+            - generic [ref=e453]:
+              - group [ref=e454] [cursor=pointer]:
+                - figure "Exdry thấm hút, nhanh khô Công nghệ ExDry hỗ trợ thấm hút mồ hôi hiệu quả khi vận động, giúp hơi ẩm bay hơi nhanh, giữ cho cơ thể luôn khô ráo và thoáng mát" [ref=e455]:
+                  - img "Exdry thấm hút, nhanh khô" [ref=e456]
+                  - generic [ref=e457]:
+                    - heading "Exdry thấm hút, nhanh khô" [level=4] [ref=e458]
+                    - paragraph [ref=e459]: Công nghệ ExDry hỗ trợ thấm hút mồ hôi hiệu quả khi vận động, giúp hơi ẩm bay hơi nhanh, giữ cho cơ thể luôn khô ráo và thoáng mát
+              - group [ref=e460] [cursor=pointer]:
+                - figure "Kiểu dệt mini square Tạo ra các lỗ nhỏ trên bề mặt vải, tăng khoáng khí để làm mát cơ thể và nhanh khô hơn" [ref=e461]:
+                  - img "Kiểu dệt mini square" [ref=e462]
+                  - generic [ref=e463]:
+                    - heading "Kiểu dệt mini square" [level=4] [ref=e464]
+                    - paragraph [ref=e465]: Tạo ra các lỗ nhỏ trên bề mặt vải, tăng khoáng khí để làm mát cơ thể và nhanh khô hơn
+              - group [ref=e466] [cursor=pointer]:
+                - figure "Chạy bộ, leo núi, chạy trail Sản phẩm được đánh giá phù hợp với hoạt động chạy bộ bởi các Runner" [ref=e467]:
+                  - img "Chạy bộ, leo núi, chạy trail" [ref=e468]
+                  - generic [ref=e469]:
+                    - heading "Chạy bộ, leo núi, chạy trail" [level=4] [ref=e470]
+                    - paragraph [ref=e471]: Sản phẩm được đánh giá phù hợp với hoạt động chạy bộ bởi các Runner
+              - group [ref=e472] [cursor=pointer]:
+                - figure "Tự hào Việt Nam Hình ảnh lá cờ Việt Nam được in trang trọng trên ngực áo, thể hiện niềm tự hào thương hiệu Việt Nam, trên mọi chặng đường" [ref=e473]:
+                  - img "Tự hào Việt Nam" [ref=e474]
+                  - generic [ref=e475]:
+                    - heading "Tự hào Việt Nam" [level=4] [ref=e476]
+                    - paragraph [ref=e477]: Hình ảnh lá cờ Việt Nam được in trang trọng trên ngực áo, thể hiện niềm tự hào thương hiệu Việt Nam, trên mọi chặng đường
+        - generic [ref=e932]:
+          - generic [ref=e478]:
+            - heading "Áo thun chạy bộ \"Việt Nam tiến bước\" - Bứt Phá Mọi Giới Hạn" [level=2] [ref=e934]
+            - paragraph [ref=e935]:
+              - text: Mang trong mình niềm tự hào dân tộc,
+              - strong [ref=e936]: Áo thun chạy bộ "Việt Nam tiến bước"
+              - text: vừa là mẫu
+              - link "áo chạy bộ nam" [ref=e937] [cursor=pointer]:
+                - /url: https://www.coolmate.me/collection/ao-nam-chay-bo
+              - text: vừa là mẫu
+              - link "áo chạy bộ nữ" [ref=e938] [cursor=pointer]:
+                - /url: https://www.coolmate.me/collection/ao-nu-chay-bo
+              - text: lý tưởng trên mọi cung đường, một sự bổ sung không thể thiếu cho bộ sưu tập
+              - link "quần áo chạy bộ" [ref=e939] [cursor=pointer]:
+                - /url: https://www.coolmate.me/collection/quan-ao-chay-bo
+              - text: của bạn. Đây không chỉ là một chiếc
+              - link "áo thể thao nam" [ref=e940] [cursor=pointer]:
+                - /url: https://www.coolmate.me/collection/ao-nam-choi-the-thao
+              - text: hiệu suất cao, mà còn là một phần của bộ
+              - link "đồ thể thao" [ref=e941] [cursor=pointer]:
+                - /url: https://www.coolmate.me/collection/coolmate-activewear
+              - text: đầy ý nghĩa. Sản phẩm được dệt từ 100%
+              - link "vải Polyester" [ref=e942] [cursor=pointer]:
+                - /url: https://www.coolmate.me/post/vai-polyester-la-gi
+              - text: ", ứng dụng công nghệ Ex-Dry tiên tiến giúp thấm hút mồ hôi hiệu quả và khô nhanh trong tích tắc. Cảm giác siêu nhẹ và thoáng mát từ chất liệu này giúp cơ thể bạn luôn duy trì trạng thái tốt nhất. Đặc biệt, cấu trúc dệt mini-square tạo ra hàng ngàn lỗ thoáng khí li ti trên bề mặt vải, tối ưu hóa khả năng thoát hơi ẩm, giúp bạn luôn tự tin bứt phá."
+            - heading "Thiết Kế Regular Fit Tối Ưu Vận Động" [level=2] [ref=e943]
+            - paragraph [ref=e944]:
+              - text: Với
+              - link "form dáng Regular Fit" [ref=e945] [cursor=pointer]:
+                - /url: https://www.coolmate.me/post/regular-fit-la-gi-395
+              - text: ", áo mang lại sự vừa vặn hoàn hảo, không quá ôm sát gây gò bó cũng không quá rộng, tạo ra không gian lý tưởng cho mọi chuyển động khi chạy, leo núi hay chạy trail. Các chi tiết thiết kế được hoàn thiện tỉ mỉ, tập trung vào hiệu suất:"
+            - list [ref=e946]:
+              - listitem [ref=e947]:
+                - strong [ref=e948]: "Thiết kế:"
+                - text: Màu sắc ombre chuyển từ đỏ sang vàng lấy cảm hứng từ quốc kỳ.
+              - listitem [ref=e949]:
+                - strong [ref=e950]: "Điểm nhấn:"
+                - text: Hình ảnh lá cờ Việt Nam được in trang trọng trên ngực áo, thể hiện niềm tự hào dân tộc.
+              - listitem [ref=e951]:
+                - strong [ref=e952]: "Thoáng khí:"
+                - text: Cấu trúc vải đặc biệt giúp không khí lưu thông tối đa.
+              - listitem [ref=e953]:
+                - strong [ref=e954]: "Phù hợp:"
+                - text: Sản phẩm được thiết kế unisex, phù hợp cho cả nam và nữ. Vui lòng tham khảo bảng size chi tiết dưới đây để chọn kích cỡ phù hợp nhất.
+            - paragraph:
+              - strong:
+                - img "Bảng size chi tiết cho nam của áo thun chạy bộ Việt Nam tiến bước"
+            - paragraph [ref=e955]:
+              - emphasis [ref=e956]: Bảng size chi tiết cho nam của áo thun chạy bộ Việt Nam tiến bước
+            - paragraph:
+              - strong:
+                - img "Bảng size chi tiết cho nữ của áo thun chạy bộ Việt Nam tiến bước"
+            - paragraph [ref=e957]:
+              - emphasis [ref=e958]: Bảng size chi tiết cho nam của áo thun chạy bộ Việt Nam tiến bước
+            - paragraph [ref=e959]:
+              - strong [ref=e960]: ">>> Xem thêm:"
+              - link "Cách chọn size áo thun nam chuẩn xác cho mọi dáng người" [ref=e961] [cursor=pointer]:
+                - /url: https://www.coolmate.me/post/cach-chon-size-ao-thun-nam-chuan-xac
+            - heading "Đồng Hành Cùng Bạn Trên Mọi Cung Đường" [level=2] [ref=e962]
+            - paragraph [ref=e963]:
+              - text: Chiếc
+              - link "áo thun thể thao nam" [ref=e964] [cursor=pointer]:
+                - /url: https://www.coolmate.me/collection/ao-thun-nam-choi-the-thao
+              - text: hay
+              - link "áo thể thao nữ" [ref=e965] [cursor=pointer]:
+                - /url: https://www.coolmate.me/collection/ao-nu-choi-the-thao
+              - text: "này là lựa chọn hoàn hảo cho các hoạt động đòi hỏi hiệu suất cao và sự bền bỉ:"
+            - list [ref=e966]:
+              - listitem [ref=e967]: Chạy bộ đường dài, chạy trail địa hình.
+              - listitem [ref=e968]: Leo núi, trekking và các hoạt động dã ngoại.
+              - listitem [ref=e969]: Các buổi tập luyện cường độ cao trong phòng gym hoặc ngoài trời.
+            - paragraph [ref=e970]:
+              - text: Để hoàn thiện bộ trang phục, hãy kết hợp áo cùng một chiếc
+              - link "quần short nam" [ref=e971] [cursor=pointer]:
+                - /url: https://www.coolmate.me/collection/quan-short-nam
+              - text: chuyên dụng để có một set đồ thể thao thoải mái và chuyên nghiệp.
+            - heading "Bí Quyết Giữ Sản Phẩm Bền Đẹp" [level=2] [ref=e972]
+            - paragraph [ref=e973]: "Sản phẩm được sản xuất tại Việt Nam với chất lượng cao. Để áo luôn bền màu và giữ đúng phom dáng, hãy tuân thủ những hướng dẫn sau:"
+            - list [ref=e974]:
+              - listitem [ref=e975]: Giặt máy ở chế độ nhẹ, ưu tiên giặt tay để bảo vệ cấu trúc vải.
+              - listitem [ref=e976]: Ủi ở nhiệt độ thấp và tuyệt đối không ủi trực tiếp lên hình in.
+              - listitem [ref=e977]: Không sử dụng chất tẩy rửa mạnh và không giặt khô.
+            - paragraph [ref=e978]:
+              - text: Việc chăm sóc đúng cách sẽ giúp chiếc áo của bạn luôn như mới. Bạn có thể tìm hiểu thêm về
+              - link "cách bảo quản áo thun" [ref=e979] [cursor=pointer]:
+                - /url: https://www.coolmate.me/post/cach-bao-quan-ao-thun-luon-nhu-moi
+              - text: hiệu quả để giữ cho sản phẩm đồng hành cùng bạn lâu dài.
+          - button "Xem thêm" [ref=e982] [cursor=pointer]
+      - region "Gợi ý sản phẩm" [ref=e983]:
+        - heading "Gợi ý sản phẩm" [level=2] [ref=e984]
+        - region [ref=e986]:
+          - generic [ref=e988]:
+            - group [ref=e989] [cursor=pointer]:
+              - group "Product card" [ref=e991]:
+                - link "View details for Mũ lưỡi trai chạy bộ Unisex" [ref=e993]:
+                  - /url: /product/mu-luoi-trai-chay-bo-unisex
+                  - generic [ref=e994]:
+                    - img "Mũ lưỡi trai chạy bộ Unisex - Đen" [ref=e996]
+                    - img "Mũ lưỡi trai chạy bộ Unisex - Đen" [ref=e997]
+                  - generic [ref=e999]: Bán chạy
+                - generic [ref=e1000]:
+                  - generic [ref=e1001]:
+                    - button "Chọn màu Đen" [ref=e1002]
+                    - button "Chọn màu Xám" [ref=e1003]
+                  - link "Xem chi tiết sản phẩm Mũ lưỡi trai chạy bộ Unisex" [ref=e1004]:
+                    - /url: /product/mu-luoi-trai-chay-bo-unisex
+                    - heading "Mũ lưỡi trai chạy bộ Unisex" [level=3] [ref=e1005]
+                  - generic [ref=e1006]:
+                    - paragraph [ref=e1007]: 199.000đ
+                    - generic [ref=e1008]: "-13%"
+                    - paragraph [ref=e1009]: 229.000đ
+                  - generic [ref=e1010]: Sản phẩm Mũ lưỡi trai chạy bộ Unisex có giá 199.000đ (Giảm 13% từ 229.000đ)
+            - group [ref=e1011] [cursor=pointer]:
+              - group "Product card" [ref=e1013]:
+                - link "View details for Áo Thun oversize 84RISING trơn" [ref=e1015]:
+                  - /url: /product/ao-thun-oversize-basic-binh-an
+                  - generic [ref=e1016]:
+                    - img "Áo Thun oversize 84RISING trơn - Trắng" [ref=e1018]
+                    - img "Áo Thun oversize 84RISING trơn - Trắng" [ref=e1019]
+                - generic [ref=e1020]:
+                  - button "Chọn màu Trắng" [ref=e1022]
+                  - link "Xem chi tiết sản phẩm Áo Thun oversize 84RISING trơn" [ref=e1023]:
+                    - /url: /product/ao-thun-oversize-basic-binh-an
+                    - heading "Áo Thun oversize 84RISING trơn" [level=3] [ref=e1024]
+                  - generic [ref=e1025]:
+                    - paragraph [ref=e1026]: 326.000đ
+                    - generic [ref=e1027]: "-15%"
+                    - paragraph [ref=e1028]: 384.000đ
+                  - generic [ref=e1029]: Sản phẩm Áo Thun oversize 84RISING trơn có giá 326.000đ (Giảm 15% từ 384.000đ)
+            - group [ref=e1030] [cursor=pointer]:
+              - group "Product card" [ref=e1032]:
+                - link "View details for Áo Thun Nam Viet Devils - Metallic Blaze" [ref=e1034]:
+                  - /url: /product/ao-thun-cotton-phien-ban-viet-devils-metallic-blaze
+                  - generic [ref=e1035]:
+                    - img "Áo Thun Nam Viet Devils - Metallic Blaze - Đen" [ref=e1037]
+                    - img "Áo Thun Nam Viet Devils - Metallic Blaze - Đen" [ref=e1038]
+                - generic [ref=e1039]:
+                  - generic [ref=e1040]:
+                    - button "Chọn màu Đen" [ref=e1041]
+                    - button "Chọn màu Trắng" [ref=e1042]
+                  - link "Xem chi tiết sản phẩm Áo Thun Nam Viet Devils - Metallic Blaze" [ref=e1043]:
+                    - /url: /product/ao-thun-cotton-phien-ban-viet-devils-metallic-blaze
+                    - heading "Áo Thun Nam Viet Devils - Metallic Blaze" [level=3] [ref=e1044]
+                  - generic [ref=e1045]:
+                    - paragraph [ref=e1046]: 279.000đ
+                    - generic [ref=e1047]: "-15%"
+                    - paragraph [ref=e1048]: 329.000đ
+                  - paragraph [ref=e1049]: Thời gian xử lý đơn hàng từ 2-3 ngày
+                  - generic [ref=e1050]: Sản phẩm Áo Thun Nam Viet Devils - Metallic Blaze có giá 279.000đ (Giảm 15% từ 329.000đ). Thời gian xử lý đơn hàng từ 2-3 ngày
+            - group [ref=e1051] [cursor=pointer]:
+              - group "Product card" [ref=e1053]:
+                - link "View details for Áo Thun Nam Viet Devils - United Slash" [ref=e1055]:
+                  - /url: /product/ao-thun-cotton-compact-phien-ban-viet-devils-united-slash
+                  - generic [ref=e1056]:
+                    - img "Áo Thun Nam Viet Devils - United Slash - Trắng" [ref=e1058]
+                    - img "Áo Thun Nam Viet Devils - United Slash - Trắng" [ref=e1059]
+                  - generic [ref=e1061]: NO RESTOCK
+                - generic [ref=e1062]:
+                  - generic [ref=e1063]:
+                    - button "Chọn màu Trắng" [ref=e1064]
+                    - button "Chọn màu Đen" [ref=e1065]
+                  - link "Xem chi tiết sản phẩm Áo Thun Nam Viet Devils - United Slash" [ref=e1066]:
+                    - /url: /product/ao-thun-cotton-compact-phien-ban-viet-devils-united-slash
+                    - heading "Áo Thun Nam Viet Devils - United Slash" [level=3] [ref=e1067]
+                  - generic [ref=e1068]:
+                    - paragraph [ref=e1069]: 202.000đ
+                    - generic [ref=e1070]: "-48%"
+                    - paragraph [ref=e1071]: 389.000đ
+                  - paragraph [ref=e1072]: Thời gian xử lý đơn hàng từ 2-3 ngày
+                  - generic [ref=e1073]: Sản phẩm Áo Thun Nam Viet Devils - United Slash có giá 202.000đ (Giảm 48% từ 389.000đ). Thời gian xử lý đơn hàng từ 2-3 ngày
+            - group [ref=e1074] [cursor=pointer]:
+              - group "Product card" [ref=e1076]:
+                - link "View details for Áo Thun Nam Viet Devils - Chaos Black" [ref=e1078]:
+                  - /url: /product/ao-thun-cotton-phien-ban-viet-devils-chaos-black
+                  - generic [ref=e1079]:
+                    - img "Áo Thun Nam Viet Devils - Chaos Black - Đen" [ref=e1081]
+                    - img "Áo Thun Nam Viet Devils - Chaos Black - Đen" [ref=e1082]
+                - generic [ref=e1083]:
+                  - generic [ref=e1084]:
+                    - button "Chọn màu Đen" [ref=e1085]
+                    - button "Chọn màu Trắng" [ref=e1086]
+                  - link "Xem chi tiết sản phẩm Áo Thun Nam Viet Devils - Chaos Black" [ref=e1087]:
+                    - /url: /product/ao-thun-cotton-phien-ban-viet-devils-chaos-black
+                    - heading "Áo Thun Nam Viet Devils - Chaos Black" [level=3] [ref=e1088]
+                  - generic [ref=e1089]:
+                    - paragraph [ref=e1090]: 279.000đ
+                    - generic [ref=e1091]: "-15%"
+                    - paragraph [ref=e1092]: 329.000đ
+                  - paragraph [ref=e1093]: Thời gian xử lý đơn hàng từ 2-3 ngày
+                  - generic [ref=e1094]: Sản phẩm Áo Thun Nam Viet Devils - Chaos Black có giá 279.000đ (Giảm 15% từ 329.000đ). Thời gian xử lý đơn hàng từ 2-3 ngày
+            - group [ref=e1095] [cursor=pointer]:
+              - group "Product card" [ref=e1097]:
+                - link "View details for Áo Thun Nam Viet Devils - The Inferno Devil" [ref=e1099]:
+                  - /url: /product/ao-thun-cotton-phien-ban-viet-devils-the-inferno-devil
+                  - generic [ref=e1100]:
+                    - img "Áo Thun Nam Viet Devils - The Inferno Devil - Đen" [ref=e1102]
+                    - img "Áo Thun Nam Viet Devils - The Inferno Devil - Đen" [ref=e1103]
+                - generic [ref=e1104]:
+                  - generic [ref=e1105]:
+                    - button "Chọn màu Đen" [ref=e1106]
+                    - button "Chọn màu Trắng" [ref=e1107]
+                  - link "Xem chi tiết sản phẩm Áo Thun Nam Viet Devils - The Inferno Devil" [ref=e1108]:
+                    - /url: /product/ao-thun-cotton-phien-ban-viet-devils-the-inferno-devil
+                    - heading "Áo Thun Nam Viet Devils - The Inferno Devil" [level=3] [ref=e1109]
+                  - generic [ref=e1110]:
+                    - paragraph [ref=e1111]: 279.000đ
+                    - generic [ref=e1112]: "-15%"
+                    - paragraph [ref=e1113]: 329.000đ
+                  - paragraph [ref=e1114]: Thời gian xử lý đơn hàng từ 2-3 ngày
+                  - generic [ref=e1115]: Sản phẩm Áo Thun Nam Viet Devils - The Inferno Devil có giá 279.000đ (Giảm 15% từ 329.000đ). Thời gian xử lý đơn hàng từ 2-3 ngày
+            - group [ref=e1116] [cursor=pointer]:
+              - group "Product card" [ref=e1118]:
+                - link "View details for Áo Thun Nam Viet Devils - Born And Heart" [ref=e1120]:
+                  - /url: /product/ao-thun-cotton-compact-phien-ban-viet-devils-born-and-heart
+                  - generic [ref=e1121]:
+                    - img "Áo Thun Nam Viet Devils - Born And Heart - Trắng" [ref=e1123]
+                    - img "Áo Thun Nam Viet Devils - Born And Heart - Trắng" [ref=e1124]
+                  - generic [ref=e1126]: NO RESTOCK
+                - generic [ref=e1127]:
+                  - generic [ref=e1128]:
+                    - button "Chọn màu Trắng" [ref=e1129]
+                    - button "Chọn màu Đen" [ref=e1130]
+                  - link "Xem chi tiết sản phẩm Áo Thun Nam Viet Devils - Born And Heart" [ref=e1131]:
+                    - /url: /product/ao-thun-cotton-compact-phien-ban-viet-devils-born-and-heart
+                    - heading "Áo Thun Nam Viet Devils - Born And Heart" [level=3] [ref=e1132]
+                  - generic [ref=e1133]:
+                    - paragraph [ref=e1134]: 202.000đ
+                    - generic [ref=e1135]: "-48%"
+                    - paragraph [ref=e1136]: 389.000đ
+                  - paragraph [ref=e1137]: Thời gian xử lý đơn hàng từ 2-3 ngày
+                  - generic [ref=e1138]: Sản phẩm Áo Thun Nam Viet Devils - Born And Heart có giá 202.000đ (Giảm 48% từ 389.000đ). Thời gian xử lý đơn hàng từ 2-3 ngày
+            - group [ref=e1139] [cursor=pointer]:
+              - group "Product card" [ref=e1141]:
+                - link "View details for Áo Thun Nam Viet Devils - Metallic Blaze 2" [ref=e1143]:
+                  - /url: /product/ao-thun-cotton-phien-ban-viet-devils-metallic-blaze-2
+                  - generic [ref=e1144]:
+                    - img "Áo Thun Nam Viet Devils - Metallic Blaze 2 - Đen" [ref=e1146]
+                    - img "Áo Thun Nam Viet Devils - Metallic Blaze 2 - Đen" [ref=e1147]
+                - generic [ref=e1148]:
+                  - generic [ref=e1149]:
+                    - button "Chọn màu Đen" [ref=e1150]
+                    - button "Chọn màu Trắng" [ref=e1151]
+                  - link "Xem chi tiết sản phẩm Áo Thun Nam Viet Devils - Metallic Blaze 2" [ref=e1152]:
+                    - /url: /product/ao-thun-cotton-phien-ban-viet-devils-metallic-blaze-2
+                    - heading "Áo Thun Nam Viet Devils - Metallic Blaze 2" [level=3] [ref=e1153]
+                  - generic [ref=e1154]:
+                    - paragraph [ref=e1155]: 279.000đ
+                    - generic [ref=e1156]: "-15%"
+                    - paragraph [ref=e1157]: 329.000đ
+                  - paragraph [ref=e1158]: Thời gian xử lý đơn hàng từ 2-3 ngày
+                  - generic [ref=e1159]: Sản phẩm Áo Thun Nam Viet Devils - Metallic Blaze 2 có giá 279.000đ (Giảm 15% từ 329.000đ). Thời gian xử lý đơn hàng từ 2-3 ngày
+            - group [ref=e1160] [cursor=pointer]:
+              - group "Product card" [ref=e1162]:
+                - link "View details for Áo Thun Nam Viet Devils - The International" [ref=e1164]:
+                  - /url: /product/ao-thun-cotton-compact-phien-ban-viet-devils-the-international
+                  - generic [ref=e1165]:
+                    - img "Áo Thun Nam Viet Devils - The International - Trắng" [ref=e1167]
+                    - img "Áo Thun Nam Viet Devils - The International - Trắng" [ref=e1168]
+                  - generic [ref=e1170]: NO RESTOCK
+                - generic [ref=e1171]:
+                  - generic [ref=e1172]:
+                    - button "Chọn màu Trắng" [ref=e1173]
+                    - button "Chọn màu Đen" [ref=e1174]
+                  - link "Xem chi tiết sản phẩm Áo Thun Nam Viet Devils - The International" [ref=e1175]:
+                    - /url: /product/ao-thun-cotton-compact-phien-ban-viet-devils-the-international
+                    - heading "Áo Thun Nam Viet Devils - The International" [level=3] [ref=e1176]
+                  - generic [ref=e1177]:
+                    - paragraph [ref=e1178]: 194.000đ
+                    - generic [ref=e1179]: "-50%"
+                    - paragraph [ref=e1180]: 389.000đ
+                  - paragraph [ref=e1181]: Thời gian xử lý đơn hàng từ 2-3 ngày
+                  - generic [ref=e1182]: Sản phẩm Áo Thun Nam Viet Devils - The International có giá 194.000đ (Giảm 50% từ 389.000đ). Thời gian xử lý đơn hàng từ 2-3 ngày
+            - group [ref=e1183] [cursor=pointer]:
+              - group "Product card" [ref=e1185]:
+                - link "View details for Áo Thun Nam Viet Devils - Viva Ronaldo!" [ref=e1187]:
+                  - /url: /product/ao-thun-cotton-compact-phien-ban-viet-devils-viva-ronaldo
+                  - generic [ref=e1188]:
+                    - img "Áo Thun Nam Viet Devils - Viva Ronaldo! - Trắng" [ref=e1190]
+                    - img "Áo Thun Nam Viet Devils - Viva Ronaldo! - Trắng" [ref=e1191]
+                  - generic [ref=e1193]: NO RESTOCK
+                - generic [ref=e1194]:
+                  - generic [ref=e1195]:
+                    - button "Chọn màu Trắng" [ref=e1196]
+                    - button "Chọn màu Đen" [ref=e1197]
+                  - link "Xem chi tiết sản phẩm Áo Thun Nam Viet Devils - Viva Ronaldo!" [ref=e1198]:
+                    - /url: /product/ao-thun-cotton-compact-phien-ban-viet-devils-viva-ronaldo
+                    - heading "Áo Thun Nam Viet Devils - Viva Ronaldo!" [level=3] [ref=e1199]
+                  - generic [ref=e1200]:
+                    - paragraph [ref=e1201]: 202.000đ
+                    - generic [ref=e1202]: "-48%"
+                    - paragraph [ref=e1203]: 389.000đ
+                  - paragraph [ref=e1204]: Thời gian xử lý đơn hàng từ 2-3 ngày
+                  - generic [ref=e1205]: Sản phẩm Áo Thun Nam Viet Devils - Viva Ronaldo! có giá 202.000đ (Giảm 48% từ 389.000đ). Thời gian xử lý đơn hàng từ 2-3 ngày
+          - button "Previous slide" [ref=e1206] [cursor=pointer]:
+            - img
+            - generic [ref=e1207]: Previous slide
+          - button "Next slide" [ref=e1208] [cursor=pointer]:
+            - img
+            - generic [ref=e1209]: Next slide
+      - generic [ref=e542]:
+        - generic [ref=e543]:
+          - heading "Đánh giá sản phẩm" [level=2] [ref=e544]:
+            - text: Đánh giá
+            - text: sản phẩm
+          - generic [ref=e545]:
+            - generic [ref=e547]:
+              - generic [ref=e549]: Lọc đánh giá
+              - generic [ref=e551]:
+                - img [ref=e553]
+                - searchbox "Lọc đánh giá" [ref=e556]
+            - generic [ref=e558]:
+              - generic [ref=e559]:
+                - paragraph [ref=e560]: Phân loại xếp hạng
+                - list [ref=e561]:
+                  - listitem [ref=e562]:
+                    - generic [ref=e563]:
+                      - checkbox "5 full-star full-star full-star full-star full-star" [ref=e564] [cursor=pointer]
+                      - generic [ref=e566] [cursor=pointer]:
+                        - paragraph [ref=e567]: "5"
+                        - generic [ref=e569]:
+                          - img "full-star" [ref=e570]
+                          - img "full-star" [ref=e571]
+                          - img "full-star" [ref=e572]
+                          - img "full-star" [ref=e573]
+                          - img "full-star" [ref=e574]
+                  - listitem [ref=e575]:
+                    - generic [ref=e576]:
+                      - checkbox "4 full-star full-star full-star full-star empty-star" [ref=e577] [cursor=pointer]
+                      - generic [ref=e579] [cursor=pointer]:
+                        - paragraph [ref=e580]: "4"
+                        - generic [ref=e582]:
+                          - img "full-star" [ref=e583]
+                          - img "full-star" [ref=e584]
+                          - img "full-star" [ref=e585]
+                          - img "full-star" [ref=e586]
+                          - img "empty-star" [ref=e587]
+                  - listitem [ref=e588]:
+                    - generic [ref=e589]:
+                      - checkbox "3 full-star full-star full-star empty-star empty-star" [ref=e590] [cursor=pointer]
+                      - generic [ref=e592] [cursor=pointer]:
+                        - paragraph [ref=e593]: "3"
+                        - generic [ref=e595]:
+                          - img "full-star" [ref=e596]
+                          - img "full-star" [ref=e597]
+                          - img "full-star" [ref=e598]
+                          - img "empty-star" [ref=e599]
+                          - img "empty-star" [ref=e600]
+                  - listitem [ref=e601]:
+                    - generic [ref=e602]:
+                      - checkbox "2 full-star full-star empty-star empty-star empty-star" [ref=e603] [cursor=pointer]
+                      - generic [ref=e605] [cursor=pointer]:
+                        - paragraph [ref=e606]: "2"
+                        - generic [ref=e608]:
+                          - img "full-star" [ref=e609]
+                          - img "full-star" [ref=e610]
+                          - img "empty-star" [ref=e611]
+                          - img "empty-star" [ref=e612]
+                          - img "empty-star" [ref=e613]
+                  - listitem [ref=e614]:
+                    - generic [ref=e615]:
+                      - checkbox "1 full-star empty-star empty-star empty-star empty-star" [ref=e616] [cursor=pointer]
+                      - generic [ref=e618] [cursor=pointer]:
+                        - paragraph [ref=e619]: "1"
+                        - generic [ref=e621]:
+                          - img "full-star" [ref=e622]
+                          - img "empty-star" [ref=e623]
+                          - img "empty-star" [ref=e624]
+                          - img "empty-star" [ref=e625]
+                          - img "empty-star" [ref=e626]
+              - generic [ref=e627]:
+                - img "icon check" [ref=e628]
+                - paragraph [ref=e629]: Các review đều đến từ khách hàng đã thực sự mua hàng của Coolmate
+              - generic [ref=e630]:
+                - paragraph [ref=e631]: Lọc phản hồi
+                - list [ref=e632]:
+                  - listitem [ref=e633]:
+                    - generic [ref=e634]:
+                      - checkbox "Đã phản hồi" [ref=e635] [cursor=pointer]
+                      - paragraph [ref=e638] [cursor=pointer]: Đã phản hồi
+                  - listitem [ref=e639]:
+                    - generic [ref=e640]:
+                      - checkbox "Có hình ảnh" [ref=e641] [cursor=pointer]
+                      - paragraph [ref=e644] [cursor=pointer]: Có hình ảnh
+        - generic [ref=e645]:
+          - generic [ref=e646]:
+            - generic [ref=e647]:
+              - paragraph [ref=e648]: "4.8"
+              - generic [ref=e649]:
+                - generic [ref=e650]:
+                  - img "full-star" [ref=e651]
+                  - img "full-star" [ref=e652]
+                  - img "full-star" [ref=e653]
+                  - img "full-star" [ref=e654]
+                  - img "half-star" [ref=e655]
+                - paragraph [ref=e656]: Dựa trên 9 đánh giá đến từ khách hàng
+            - generic [ref=e1210]:
+              - paragraph [ref=e1211]: Phù hợp với cơ thể
+              - generic [ref=e1212]:
+                - paragraph [ref=e1213]: Chật
+                - generic [ref=e1214]:
+                  - progressbar [ref=e1215]
+                  - paragraph [ref=e1217]: 0%
+              - generic [ref=e1218]:
+                - paragraph [ref=e1219]: Đúng kích thước
+                - generic [ref=e1220]:
+                  - progressbar [ref=e1221]
+                  - paragraph [ref=e1223]: 100%
+              - generic [ref=e1224]:
+                - paragraph [ref=e1225]: Rộng
+                - generic [ref=e1226]:
+                  - progressbar [ref=e1227]
+                  - paragraph [ref=e1229]: 0%
+          - generic [ref=e657]:
+            - paragraph [ref=e658]:
+              - text: Hiển thị đánh giá
+              - generic [ref=e659]: 1-9
+            - combobox "Sắp xếp" [ref=e661] [cursor=pointer]:
+              - generic: Sắp xếp
+              - img [ref=e662]
+          - list "Product reviews list" [ref=e1230]:
+            - listitem "Product review item" [ref=e1231]:
+              - generic [ref=e1232]:
+                - generic [ref=e1233]:
+                  - paragraph [ref=e1234]: Lê Hương
+                  - time [ref=e1236]: 13/11/2025
+                - generic [ref=e1238] [cursor=pointer]:
+                  - img "full-star" [ref=e1239]
+                  - img "full-star" [ref=e1240]
+                  - img "full-star" [ref=e1241]
+                  - img "full-star" [ref=e1242]
+                  - img "full-star" [ref=e1243]
+                - generic [ref=e1244]:
+                  - list [ref=e1245]:
+                    - listitem [ref=e1246]:
+                      - paragraph [ref=e1247]: "Kích thước:"
+                      - paragraph [ref=e1248]: M
+                    - listitem [ref=e1249]:
+                      - paragraph [ref=e1250]: "Màu sắc:"
+                      - paragraph [ref=e1251]: Nữ - Không Logo
+                  - list [ref=e1252]:
+                    - listitem [ref=e1253]:
+                      - paragraph [ref=e1254]: "Phù hợp với cơ thể:"
+                      - paragraph [ref=e1255]: Đúng kích thước
+                    - listitem [ref=e1256]:
+                      - paragraph [ref=e1257]: "Chiều cao:"
+                      - paragraph [ref=e1258]: 150cm
+                    - listitem [ref=e1259]:
+                      - paragraph [ref=e1260]: "Cân nặng:"
+                      - paragraph [ref=e1261]: 56kg
+                - generic:
+                  - list
+            - listitem "Product review item" [ref=e1262]:
+              - generic [ref=e1263]:
+                - generic [ref=e1264]:
+                  - paragraph [ref=e1265]: Bùi Quang Khải
+                  - time [ref=e1267]: 03/10/2025
+                - generic [ref=e1269] [cursor=pointer]:
+                  - img "full-star" [ref=e1270]
+                  - img "full-star" [ref=e1271]
+                  - img "full-star" [ref=e1272]
+                  - img "full-star" [ref=e1273]
+                  - img "half-star" [ref=e1274]
+                - generic [ref=e1275]:
+                  - list [ref=e1276]:
+                    - listitem [ref=e1277]:
+                      - paragraph [ref=e1278]: "Kích thước:"
+                      - paragraph [ref=e1279]: XL
+                    - listitem [ref=e1280]:
+                      - paragraph [ref=e1281]: "Màu sắc:"
+                      - paragraph [ref=e1282]: Nam
+                  - list [ref=e1283]:
+                    - listitem [ref=e1284]:
+                      - paragraph [ref=e1285]: "Phù hợp với cơ thể:"
+                      - paragraph [ref=e1286]: Đúng kích thước
+                    - listitem [ref=e1287]:
+                      - paragraph [ref=e1288]: "Chiều cao:"
+                      - paragraph [ref=e1289]: 170cm
+                    - listitem [ref=e1290]:
+                      - paragraph [ref=e1291]: "Cân nặng:"
+                      - paragraph [ref=e1292]: 70kg
+                - generic [ref=e1294]: Đóng gói không sạch sẽ, bụi bẩn
+                - list [ref=e1296]:
+                  - listitem [ref=e1297]:
+                    - generic [ref=e1299]: Sản phẩm đẹp
+                  - listitem [ref=e1300]:
+                    - generic [ref=e1302]: Giao hàng nhanh
+            - listitem "Product review item" [ref=e1303]:
+              - generic [ref=e1304]:
+                - generic [ref=e1305]:
+                  - paragraph [ref=e1306]: Dương Hương
+                  - time [ref=e1308]: 01/10/2025
+                - generic [ref=e1310] [cursor=pointer]:
+                  - img "full-star" [ref=e1311]
+                  - img "full-star" [ref=e1312]
+                  - img "full-star" [ref=e1313]
+                  - img "full-star" [ref=e1314]
+                  - img "full-star" [ref=e1315]
+                - generic [ref=e1316]:
+                  - list [ref=e1317]:
+                    - listitem [ref=e1318]:
+                      - paragraph [ref=e1319]: "Kích thước:"
+                      - paragraph [ref=e1320]: XL
+                    - listitem [ref=e1321]:
+                      - paragraph [ref=e1322]: "Màu sắc:"
+                      - paragraph [ref=e1323]: Đỏ
+                  - list [ref=e1324]:
+                    - listitem [ref=e1325]:
+                      - paragraph [ref=e1326]: "Phù hợp với cơ thể:"
+                      - paragraph [ref=e1327]: Đúng kích thước
+                    - listitem [ref=e1328]:
+                      - paragraph [ref=e1329]: "Chiều cao:"
+                      - paragraph [ref=e1330]: 157cm
+                    - listitem [ref=e1331]:
+                      - paragraph [ref=e1332]: "Cân nặng:"
+                      - paragraph [ref=e1333]: 57kg
+                - generic:
+                  - list
+            - listitem "Product review item" [ref=e1334]:
+              - generic [ref=e1335]:
+                - generic [ref=e1336]:
+                  - paragraph [ref=e1337]: Dương Hương
+                  - time [ref=e1339]: 01/10/2025
+                - generic [ref=e1341] [cursor=pointer]:
+                  - img "full-star" [ref=e1342]
+                  - img "full-star" [ref=e1343]
+                  - img "full-star" [ref=e1344]
+                  - img "full-star" [ref=e1345]
+                  - img "full-star" [ref=e1346]
+                - generic [ref=e1347]:
+                  - list [ref=e1348]:
+                    - listitem [ref=e1349]:
+                      - paragraph [ref=e1350]: "Kích thước:"
+                      - paragraph [ref=e1351]: XL
+                    - listitem [ref=e1352]:
+                      - paragraph [ref=e1353]: "Màu sắc:"
+                      - paragraph [ref=e1354]: Đỏ
+                  - list [ref=e1355]:
+                    - listitem [ref=e1356]:
+                      - paragraph [ref=e1357]: "Phù hợp với cơ thể:"
+                      - paragraph [ref=e1358]: Đúng kích thước
+                    - listitem [ref=e1359]:
+                      - paragraph [ref=e1360]: "Chiều cao:"
+                      - paragraph [ref=e1361]: 157cm
+                    - listitem [ref=e1362]:
+                      - paragraph [ref=e1363]: "Cân nặng:"
+                      - paragraph [ref=e1364]: 57kg
+                - generic:
+                  - list
+            - listitem "Product review item" [ref=e1365]:
+              - generic [ref=e1366]:
+                - generic [ref=e1367]:
+                  - paragraph [ref=e1368]: Tiếu Ngạo Giang hồ
+                  - time [ref=e1370]: 22/09/2025
+                - generic [ref=e1372] [cursor=pointer]:
+                  - img "full-star" [ref=e1373]
+                  - img "full-star" [ref=e1374]
+                  - img "full-star" [ref=e1375]
+                  - img "full-star" [ref=e1376]
+                  - img "half-star" [ref=e1377]
+                - generic [ref=e1378]:
+                  - list [ref=e1379]:
+                    - listitem [ref=e1380]:
+                      - paragraph [ref=e1381]: "Kích thước:"
+                      - paragraph [ref=e1382]: M
+                    - listitem [ref=e1383]:
+                      - paragraph [ref=e1384]: "Màu sắc:"
+                      - paragraph [ref=e1385]: Nam
+                  - list [ref=e1386]:
+                    - listitem [ref=e1387]:
+                      - paragraph [ref=e1388]: "Phù hợp với cơ thể:"
+                      - paragraph [ref=e1389]: Đúng kích thước
+                    - listitem [ref=e1390]:
+                      - paragraph [ref=e1391]: "Chiều cao:"
+                      - paragraph [ref=e1392]: 167cm
+                    - listitem [ref=e1393]:
+                      - paragraph [ref=e1394]: "Cân nặng:"
+                      - paragraph [ref=e1395]: 68kg
+                - list [ref=e1397]:
+                  - listitem [ref=e1398]:
+                    - generic [ref=e1400]: Sản phẩm đẹp
+            - listitem "Product review item" [ref=e1401]:
+              - generic [ref=e1402]:
+                - generic [ref=e1403]:
+                  - paragraph [ref=e1404]: Cù Trường Vĩnh
+                  - time [ref=e1406]: 02/09/2025
+                - generic [ref=e1408] [cursor=pointer]:
+                  - img "full-star" [ref=e1409]
+                  - img "full-star" [ref=e1410]
+                  - img "full-star" [ref=e1411]
+                  - img "full-star" [ref=e1412]
+                  - img "full-star" [ref=e1413]
+                - generic [ref=e1414]:
+                  - list [ref=e1415]:
+                    - listitem [ref=e1416]:
+                      - paragraph [ref=e1417]: "Kích thước:"
+                      - paragraph [ref=e1418]: 2XL
+                    - listitem [ref=e1419]:
+                      - paragraph [ref=e1420]: "Màu sắc:"
+                      - paragraph [ref=e1421]: Nam
+                  - list [ref=e1422]:
+                    - listitem [ref=e1423]:
+                      - paragraph [ref=e1424]: "Phù hợp với cơ thể:"
+                      - paragraph [ref=e1425]: Đúng kích thước
+                - generic [ref=e1427]: Sản phẩm đẹp như hình minh họa
+                - list [ref=e1429]:
+                  - listitem [ref=e1430]:
+                    - generic [ref=e1432]: Sản phẩm đẹp
+                  - listitem [ref=e1433]:
+                    - generic [ref=e1435]: Đóng gói đẹp
+                  - listitem [ref=e1436]:
+                    - generic [ref=e1438]: Giao hàng nhanh
+                  - listitem [ref=e1439]:
+                    - generic [ref=e1441]: Chăm sóc khách hàng tận tình
+            - listitem "Product review item" [ref=e1442]:
+              - generic [ref=e1443]:
+                - generic [ref=e1444]:
+                  - paragraph [ref=e1445]: Giang Truong Hoang
+                  - time [ref=e1447]: 02/09/2025
+                - generic [ref=e1449] [cursor=pointer]:
+                  - img "full-star" [ref=e1450]
+                  - img "full-star" [ref=e1451]
+                  - img "full-star" [ref=e1452]
+                  - img "full-star" [ref=e1453]
+                  - img "half-star" [ref=e1454]
+                - generic [ref=e1455]:
+                  - list [ref=e1456]:
+                    - listitem [ref=e1457]:
+                      - paragraph [ref=e1458]: "Kích thước:"
+                      - paragraph [ref=e1459]: S
+                    - listitem [ref=e1460]:
+                      - paragraph [ref=e1461]: "Màu sắc:"
+                      - paragraph [ref=e1462]: Nữ
+                  - list [ref=e1463]:
+                    - listitem [ref=e1464]:
+                      - paragraph [ref=e1465]: "Phù hợp với cơ thể:"
+                      - paragraph [ref=e1466]: Đúng kích thước
+                - generic [ref=e1468]: Good
+                - generic:
+                  - list
+            - listitem "Product review item" [ref=e1469]:
+              - generic [ref=e1470]:
+                - generic [ref=e1471]:
+                  - paragraph [ref=e1472]: Giang Truong Hoang
+                  - time [ref=e1474]: 02/09/2025
+                - generic [ref=e1476] [cursor=pointer]:
+                  - img "full-star" [ref=e1477]
+                  - img "full-star" [ref=e1478]
+                  - img "full-star" [ref=e1479]
+                  - img "full-star" [ref=e1480]
+                  - img "half-star" [ref=e1481]
+                - generic [ref=e1482]:
+                  - list [ref=e1483]:
+                    - listitem [ref=e1484]:
+                      - paragraph [ref=e1485]: "Kích thước:"
+                      - paragraph [ref=e1486]: S
+                    - listitem [ref=e1487]:
+                      - paragraph [ref=e1488]: "Màu sắc:"
+                      - paragraph [ref=e1489]: Nữ
+                  - list [ref=e1490]:
+                    - listitem [ref=e1491]:
+                      - paragraph [ref=e1492]: "Phù hợp với cơ thể:"
+                      - paragraph [ref=e1493]: Đúng kích thước
+                - generic [ref=e1495]: Good
+                - generic:
+                  - list
+            - listitem "Product review item" [ref=e1496]:
+              - generic [ref=e1497]:
+                - generic [ref=e1498]:
+                  - paragraph [ref=e1499]: tayentran27
+                  - time [ref=e1501]: 31/08/2025
+                - generic [ref=e1503] [cursor=pointer]:
+                  - img "full-star" [ref=e1504]
+                  - img "full-star" [ref=e1505]
+                  - img "full-star" [ref=e1506]
+                  - img "full-star" [ref=e1507]
+                  - img "full-star" [ref=e1508]
+                - generic [ref=e1509]:
+                  - list [ref=e1510]:
+                    - listitem [ref=e1511]:
+                      - paragraph [ref=e1512]: "Kích thước:"
+                      - paragraph [ref=e1513]: 2XL
+                    - listitem [ref=e1514]:
+                      - paragraph [ref=e1515]: "Màu sắc:"
+                      - paragraph [ref=e1516]: Nam
+                  - list
+                - generic [ref=e1518]: Chất lượng sản phẩm:ok Đúng với mô tả:đúng Sản phẩm bền, đẹp và mát mẻ. Mình đã nhiều lần yên tâm chọn lựa coolmate cho anh nhà ^^
+                - generic:
+                  - list
+                  - generic [ref=e1519]:
+                    - paragraph [ref=e1520]: Đánh giá từ
+                    - img "source icon" [ref=e1521]
+          - navigation "pagination" [ref=e665]:
+            - list [ref=e666]:
+              - listitem [ref=e667]:
+                - button "Trang trước" [disabled] [ref=e668]:
+                  - img [ref=e669]
+              - listitem [ref=e671]:
+                - button "Trang 1" [ref=e672] [cursor=pointer]: "1"
+              - listitem [ref=e673]:
+                - button "Trang tiếp theo" [disabled] [ref=e674]:
+                  - img [ref=e675]
+      - region "Sản phẩm bạn đã xem" [ref=e1522]:
+        - heading "Sản phẩm bạn đã xem" [level=2] [ref=e1523]
+        - paragraph [ref=e1525]: Không có sản phẩm nào
+      - generic [ref=e1527]:
+        - generic [ref=e1528]:
+          - heading "Đặc quyền dành cho 529.945 thành viên CoolClub" [level=4] [ref=e1529]:
+            - text: Đặc quyền dành cho
+            - generic [ref=e1530]: "529.945"
+            - text: thành viên CoolClub
+          - list [ref=e1531]:
+            - listitem [ref=e1532]:
+              - link "Mời bạn bè hoàn tiền 10% CoolCash Mời bạn bèhoàn tiền 10% CoolCash" [ref=e1533] [cursor=pointer]:
+                - /url: /coolclub#referral-friend-section?itm_source=awareness
+                - paragraph [ref=e1534]:
+                  - text: Mời bạn bè
+                  - text: hoàn tiền 10% CoolCash
+                - img "Mời bạn bèhoàn tiền 10% CoolCash" [ref=e1535]
+            - listitem [ref=e1536]:
+              - link "Hoàn tiền đến 7% Hoàn tiền đến 7%" [ref=e1537] [cursor=pointer]:
+                - /url: ""
+                - paragraph [ref=e1538]: Hoàn tiền đến 7%
+                - img "Hoàn tiền đến 7%" [ref=e1539]
+            - listitem [ref=e1540]:
+              - link "Quà tặng sinh nhật & dịp đặc biệt Quà tặng sinh nhật& dịp đặc biệt" [ref=e1541] [cursor=pointer]:
+                - /url: ""
+                - paragraph [ref=e1542]:
+                  - text: Quà tặng sinh nhật
+                  - text: "& dịp đặc biệt"
+                - img "Quà tặng sinh nhật& dịp đặc biệt" [ref=e1543]
+        - generic [ref=e1544]:
+          - paragraph [ref=e1545]: hoạt động gần đây
+          - generic [ref=e1546]:
+            - list [ref=e1547]:
+              - listitem [ref=e1548]:
+                - text: Trần Thanh Tú vừa được cộng
+                - strong [ref=e1549]: 4.000 CoolCash
+                - text: "từ ĐH #0xxx083"
+              - listitem [ref=e1550]:
+                - text: Hà Thị Minh Tâm vừa được cộng
+                - strong [ref=e1551]: 6.000 CoolCash
+                - text: "từ ĐH #7xxx491"
+              - listitem [ref=e1552]: Chào mừng Kim Loan vừa gia nhập CoolClub!
+              - listitem [ref=e1553]: Chào mừng Bích Hạnh vừa gia nhập CoolClub!
+              - listitem [ref=e1554]: Chào mừng Kien Nguyen vừa gia nhập CoolClub!
+              - listitem [ref=e1555]: Chào mừng Gia Tuyên vừa gia nhập CoolClub!
+              - listitem [ref=e1556]: Chào mừng Dương Nguyễn Hoàng vừa gia nhập CoolClub!
+              - listitem [ref=e1557]: Chào mừng Bảo Long vừa gia nhập CoolClub!
+              - listitem [ref=e1558]: Chào mừng Linh Đỗ vừa gia nhập CoolClub!
+              - listitem [ref=e1559]: Chào mừng ÁNH vừa gia nhập CoolClub!
+              - listitem [ref=e1560]: Chào mừng Bình Bụ Bẫm vừa gia nhập CoolClub!
+              - listitem [ref=e1561]: Chào mừng Bs Hoàng Chấn Thương Chỉnh Hình vừa gia nhập CoolClub!
+              - listitem [ref=e1562]:
+                - text: Lê Phúc vừa được cộng
+                - strong [ref=e1563]: 39.000 CoolCash
+                - text: "từ ĐH #1xxx031"
+              - listitem [ref=e1564]:
+                - text: Bùi Quang Dương vừa được cộng
+                - strong [ref=e1565]: 13.000 CoolCash
+                - text: "từ ĐH #0xxx327"
+              - listitem [ref=e1566]:
+                - text: Imskardu vừa được cộng
+                - strong [ref=e1567]: 3.000 CoolCash
+                - text: "từ ĐH #3xxx455"
+              - listitem [ref=e1568]:
+                - text: Ms Trang vừa được cộng
+                - strong [ref=e1569]: 9.000 CoolCash
+                - text: "từ ĐH #7xxx051"
+              - listitem [ref=e1570]:
+                - text: Nguyen Huan vừa được cộng
+                - strong [ref=e1571]: 6.000 CoolCash
+                - text: "từ ĐH #8xxx310"
+              - listitem [ref=e1572]:
+                - text: Tạ Văn Cường vừa được cộng
+                - strong [ref=e1573]: 12.000 CoolCash
+                - text: "từ ĐH #8xxx639"
+              - listitem [ref=e1574]:
+                - text: Nguyễn Phúc Khôi vừa được cộng
+                - strong [ref=e1575]: 46.000 CoolCash
+                - text: "từ ĐH #2xxx740"
+              - listitem [ref=e1576]:
+                - text: Nguyễn Phúc Khôi vừa được cộng
+                - strong [ref=e1577]: 18.000 CoolCash
+                - text: "từ ĐH #2xxx361"
+              - listitem [ref=e1578]: TRẦN THỊ KiM YẾN OANH vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1579]: ÂN vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1580]: Nguyễn Thành Tây vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1581]: Thảo Hoàng vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1582]: Tạ Thanh Thiện vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1583]: Xuân Tâm Trương vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1584]: Hiếu Nguyễn vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1585]: Hong Quan Do vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1586]: Phúc Nguyễn vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1587]: Minh Nguyen Thi vừa được nhận 1 phần quà sinh nhật đặc biệt.
+            - list [ref=e1588]:
+              - listitem [ref=e1589]:
+                - text: Ms Trang vừa được cộng
+                - strong [ref=e1590]: 9.000 CoolCash
+                - text: "từ ĐH #7xxx051"
+              - listitem [ref=e1591]:
+                - text: Nguyen Huan vừa được cộng
+                - strong [ref=e1592]: 6.000 CoolCash
+                - text: "từ ĐH #8xxx310"
+              - listitem [ref=e1593]:
+                - text: Tạ Văn Cường vừa được cộng
+                - strong [ref=e1594]: 12.000 CoolCash
+                - text: "từ ĐH #8xxx639"
+              - listitem [ref=e1595]:
+                - text: Nguyễn Phúc Khôi vừa được cộng
+                - strong [ref=e1596]: 46.000 CoolCash
+                - text: "từ ĐH #2xxx740"
+              - listitem [ref=e1597]:
+                - text: Nguyễn Phúc Khôi vừa được cộng
+                - strong [ref=e1598]: 18.000 CoolCash
+                - text: "từ ĐH #2xxx361"
+              - listitem [ref=e1599]: TRẦN THỊ KiM YẾN OANH vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1600]: ÂN vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1601]: Nguyễn Thành Tây vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1602]: Thảo Hoàng vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1603]: Tạ Thanh Thiện vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1604]: Xuân Tâm Trương vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1605]: Hiếu Nguyễn vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1606]: Hong Quan Do vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1607]: Phúc Nguyễn vừa được nhận 1 phần quà sinh nhật đặc biệt.
+              - listitem [ref=e1608]: Minh Nguyen Thi vừa được nhận 1 phần quà sinh nhật đặc biệt.
+          - link "Gia nhập Coolclub ngay icon arrow right" [ref=e1609] [cursor=pointer]:
+            - /url: /coolclub?itm_source=awareness
+            - text: Gia nhập Coolclub ngay
+            - img "icon arrow right" [ref=e1610]
+    - region "Notifications alt+T"
+  - contentinfo [ref=e718]:
+    - generic [ref=e719]:
+      - generic [ref=e720]:
+        - list [ref=e721]:
+          - listitem [ref=e722]:
+            - img "Biểu tượng điện thoại liên hệ" [ref=e723]
+            - generic [ref=e724]:
+              - paragraph [ref=e725]: Hotline
+              - link "1900.272737 -" [ref=e726] [cursor=pointer]:
+                - /url: tel:1900.272737
+              - link "028.7777.2737" [ref=e727] [cursor=pointer]:
+                - /url: tel:028.7777.2737
+          - listitem [ref=e728]:
+            - img "Biểu tượng email" [ref=e729]
+            - generic [ref=e730]:
+              - paragraph [ref=e731]: Email
+              - link "Cool@coolmate.me" [ref=e1611] [cursor=pointer]:
+                - /url: mailto:Cool@coolmate.me
+        - generic [ref=e732]:
+          - heading "COOLMATE lắng nghe bạn!" [level=2] [ref=e733]
+          - paragraph [ref=e734]: Chúng tôi luôn trân trọng và mong đợi nhận được mọi ý kiến đóng góp từ khách hàng để có thể nâng cấp trải nghiệm dịch vụ và sản phẩm tốt hơn nữa.
+          - link "Đóng góp ý kiến" [ref=e735] [cursor=pointer]:
+            - /url: https://form.omicrm.io/4115e15i615115107e556i53?lng=vi
+            - text: Đóng góp ý kiến
+            - img
+      - list [ref=e736]:
+        - listitem [ref=e737]:
+          - link "Theo dõi chúng tôi trên socials.facebook" [ref=e738] [cursor=pointer]:
+            - /url: https://www.facebook.com/coolmate.me
+            - img "Theo dõi chúng tôi trên socials.facebook" [ref=e739]
+        - listitem [ref=e740]:
+          - link "Theo dõi chúng tôi trên socials.zalo" [ref=e741] [cursor=pointer]:
+            - /url: https://zalo.me/1517736583279228381
+            - img "Theo dõi chúng tôi trên socials.zalo" [ref=e742]
+        - listitem [ref=e743]:
+          - link "Theo dõi chúng tôi trên socials.tiktok" [ref=e744] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@cool.coolmate
+            - img "Theo dõi chúng tôi trên socials.tiktok" [ref=e745]
+        - listitem [ref=e746]:
+          - link "Theo dõi chúng tôi trên socials.instagram" [ref=e747] [cursor=pointer]:
+            - /url: https://www.instagram.com/coolmate.me/
+            - img "Theo dõi chúng tôi trên socials.instagram" [ref=e748]
+        - listitem [ref=e749]:
+          - link "Theo dõi chúng tôi trên socials.youtube" [ref=e750] [cursor=pointer]:
+            - /url: https://www.youtube.com/channel/UCWw8wLlodKBtEvVt1tTAsMA
+            - img "Theo dõi chúng tôi trên socials.youtube" [ref=e751]
+    - navigation "Chính sách & Liên kết" [ref=e754]:
+      - generic [ref=e755]:
+        - generic [ref=e756]:
+          - list "CoolClub" [ref=e757]:
+            - listitem [ref=e758]:
+              - heading "CoolClub" [level=2] [ref=e759]
+            - listitem [ref=e760]:
+              - link "Tài khoản CoolClub" [ref=e761] [cursor=pointer]:
+                - /url: /account/info?itm_source=footerm
+            - listitem [ref=e762]:
+              - link "Đăng kí thành viên" [ref=e763] [cursor=pointer]:
+                - /url: /register?itm_source=footerm
+            - listitem [ref=e764]:
+              - link "Ưu đãi & Đặc quyền" [ref=e765] [cursor=pointer]:
+                - /url: /coolclub?itm_source=footer
+          - list "CoolClub" [ref=e766]:
+            - listitem [ref=e767]:
+              - heading "Tài liệu - Tuyển dụng" [level=2] [ref=e768]
+            - listitem [ref=e769]:
+              - link "Tuyển dụng" [ref=e770] [cursor=pointer]:
+                - /url: /lp/coolmate-101?itm_source=footer
+            - listitem [ref=e771]:
+              - link "Đăng ký bản quyền" [ref=e772] [cursor=pointer]:
+                - /url: http://online.gov.vn/(X(1)S(sgmttobbtsiaq3l5itoicxhw))/Home/WebDetails/53184?AspxAutoDetectCookieSupport=1
+        - generic [ref=e773]:
+          - list "Chính sách" [ref=e774]:
+            - listitem [ref=e775]:
+              - heading "Chính sách" [level=2] [ref=e776]
+            - listitem [ref=e777]:
+              - link "Chính sách đổi trả tại cửa hàng" [ref=e778] [cursor=pointer]:
+                - /url: /page/chinh-sach-doi-tra-tai-cua-hang
+            - listitem [ref=e779]:
+              - link "Chính sách đổi trả 60 ngày online" [ref=e780] [cursor=pointer]:
+                - /url: /page/dich-vu-60-ngay-doi-tra
+            - listitem [ref=e781]:
+              - link "Chính sách khuyến mãi" [ref=e782] [cursor=pointer]:
+                - /url: /page/chuong-trinh-va-chinh-sach-khuyen-mai-tai-coolmate
+            - listitem [ref=e783]:
+              - link "Chính sách bảo mật" [ref=e784] [cursor=pointer]:
+                - /url: /page/chinh-sach-bao-mat-thong-tin-ca-nhan
+            - listitem [ref=e785]:
+              - link "Chính sách giao hàng" [ref=e786] [cursor=pointer]:
+                - /url: /page/dich-vu-giao-hang-coolmate
+          - list "Chính sách" [ref=e787]:
+            - listitem [ref=e788]:
+              - heading "Coolmate.me" [level=2] [ref=e789]
+            - listitem [ref=e790]:
+              - link "Lịch sử thay đổi website" [ref=e791] [cursor=pointer]:
+                - /url: /page/changelog?itm_source=footer
+        - generic [ref=e792]:
+          - list "Chăm sóc khách hàng" [ref=e793]:
+            - listitem [ref=e794]:
+              - heading "Chăm sóc khách hàng" [level=2] [ref=e795]
+            - listitem [ref=e796]:
+              - link "Trải nghiệm mua sắm 100% hài lòng" [ref=e797] [cursor=pointer]:
+                - /url: /page/11-dich-vu-tai-coolmate-co-the-ban-chua-biet
+            - listitem [ref=e798]:
+              - link "Hỏi đáp - FAQs" [ref=e799] [cursor=pointer]:
+                - /url: /page/faqs
+          - list "Chăm sóc khách hàng" [ref=e800]:
+            - listitem [ref=e801]:
+              - heading "Khám phá" [level=2] [ref=e802]
+            - listitem [ref=e803]:
+              - link "Community Threads" [ref=e804] [cursor=pointer]:
+                - /url: /community-threads
+            - listitem [ref=e805]:
+              - link "Hướng dẫn chọn size" [ref=e806] [cursor=pointer]:
+                - /url: /size-chart
+            - listitem [ref=e807]:
+              - link "Blog" [ref=e808] [cursor=pointer]:
+                - /url: /blog
+        - list "Về COOLMATE" [ref=e810]:
+          - listitem [ref=e811]:
+            - heading "Về COOLMATE" [level=2] [ref=e812]
+          - listitem [ref=e813]:
+            - link "Quy tắc ứng xử của Coolmate" [ref=e814] [cursor=pointer]:
+              - /url: /page/quy-tac-ung-xu-cua-coolmate?itm_source=footer
+          - listitem [ref=e815]:
+            - link "Coolmate 101" [ref=e816] [cursor=pointer]:
+              - /url: /lp/coolmate-101?itm_source=footer
+          - listitem [ref=e817]:
+            - link "DVKH xuất sắc" [ref=e818] [cursor=pointer]:
+              - /url: /page/11-dich-vu-tai-coolmate-co-the-ban-chua-biet?itm_source=footer
+          - listitem [ref=e819]:
+            - link "Câu chuyện về Coolmate" [ref=e820] [cursor=pointer]:
+              - /url: /page/coolmate-story?itm_source=footer
+          - listitem [ref=e821]:
+            - link "Nhà máy" [ref=e822] [cursor=pointer]:
+              - /url: /page/san-pham-coolmate-duoc-san-xuat-nhu-the-nao?itm_source=footer
+          - listitem [ref=e823]:
+            - link "Care & Share" [ref=e824] [cursor=pointer]:
+              - /url: /collection/care-and-share?itm_source=footer
+          - listitem [ref=e825]:
+            - link "Cam kết bền vững" [ref=e826] [cursor=pointer]:
+              - /url: /page/cam-ket-phat-trien-ben-vung?itm_source=footer
+          - listitem [ref=e827]:
+            - link "Tầm nhìn 2030" [ref=e828] [cursor=pointer]:
+              - /url: /tam-nhin-2030
+      - generic [ref=e829]:
+        - heading "Địa chỉ liên hệ" [level=2] [ref=e830]
+        - list [ref=e831]:
+          - listitem [ref=e832]:
+            - generic [ref=e833]: "Cửa hàng:"
+            - text: B2-34, Tầng B2, Hanoi Centre, 175 Nguyễn Thái Học, Đống Đa, Hà Nội
+          - listitem [ref=e834]:
+            - generic [ref=e835]: "Văn phòng Hà Nội:"
+            - text: Tầng 3-4, Tòa nhà BMM, Km2, Đường Phùng Hưng, Phường Hà Đông, Thành phố Hà Nội, Việt Nam
+          - listitem [ref=e836]:
+            - generic [ref=e837]: "Trung tâm vận hành Hà Nội:"
+            - text: Lô C8, KCN Lại Yên, Xã Lại Yên, Huyện Hoài Đức, Thành phố Hà Nội
+          - listitem [ref=e838]:
+            - generic [ref=e839]: "Văn phòng và Trung tâm vận hành TP.HCM:"
+            - text: Lô C3, đường D2, KCN Cát Lái, Thạnh Mỹ Lợi, TP. Thủ Đức, TP. Hồ Chí Minh
+          - listitem [ref=e840]:
+            - generic [ref=e841]: "Trung tâm R&D:"
+            - text: T6-01, The Manhattan Vinhomes Grand Park, Long Bình, TP. Thủ Đức
+    - generic [ref=e843]:
+      - generic [ref=e844]:
+        - text: "@ CÔNG TY TNHH FASTECH ASIA"
+        - paragraph [ref=e845]: "Mã số doanh nghiệp: 0108617038. Giấy chứng nhận đăng ký doanh nghiệp do Sở Kế hoạch và Đầu tư TP Hà Nội cấp lần đầu ngày 20/02/2019."
+      - list [ref=e846]:
+        - listitem [ref=e847]:
+          - link "companyInfo.certifications.trust" [ref=e848] [cursor=pointer]:
+            - /url: https://tinnhiemmang.vn/danh-ba-tin-nhiem/coolmateme-1646213826
+            - img "companyInfo.certifications.trust" [ref=e849]
+        - listitem [ref=e850]:
+          - link "companyInfo.certifications.iso9001" [ref=e851] [cursor=pointer]:
+            - /url: https://www.dmca.com/Protection/Status.aspx?ID=c6fdbdee-127c-4cf1-923d-7efe75201df6&refurl=https://www.coolmate.me/
+            - img "companyInfo.certifications.iso9001" [ref=e852]
+        - listitem [ref=e853]:
+          - link "companyInfo.certifications.iso14001" [ref=e854] [cursor=pointer]:
+            - /url: "#"
+            - img "companyInfo.certifications.iso14001" [ref=e855]
+        - listitem [ref=e856]:
+          - link "companyInfo.certifications.hvnclc" [ref=e857] [cursor=pointer]:
+            - /url: http://online.gov.vn/(X(1)S(3e0hkhscv5zs101mhuopx43a))/Home/WebDetails/53184?AspxAutoDetectCookieSupport=1
+            - img "companyInfo.certifications.hvnclc" [ref=e858]
+  - alert [ref=e859]
+  - button "icon-float-fab" [ref=e1613] [cursor=pointer]:
+    - img "icon-float-fab" [ref=e1614]

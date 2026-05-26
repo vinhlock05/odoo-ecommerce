@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+            S1 Master Data — Product Category Tree
+            Root → Áo / Quần / Phụ kiện / Đồ lót / Đồ thể thao
+            Each major category has 2-3 sub-categories.
+        -->
+
+        <!-- Root category for all FashionOS products -->
+        <record id="product_category_fashionos" model="product.category">
+            <field name="name">FashionOS</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+
+        <!-- ===================== Áo (Tops) ===================== -->
+        <record id="cat_ao" model="product.category">
+            <field name="name">Áo</field>
+            <field name="parent_id" ref="product_category_fashionos"/>
+        </record>
+        <record id="cat_ao_thun" model="product.category">
+            <field name="name">Áo thun</field>
+            <field name="parent_id" ref="cat_ao"/>
+        </record>
+        <record id="cat_ao_so_mi" model="product.category">
+            <field name="name">Áo sơ mi</field>
+            <field name="parent_id" ref="cat_ao"/>
+        </record>
+        <record id="cat_ao_khoac" model="product.category">
+            <field name="name">Áo khoác</field>
+            <field name="parent_id" ref="cat_ao"/>
+        </record>
+        <record id="cat_ao_polo" model="product.category">
+            <field name="name">Áo polo</field>
+            <field name="parent_id" ref="cat_ao"/>
+        </record>
+
+        <!-- ===================== Quần (Bottoms) ===================== -->
+        <record id="cat_quan" model="product.category">
+            <field name="name">Quần</field>
+            <field name="parent_id" ref="product_category_fashionos"/>
+        </record>
+        <record id="cat_quan_jeans" model="product.category">
+            <field name="name">Quần jeans</field>
+            <field name="parent_id" ref="cat_quan"/>
+        </record>
+        <record id="cat_quan_kaki" model="product.category">
+            <field name="name">Quần kaki</field>
+            <field name="parent_id" ref="cat_quan"/>
+        </record>
+        <record id="cat_quan_short" model="product.category">
+            <field name="name">Quần short</field>
+            <field name="parent_id" ref="cat_quan"/>
+        </record>
+        <record id="cat_quan_dai" model="product.category">
+            <field name="name">Quần dài</field>
+            <field name="parent_id" ref="cat_quan"/>
+        </record>
+
+        <!-- ===================== Phụ kiện (Accessories) ===================== -->
+        <record id="cat_phu_kien" model="product.category">
+            <field name="name">Phụ kiện</field>
+            <field name="parent_id" ref="product_category_fashionos"/>
+        </record>
+        <record id="cat_tat" model="product.category">
+            <field name="name">Tất / Vớ</field>
+            <field name="parent_id" ref="cat_phu_kien"/>
+        </record>
+        <record id="cat_that_lung" model="product.category">
+            <field name="name">Thắt lưng</field>
+            <field name="parent_id" ref="cat_phu_kien"/>
+        </record>
+        <record id="cat_mu" model="product.category">
+            <field name="name">Mũ / Nón</field>
+            <field name="parent_id" ref="cat_phu_kien"/>
+        </record>
+
+        <!-- ===================== Đồ lót (Innerwear) ===================== -->
+        <record id="cat_do_lot" model="product.category">
+            <field name="name">Đồ lót</field>
+            <field name="parent_id" ref="product_category_fashionos"/>
+        </record>
+        <record id="cat_ao_lot" model="product.category">
+            <field name="name">Áo lót / Ba lỗ</field>
+            <field name="parent_id" ref="cat_do_lot"/>
+        </record>
+        <record id="cat_quan_lot" model="product.category">
+            <field name="name">Quần lót</field>
+            <field name="parent_id" ref="cat_do_lot"/>
+        </record>
+
+        <!-- ===================== Đồ thể thao (Sportswear) ===================== -->
+        <record id="cat_the_thao" model="product.category">
+            <field name="name">Đồ thể thao</field>
+            <field name="parent_id" ref="product_category_fashionos"/>
+        </record>
+        <record id="cat_ao_the_thao" model="product.category">
+            <field name="name">Áo thể thao</field>
+            <field name="parent_id" ref="cat_the_thao"/>
+        </record>
+        <record id="cat_quan_the_thao" model="product.category">
+            <field name="name">Quần thể thao</field>
+            <field name="parent_id" ref="cat_the_thao"/>
+        </record>
+        <record id="cat_bo_the_thao" model="product.category">
+            <field name="name">Bộ thể thao</field>
+            <field name="parent_id" ref="cat_the_thao"/>
+        </record>
+
+    </data>
+</odoo>

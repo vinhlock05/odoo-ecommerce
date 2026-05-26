@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Extend the main Settings form to add a FashionOS tab -->
+        <record id="res_config_settings_view_fashionos" model="ir.ui.view">
+            <field name="name">res.config.settings.view.fashionos</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="FashionOS" string="FashionOS"
+                         data-key="fashionos" groups="base.group_system">
+
+                        <!-- Feature Flags -->
+                        <h2>Feature Flags</h2>
+                        <div class="row mt16 o_settings_container">
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_headless_mode"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_headless_mode"/>
+                                    <div class="text-muted">
+                                        FF-20 — Disable Odoo website frontend; all traffic via REST API
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_free_shipping"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_free_shipping"/>
+                                    <div class="text-muted">FF-10 — Compute free-shipping eligibility</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_alternate_receiver"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_alternate_receiver"/>
+                                    <div class="text-muted">FF-06 — Allow orders to be delivered to a different person</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_coolcash"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_coolcash"/>
+                                    <div class="text-muted">FF-01 — Loyalty points system (Sprint 4)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_coolclub"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_coolclub"/>
+                                    <div class="text-muted">FF-02 — Membership tier system (Sprint 4)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_referral"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_referral"/>
+                                    <div class="text-muted">FF-03 — Referral / friend invitation (Sprint 4)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_combo"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_combo"/>
+                                    <div class="text-muted">FF-04 — Combo / bundle products (Sprint 2)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_smart_routing"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_smart_routing"/>
+                                    <div class="text-muted">FF-05 — Smart order routing to nearest warehouse (Sprint 5)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_return_request"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_return_request"/>
+                                    <div class="text-muted">FF-07 — Customer return / exchange requests (Sprint 6)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_jwt_auth"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_jwt_auth"/>
+                                    <div class="text-muted">FF-09 — JWT-based API authentication (Sprint 3)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_zalo_notification"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_zalo_notification"/>
+                                    <div class="text-muted">FF-08 — Zalo OA push notifications (Sprint 6)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_product_reviews"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_product_reviews"/>
+                                    <div class="text-muted">FF-11 — Product reviews and ratings (Sprint 6)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_wishlist"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_wishlist"/>
+                                    <div class="text-muted">FF-12 — Wishlist / saved items (Sprint 6)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_flash_sale"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_flash_sale"/>
+                                    <div class="text-muted">FF-13 — Flash sale / countdown discounts (Sprint 6)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_multi_warehouse"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_multi_warehouse"/>
+                                    <div class="text-muted">FF-16 — Multi-warehouse fulfilment (Sprint 5)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="ff_analytics"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="ff_analytics"/>
+                                    <div class="text-muted">FF-19 — Analytics / event tracking (Sprint 7)</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Business Config -->
+                        <h2>Business Config</h2>
+                        <div class="row mt16 o_settings_container">
+
+                            <div class="col-12 col-lg-6 o_setting_box" invisible="not ff_free_shipping">
+                                <div class="o_setting_right_pane">
+                                    <label for="free_shipping_threshold"/>
+                                    <div class="text-muted">Orders above this amount qualify for free shipping</div>
+                                    <div class="content-group mt8">
+                                        <div class="row">
+                                            <field name="free_shipping_threshold" class="col-lg-7"/>
+                                            <span class="col-lg-1 text-muted">VND</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box" invisible="not ff_coolcash">
+                                <div class="o_setting_right_pane">
+                                    <label for="coolcash_earn_rate"/>
+                                    <div class="text-muted">Percentage of order value awarded as CoolCash</div>
+                                    <div class="content-group mt8">
+                                        <div class="row">
+                                            <field name="coolcash_earn_rate" class="col-lg-7"/>
+                                            <span class="col-lg-1 text-muted">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box" invisible="not ff_coolclub">
+                                <div class="o_setting_right_pane">
+                                    <label string="CoolClub Tier Thresholds (VND)"/>
+                                    <div class="text-muted">Cumulative spend required for each tier</div>
+                                    <div class="content-group mt8">
+                                        <div class="row mb4">
+                                            <span class="col-lg-3 text-muted">Silver</span>
+                                            <field name="coolclub_silver_threshold" class="col-lg-4"/>
+                                        </div>
+                                        <div class="row mb4">
+                                            <span class="col-lg-3 text-muted">Gold</span>
+                                            <field name="coolclub_gold_threshold" class="col-lg-4"/>
+                                        </div>
+                                        <div class="row">
+                                            <span class="col-lg-3 text-muted">Diamond</span>
+                                            <field name="coolclub_diamond_threshold" class="col-lg-4"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box" invisible="not ff_jwt_auth">
+                                <div class="o_setting_right_pane">
+                                    <label for="jwt_secret_key"/>
+                                    <div class="text-muted">Secret key for signing JWT tokens — keep this private</div>
+                                    <div class="content-group mt8">
+                                        <div class="row">
+                                            <field name="jwt_secret_key" class="col-lg-10" password="True"/>
+                                        </div>
+                                        <div class="row mt4">
+                                            <span class="col-lg-4 text-muted">Expiry (hours)</span>
+                                            <field name="jwt_expiry_hours" class="col-lg-3"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box" invisible="not ff_zalo_notification">
+                                <div class="o_setting_right_pane">
+                                    <label string="Zalo OA Credentials"/>
+                                    <div class="content-group mt8">
+                                        <div class="row mb4">
+                                            <span class="col-lg-3 text-muted">OA Token</span>
+                                            <field name="zalo_oa_token" class="col-lg-7" password="True"/>
+                                        </div>
+                                        <div class="row">
+                                            <span class="col-lg-3 text-muted">OA Secret</span>
+                                            <field name="zalo_oa_secret" class="col-lg-7" password="True"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

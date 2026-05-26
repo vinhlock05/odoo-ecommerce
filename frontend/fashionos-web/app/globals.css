@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-fashionos-white text-fashionos-black;
+    font-family: var(--font-inter);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-fashionos-black text-fashionos-white px-6 py-3 text-sm font-medium
+           tracking-widest uppercase transition-colors duration-200
+           hover:bg-fashionos-accent active:scale-95;
+  }
+
+  .btn-outline {
+    @apply border border-fashionos-black text-fashionos-black px-6 py-3 text-sm font-medium
+           tracking-widest uppercase transition-colors duration-200
+           hover:bg-fashionos-black hover:text-fashionos-white active:scale-95;
+  }
+
+  .product-card {
+    @apply relative bg-white border border-fashionos-border
+           transition-shadow duration-300 hover:shadow-lg;
+  }
+}

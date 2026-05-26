@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+            FashionOS default configuration parameters.
+            noupdate="1" means these records are written once on first install
+            and NOT overwritten on subsequent upgrades — safe for production.
+        -->
+
+        <!--
+            Feature Flags — safe defaults (most off, headless + free-shipping on).
+            Values use Odoo canonical Boolean storage: '1' = enabled, '0' = disabled.
+            Odoo's res.config.settings reads/writes Boolean config_parameter fields
+            as '1' / '0' so we must match that format here.
+        -->
+        <record id="param_ff_coolcash" model="ir.config_parameter">
+            <field name="key">fashionos.ff.coolcash</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_coolclub" model="ir.config_parameter">
+            <field name="key">fashionos.ff.coolclub</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_referral" model="ir.config_parameter">
+            <field name="key">fashionos.ff.referral</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_combo" model="ir.config_parameter">
+            <field name="key">fashionos.ff.combo</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_smart_routing" model="ir.config_parameter">
+            <field name="key">fashionos.ff.smart_routing</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_alternate_receiver" model="ir.config_parameter">
+            <field name="key">fashionos.ff.alternate_receiver</field>
+            <field name="value">1</field>
+        </record>
+        <record id="param_ff_return_request" model="ir.config_parameter">
+            <field name="key">fashionos.ff.return_request</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_zalo_notification" model="ir.config_parameter">
+            <field name="key">fashionos.ff.zalo_notification</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_jwt_auth" model="ir.config_parameter">
+            <field name="key">fashionos.ff.jwt_auth</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_free_shipping" model="ir.config_parameter">
+            <field name="key">fashionos.ff.free_shipping</field>
+            <field name="value">1</field>
+        </record>
+        <record id="param_ff_product_reviews" model="ir.config_parameter">
+            <field name="key">fashionos.ff.product_reviews</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_wishlist" model="ir.config_parameter">
+            <field name="key">fashionos.ff.wishlist</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_flash_sale" model="ir.config_parameter">
+            <field name="key">fashionos.ff.flash_sale</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_bundle_price" model="ir.config_parameter">
+            <field name="key">fashionos.ff.bundle_price</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_order_split" model="ir.config_parameter">
+            <field name="key">fashionos.ff.order_split</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_multi_warehouse" model="ir.config_parameter">
+            <field name="key">fashionos.ff.multi_warehouse</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_newsletter" model="ir.config_parameter">
+            <field name="key">fashionos.ff.newsletter</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_live_chat" model="ir.config_parameter">
+            <field name="key">fashionos.ff.live_chat</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_analytics" model="ir.config_parameter">
+            <field name="key">fashionos.ff.analytics</field>
+            <field name="value">0</field>
+        </record>
+        <record id="param_ff_headless_mode" model="ir.config_parameter">
+            <field name="key">fashionos.ff.headless_mode</field>
+            <field name="value">1</field>
+        </record>
+
+        <!-- Business Config -->
+        <record id="param_coolcash_earn_rate" model="ir.config_parameter">
+            <field name="key">fashionos.coolcash.earn_rate</field>
+            <field name="value">7.0</field>
+        </record>
+        <record id="param_free_shipping_threshold" model="ir.config_parameter">
+            <field name="key">fashionos.shipping.free_threshold</field>
+            <field name="value">350000.0</field>
+        </record>
+        <record id="param_coolclub_silver" model="ir.config_parameter">
+            <field name="key">fashionos.coolclub.silver_threshold</field>
+            <field name="value">1000000.0</field>
+        </record>
+        <record id="param_coolclub_gold" model="ir.config_parameter">
+            <field name="key">fashionos.coolclub.gold_threshold</field>
+            <field name="value">3000000.0</field>
+        </record>
+        <record id="param_coolclub_diamond" model="ir.config_parameter">
+            <field name="key">fashionos.coolclub.diamond_threshold</field>
+            <field name="value">10000000.0</field>
+        </record>
+        <record id="param_jwt_expiry_hours" model="ir.config_parameter">
+            <field name="key">fashionos.jwt.expiry_hours</field>
+            <field name="value">24</field>
+        </record>
+    </data>
+</odoo>

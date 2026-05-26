@@ -764,7 +764,14 @@ class SaleOrderLine(models.Model):
 
 ---
 
-## Sprint 3 — OCA REST Framework + ShopInvader (4 ngày)
+## Sprint 3 — OCA REST Framework + ShopInvader (4 ngày) ✅ COMPLETE — 2026-05-26
+
+> **Divergence from plan:** Implemented as custom `fashion_store_api` Odoo module using
+> Python stdlib JWT (hmac/hashlib HS256) instead of OCA FastAPI/ShopInvader, which are
+> Odoo 16/17 optional dependencies not needed for a standalone headless API.
+> All 15 REST endpoints are fully implemented and committed (commit e6f482c).
+> Code-reviewer HIGH issues fixed: guarded int/float casts, price filters in ORM domain,
+> parse_body() raises ValueError on malformed JSON.
 
 ### Task S3-01: Cài Layer 1 — OCA REST Framework
 

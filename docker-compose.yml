@@ -11,7 +11,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U odoo -d fashionos"]
+      test: [ "CMD-SHELL", "pg_isready -U odoo -d fashionos" ]
       interval: 5s
       timeout: 3s
       retries: 10
@@ -33,14 +33,33 @@ services:
       PASSWORD: odoo_secret
     # v19 command tối ưu cho development, tự động reload khi sửa code Python
     command: >
-      odoo
-      --db_host=db
-      --db_user=odoo
-      --db_password=odoo_secret
-      --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons
-      --dev=all
+      odoo --db_host=db --db_user=odoo --db_password=odoo_secret --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons --dev=all
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -sf http://localhost:8069/web/health || exit 1" ]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 60s
     labels:
       - "fashionos.service=backend"
+
+  frontend:
+    build:
+      context: ./frontend/fashionos-web
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/fashionos-web:/app
+      - /app/node_modules
+    environment:
+      - NEXT_PUBLIC_ODOO_URL=http://localhost:8069
+      - ODOO_INTERNAL_URL=http://odoo:8069
+      - WATCHPACK_POLLING=true
+    depends_on:
+      odoo:
+        condition: service_healthy
 
 volumes:
   pgdata:

@@ -59,26 +59,41 @@ class AuthController(http.Controller):
             return error('password must be at least 8 characters', 400, 'VALIDATION_ERROR')
 
         env = request.env
-        existing = env['res.partner'].sudo().search([('email', '=', email)], limit=1)
+        su = env(user=1)  # auth='none' routes: sudo() sets su=True but leaves uid=0;
+                          # env(user=1) sets uid=1 so env.user is the admin singleton,
+                          # which prevents crashes when Odoo internals call sudo(False).
+        existing = su['res.partner'].search([('email', '=', email)], limit=1)
         if existing:
             return error('Email already registered', 409, 'EMAIL_TAKEN')
 
         try:
-            partner = env['res.partner'].sudo().create({
-                'name': name,
-                'email': email,
-                'phone': phone or False,
-                'x_gender_title': gender_title if gender_title in ('anh', 'chi') else False,
-                'customer_rank': 1,
-            })
-            user = env['res.users'].sudo().with_context(no_reset_password=True).create({
-                'name': name,
-                'login': email,
-                'email': email,
-                'partner_id': partner.id,
-                'groups_id': [(6, 0, [env.ref('base.group_portal').id])],
-                'password': password,
-            })
+            with env.cr.savepoint():
+                # savepoint() auto-rollbacks on ANY exception inside the block,
+                # so no partial partner/user records will be committed.
+                partner = su['res.partner'].create({
+                    'name': name,
+                    'email': email,
+                    'phone': phone or False,
+                    'x_gender_title': gender_title if gender_title in ('anh', 'chi') else False,
+                    'customer_rank': 1,
+                })
+                main_company_id = su.ref('base.main_company').id
+                user = su['res.users'].with_context(no_reset_password=True).create({
+                    'name': name,
+                    'login': email,
+                    'email': email,
+                    'partner_id': partner.id,
+                    'password': password,
+                    # Odoo 19: company_id (NOT NULL) and company_ids must both be set.
+                    'company_id': main_company_id,
+                    'company_ids': [(6, 0, [main_company_id])],
+                })
+                # Odoo 19: res.users.create() auto-assigns base.group_user (internal user).
+                # group_user and group_portal are mutually exclusive — must remove first.
+                group_user = su.ref('base.group_user')
+                group_portal = su.ref('base.group_portal')
+                group_user.write({'user_ids': [(3, user.id)]})   # (3) = remove
+                group_portal.write({'user_ids': [(4, user.id)]}) # (4) = add
         except (ValidationError, Exception) as exc:
             _logger.exception('register failed')
             return error(str(exc), 400, 'REGISTRATION_FAILED')
@@ -104,18 +119,19 @@ class AuthController(http.Controller):
 
         env = request.env
         try:
-            # Verify credentials via Odoo's auth mechanism
-            uid = env['res.users'].sudo().search([('login', '=', email)], limit=1).id
+            # Odoo 19: authenticate(credential_dict, user_agent_env)
+            credential = {'type': 'password', 'login': email, 'password': password}
+            auth_info = env['res.users'].sudo().authenticate(credential, {'interactive': False})
+            uid = auth_info.get('uid') if isinstance(auth_info, dict) else auth_info
             if not uid:
                 raise AccessDenied()
-            user = env['res.users'].sudo().browse(uid)
-            user._check_credentials(password, {'interactive': False})
         except AccessDenied:
             return error('Invalid email or password', 401, 'INVALID_CREDENTIALS')
         except Exception:
             _logger.exception('login failed for %s', email)
             return error('Login failed', 500, 'SERVER_ERROR')
 
+        user = env['res.users'].sudo().browse(uid)
         partner = user.partner_id
         token = encode_jwt(env, partner.id)
         return ok({'token': token, 'partner_id': partner.id, 'name': partner.name, 'email': email})

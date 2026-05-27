@@ -40,11 +40,10 @@ class CheckoutController(http.Controller):
 
     @http.route(
         _CHECKOUT_ROUTE,
-        type='json',
+        type='http',
         auth='none',
         methods=['POST'],
         csrf=False,
-        cors='*',
     )
     def checkout(self, **_kwargs):
         """Convert draft cart to confirmed sale order.
@@ -97,7 +96,11 @@ class CheckoutController(http.Controller):
             )
 
         # ── 3. Load cart ───────────────────────────────────────────────
-        cart = env['sale.order'].sudo().search(
+        # Use with_user(1) (SUPERUSER_ID) — auth='none' routes leave env.uid
+        # as anonymous in Odoo 19, causing sale.order._compute_user_id to call
+        # ensure_one() on an empty res.users recordset → ValueError.
+        su = env(user=1)
+        cart = su['sale.order'].search(
             [
                 ('partner_id', '=', partner.id),
                 ('x_is_cart', '=', True),
@@ -116,7 +119,7 @@ class CheckoutController(http.Controller):
             return error('Cart is empty', 400, 'CART_EMPTY')
 
         # ── 5. Validate delivery address belongs to this partner ───────
-        delivery_address = env['res.partner'].sudo().browse(delivery_address_id)
+        delivery_address = su['res.partner'].browse(delivery_address_id)
         if not delivery_address.exists():
             return error(
                 'Delivery address not found',
@@ -126,8 +129,7 @@ class CheckoutController(http.Controller):
 
         # The address must be the partner itself OR one of their children
         allowed_partner_ids = (
-            env['res.partner']
-            .sudo()
+            su['res.partner']
             .search([('id', 'child_of', partner.id)])
             .ids
         )
@@ -171,8 +173,8 @@ class CheckoutController(http.Controller):
 
         # ── 7. Write fields & confirm ──────────────────────────────────
         try:
-            cart.sudo().write(write_vals)
-            cart.sudo().action_confirm()
+            cart.write(write_vals)
+            cart.action_confirm()
         except (ValidationError, UserError, AccessError) as exc:
             _logger.warning(
                 'Checkout rejected for partner %s cart %s: %s',
@@ -190,7 +192,33 @@ class CheckoutController(http.Controller):
                 'CHECKOUT_ERROR',
             )
 
+        # ── 7b. Loyalty post-processing ────────────────────────────────
+        # Run loyalty operations inside a separate try-block so that a loyalty
+        # error doesn't roll back the already-confirmed order.
+        try:
+            LoyaltyTxn = su['loyalty.transaction']
+            su_partner = su['res.partner'].browse(partner.id)
+
+            # 1. Deduct any applied CoolCash
+            LoyaltyTxn.redeem_for_order(su_partner, cart)
+
+            # 2. Increment lifetime spend and recalculate tier
+            su_partner.write({
+                'x_lifetime_spend': su_partner.x_lifetime_spend + cart.amount_total
+            })
+            su_partner.action_recalculate_tier()
+
+            # 3. Award CoolCash earned on this order (tier-based rate)
+            LoyaltyTxn.award_order_coolcash(su_partner, cart)
+        except Exception:  # noqa: BLE001
+            _logger.exception(
+                'Loyalty post-processing failed for partner %s order %s '
+                '(order is confirmed, loyalty update skipped)',
+                partner.id, cart.name,
+            )
+
         # ── 8. Return order summary ────────────────────────────────────
+        su_partner = su['res.partner'].browse(partner.id)
         return ok({
             'order_id': cart.id,
             'order_name': cart.name,
@@ -199,4 +227,8 @@ class CheckoutController(http.Controller):
             'amount_tax': cart.amount_tax,
             'state': cart.state,
             'partner_shipping_id': cart.partner_shipping_id.id,
+            'coolcash_earned': int(cart.x_coolcash_earned or 0),
+            'coolcash_redeemed': int(cart.x_coolcash_amount_used or 0),
+            'new_coolcash_balance': int(su_partner.x_coolcash_balance),
+            'loyalty_tier': su_partner.x_loyalty_tier or 'member',
         })

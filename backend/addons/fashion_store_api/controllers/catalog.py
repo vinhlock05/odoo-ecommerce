@@ -155,6 +155,20 @@ class CatalogController(http.Controller):
 # ---------------------------------------------------------------------------
 
 def _product_summary(tmpl) -> dict:
+    variants = []
+    for variant in tmpl.product_variant_ids:
+        attr_values = []
+        for av in variant.product_template_attribute_value_ids:
+            attr_values.append({
+                'attribute': av.attribute_id.name,
+                'value': av.product_attribute_value_id.name,
+                'html_color': av.product_attribute_value_id.html_color or None,
+            })
+        variants.append({
+            'id': variant.id,
+            'attributes': attr_values,
+        })
+
     return {
         'id': tmpl.id,
         'name': tmpl.name,
@@ -165,10 +179,28 @@ def _product_summary(tmpl) -> dict:
         'categ_name': tmpl.categ_id.name if tmpl.categ_id else '',
         'image_url': f'/web/image/product.template/{tmpl.id}/image_128',
         'variant_count': len(tmpl.product_variant_ids),
+        'variants': variants,
     }
 
 
 def _product_detail(tmpl) -> dict:
+    # Attributes at product level (for size/color pickers)
+    attributes = []
+    for line in tmpl.attribute_line_ids:
+        values = []
+        for val in line.value_ids:
+            values.append({
+                'id': val.id,
+                'name': val.name,
+                'html_color': val.html_color or None,
+            })
+        attributes.append({
+            'id': line.attribute_id.id,
+            'name': line.attribute_id.name,
+            'display_type': line.attribute_id.display_type,
+            'values': values,
+        })
+
     variants = []
     for variant in tmpl.product_variant_ids:
         attr_values = []
@@ -195,6 +227,7 @@ def _product_detail(tmpl) -> dict:
         'x_gender': getattr(tmpl, 'x_gender', '') or '',
         'x_style_tags': getattr(tmpl, 'x_style_tags', '') or '',
         'image_url': f'/web/image/product.template/{tmpl.id}/image_1920',
+        'attributes': attributes,
         'variants': variants,
     })
     return detail

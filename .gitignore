@@ -46,3 +46,5 @@ playwright-report/
 # Misc
 *.bak
 *.tmp
+
+.claude/

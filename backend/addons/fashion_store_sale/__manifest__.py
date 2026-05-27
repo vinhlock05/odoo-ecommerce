@@ -21,7 +21,7 @@ sale.order.line:
 - Parent combo line reference (Many2one self)
 ''',
     'author': 'FashionOS',
-    'depends': ['sale', 'fashion_store_config'],
+    'depends': ['sale', 'fashion_store_config', 'stock'],
     'data': [],
     'installable': True,
     'application': False,

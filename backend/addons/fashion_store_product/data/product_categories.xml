@@ -10,7 +10,7 @@
         <!-- Root category for all FashionOS products -->
         <record id="product_category_fashionos" model="product.category">
             <field name="name">FashionOS</field>
-            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="parent_id" ref="product.product_category_goods"/>
         </record>
 
         <!-- ===================== Áo (Tops) ===================== -->

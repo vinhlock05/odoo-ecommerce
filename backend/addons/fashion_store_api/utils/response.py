@@ -18,8 +18,9 @@ _CORS_HEADERS = [
 
 
 def _make(body: dict, status: int):
+    payload = json.dumps(body, ensure_ascii=False, default=str)
     return request.make_response(
-        json.dumps(body, ensure_ascii=False, default=str),
+        payload.encode('utf-8'),
         headers=_CORS_HEADERS,
         status=status,
     )

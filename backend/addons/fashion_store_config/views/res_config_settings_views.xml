@@ -7,7 +7,7 @@
             <field name="model">res.config.settings</field>
             <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//div[hasclass('settings')]" position="inside">
+                <xpath expr="//form" position="inside">
                     <div class="app_settings_block" data-string="FashionOS" string="FashionOS"
                          data-key="fashionos" groups="base.group_system">
 
@@ -211,7 +211,7 @@
 
                             <div class="col-12 col-lg-6 o_setting_box" invisible="not ff_coolclub">
                                 <div class="o_setting_right_pane">
-                                    <label string="CoolClub Tier Thresholds (VND)"/>
+                                    <span class="o_form_label">CoolClub Tier Thresholds (VND)</span>
                                     <div class="text-muted">Cumulative spend required for each tier</div>
                                     <div class="content-group mt8">
                                         <div class="row mb4">
@@ -248,7 +248,7 @@
 
                             <div class="col-12 col-lg-6 o_setting_box" invisible="not ff_zalo_notification">
                                 <div class="o_setting_right_pane">
-                                    <label string="Zalo OA Credentials"/>
+                                    <span class="o_form_label">Zalo OA Credentials</span>
                                     <div class="content-group mt8">
                                         <div class="row mb4">
                                             <span class="col-lg-3 text-muted">OA Token</span>

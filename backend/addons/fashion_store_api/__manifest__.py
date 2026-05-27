@@ -17,6 +17,7 @@
         'fashion_store_config',
         'fashion_store_product',
         'fashion_store_sale',
+        'fashion_store_loyalty',
     ],
     'data': [],
     'installable': True,

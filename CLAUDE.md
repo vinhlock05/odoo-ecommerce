@@ -4,6 +4,32 @@
 > Đọc kỹ trước khi code bất cứ thứ gì.
 
 ---
+## Subagents
+
+Spawn subagents to isolate context, parallelize independent work, or offload bulk mechanical tasks. Don't spawn when the parent needs the reasoning, when synthesis requires holding things together, or when spawn overhead dominates.
+
+Pick the cheapest model that can do the subtask well:
+- Haiku: bulk mechanical work, no judgment
+- Sonnet: scoped research, code exploration, in-scope synthesis
+- Opus: subtasks needing real planning or tradeoffs
+
+If a subagent realizes it needs a higher tier than itself, return to the parent.
+
+Parent owns final output and cross-spawn synthesis. User instructions override.
+
+## Preferred Tools
+
+### Data Fetching
+
+1. **WebFetch**: free, text-only, works on public pages that don't block bots.
+2. **agent-browser CLI**: free, local Rust CLI + Chrome via CDP. For dynamic pages or auth walls that WebFetch can't handle. Returns the accessibility tree with element refs (@e1, @e2). ~82% fewer tokens than screenshot-based tools. Install: `npm i -g agent-browser && agent-browser install`. Use `snapshot` for AI-friendly DOM state, element refs for interaction.
+3. **Notice recurring fetch patterns and propose wrapping them as dedicated tools.** When the same fetch/parse logic comes up more than once, suggest wrapping it as a named tool (e.g. a skill file or a .py script that calls `agent-browser` with the snapshot and extraction steps baked in for that source). Add the entry to `## Dedicated Tools` below and reference it by name on future calls.
+
+### PDF Files
+
+Use 'pdftotext', not the 'Read' tool. Use 'Read' only when the user directly asks to analyze images or charts inside the document. Read loads PDFs as images.
+
+## Dedicated Tools
 
 ## 🚨 CRITICAL RULES — ĐỌC TRƯỚC KHI LÀM BẤT CỨ THỨ GÌ
 
@@ -18,13 +44,10 @@ Trước khi code bất cứ feature nào:
 2. **Tìm thư viện PyPI/npm trước**
 3. Chỉ tự code khi không có giải pháp phù hợp
 
-**Ví dụ vi phạm đã xảy ra:** Sprint 3 tự build JWT + HTTP controllers từ đầu thay vì dùng `OCA/rest-framework` (fastapi addon) + ShopInvader. Đây là vi phạm nghiêm trọng nguyên tắc này.
-
-### 3. SPRINT 3 — ĐÃ COMMIT NHƯNG SAI APPROACH
-- Module `fashion_store_api` (Sprint 3) đã được commit nhưng đây là **custom implementation sai**
-- Đúng ra phải dùng: `OCA/rest-framework` → addon `fastapi` (FastAPI + Pydantic + Odoo 19)
-- Và: `shopinvader/odoo-shopinvader` → ecommerce REST layer
-- Cần redo Sprint 3 khi có thời gian
+### 3. SPRINT 3 — CUSTOM JWT IMPLEMENTATION (GIỮ NGUYÊN, KHÔNG REDO)
+- Module `fashion_store_api` dùng custom JWT + HTTP controllers — đây là **lựa chọn đúng cho Odoo 19**
+- **Lý do:** OCA/rest-framework chỉ có branch đến 17.0, chưa hỗ trợ Odoo 19. ShopInvader tương tự.
+- Khi OCA ra branch 19.0 thì mới xem xét migrate, không redo bây giờ.
 
 ---
 
@@ -201,7 +224,7 @@ Convention: `{odoo_major}.0.{major}.{minor}.{patch}` — ví dụ: `19.0.1.0.0`.
 
 ## REST API (fashion_store_api — CURRENT WRONG IMPLEMENTATION)
 
-> ⚠️ Module này dùng custom HTTP controllers + JWT. Cần redo với OCA fastapi.
+> Custom HTTP controllers + JWT — lựa chọn đúng vì OCA/rest-framework chưa có branch Odoo 19.
 > Documentation dưới đây mô tả implementation hiện tại.
 
 **Base URL:** `/fashionos/api/v1/`
@@ -350,7 +373,7 @@ npm run dev   # http://localhost:3000
 | S0 | Environment Setup | ✅ Done | Docker stack, Odoo 19, PostgreSQL 16 |
 | S1 | Master Data | ✅ Done | Sizes, colors, categories trong `fashion_store_product` |
 | S2 | Foundation Modules | ✅ Done | `fashionos_base`, `fashion_store_config`, `fashion_store_product`, `fashion_store_sale` |
-| S3 | OCA + ShopInvader | ⚠️ Done (WRONG) | Đã commit `fashion_store_api` nhưng dùng custom JWT thay OCA fastapi. **Cần redo.** |
+| S3 | API Layer | ✅ Done | `fashion_store_api` với custom JWT — đúng approach cho Odoo 19 (OCA chưa có branch 19.0) |
 | S4 | CoolCash + CoolClub | ❌ Not started | Loyalty system |
 | S5 | Payments + Delivery | ❌ Not started | VNPay/MoMo/ZaloPay + GHN/GHTK |
 | S6 | Killer Features | ❌ Not started | 5 KF modules |
@@ -371,40 +394,6 @@ npm run dev   # http://localhost:3000
 | `docs/mapping/odoo-module-mapping.md` | 30 Odoo modules mapping |
 
 ---
-
-## Sprint 3 Redo Plan (Upcoming)
-
-Sprint 3 cần được làm lại đúng cách với OCA:
-
-### 1. OCA REST Framework
-```bash
-# Clone OCA rest-framework v19 vào oca_addons/
-git submodule add -b 19.0 https://github.com/OCA/rest-framework.git oca_addons/rest-framework
-```
-Addon cần cài: `fastapi` (FastAPI + Pydantic integration với Odoo 19)
-
-### 2. ShopInvader
-```bash
-git submodule add -b 19.0 https://github.com/shopinvader/odoo-shopinvader.git oca_addons/shopinvader
-```
-ShopInvader cung cấp sẵn ecommerce REST endpoints: catalog, cart, checkout, auth.
-
-### 3. Update docker-compose.yml
-```yaml
-volumes:
-  - ./backend/addons:/mnt/extra-addons
-  - ./oca_addons/rest-framework:/mnt/oca/rest-framework
-  - ./oca_addons/shopinvader:/mnt/oca/shopinvader
-
-command: >
-  odoo
-  --addons-path=/mnt/extra-addons,/mnt/oca/rest-framework,/mnt/oca/shopinvader,...
-```
-
-### 4. Custom module chỉ extend, không build từ đầu
-Thay vì viết JWT + HTTP controllers, chỉ cần:
-- Extend ShopInvader models với fashion-specific fields
-- Thêm endpoints đặc thù của FashionOS lên trên OCA base
 
 ---
 

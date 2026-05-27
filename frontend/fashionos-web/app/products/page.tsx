@@ -1,84 +1,211 @@
 import type { Metadata } from 'next'
-import { getProducts } from '@/lib/api'
+import Link from 'next/link'
+import { getProducts, type SortBy } from '@/lib/api'
 import type { Product } from '@/lib/api'
 import ProductCard from '@/components/ProductCard'
+import { ProductGridSkeleton } from '@/components/ui/Skeleton'
+import { Suspense } from 'react'
+import ProductFilters from './ProductFilters'
 
 export const metadata: Metadata = {
-  title: 'Sản phẩm',
-  description: 'Khám phá bộ sưu tập thời trang từ FashionOS',
+  title: 'Sản phẩm — FashionOS',
+  description: 'Khám phá bộ sưu tập thời trang thể thao từ FashionOS',
 }
 
-export default async function ProductsPage() {
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
+interface PageProps {
+  searchParams: Promise<{
+    page?: string
+    search?: string
+    sort_by?: string
+    min_price?: string
+    max_price?: string
+    category_id?: string
+  }>
+}
+
+export default async function ProductsPage({ searchParams }: PageProps) {
+  const sp = await searchParams
+  const page = Math.max(1, Number(sp.page ?? 1))
+  const search = sp.search ?? ''
+  const sortBy = (sp.sort_by ?? '') as SortBy | ''
+  const minPrice = sp.min_price ? Number(sp.min_price) : undefined
+  const maxPrice = sp.max_price ? Number(sp.max_price) : undefined
+  const categoryId = sp.category_id ? Number(sp.category_id) : undefined
+
   let products: Product[] = []
   let total = 0
-  let error: string | null = null
+  let totalPages = 1
+  let fetchError: string | null = null
 
   try {
-    const res = await getProducts({ limit: 20 })
+    const res = await getProducts({
+      limit: 20,
+      page,
+      search: search || undefined,
+      sort_by: sortBy || undefined,
+      min_price: minPrice,
+      max_price: maxPrice,
+      category_id: categoryId,
+    })
     products = res.data
-    total = res.pagination.total
+    total = res.meta.total
+    totalPages = res.meta.total_pages ?? Math.ceil(total / 20)
   } catch (err) {
-    error = err instanceof Error ? err.message : 'Không thể kết nối tới Odoo API'
+    fetchError = err instanceof Error ? err.message : 'Không thể kết nối tới Odoo API'
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="section-wrap py-10">
 
       {/* Page header */}
-      <div className="mb-10 border-b border-fashionos-border pb-6">
-        <p className="text-xs tracking-widest uppercase text-fashionos-muted mb-2">
-          FashionOS — Headless Odoo v19
-        </p>
-        <h1 className="text-3xl font-semibold tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
-          Bộ sưu tập
-        </h1>
-        {!error && (
-          <p className="text-sm text-fashionos-muted mt-2">{total} sản phẩm</p>
-        )}
+      <div className="mb-8 pb-6 border-b border-fashionos-border">
+        <p className="eyebrow mb-2">FashionOS</p>
+        <div className="flex items-end justify-between gap-4">
+          <h1
+            className="text-display font-bold"
+            style={{ fontFamily: 'var(--font-display)' }}
+          >
+            Bộ sưu tập
+          </h1>
+          {!fetchError && (
+            <p className="text-sm text-fashionos-muted pb-1">{total} sản phẩm</p>
+          )}
+        </div>
       </div>
 
       {/* Error state */}
-      {error && (
-        <div className="rounded border border-red-200 bg-red-50 p-6 mb-8">
-          <p className="text-sm font-medium text-red-800 mb-1">Không thể kết nối Odoo API</p>
-          <p className="text-xs text-red-600 font-mono">{error}</p>
-          <div className="mt-4 text-xs text-red-700 space-y-1">
-            <p>→ Chạy: <code className="bg-red-100 px-1">docker compose up</code></p>
-            <p>→ Cài module: <code className="bg-red-100 px-1">fashionos_base</code></p>
-            <p>→ Kiểm tra: <code className="bg-red-100 px-1">http://localhost:8069/fashionos/api/v1/health</code></p>
+      {fetchError && (
+        <div className="border border-fashionos-danger/30 bg-fashionos-danger/5 p-6 mb-8">
+          <p className="text-sm font-semibold text-fashionos-danger mb-1">
+            Không thể kết nối Odoo API
+          </p>
+          <p className="text-xs text-fashionos-muted font-mono">{fetchError}</p>
+          <div className="mt-4 text-xs text-fashionos-muted space-y-1">
+            <p>→ Chạy: <code className="bg-fashionos-surface px-1 py-0.5">docker compose up</code></p>
+            <p>→ Kiểm tra: <code className="bg-fashionos-surface px-1 py-0.5">http://localhost:8069/fashionos/api/v1/health</code></p>
           </div>
         </div>
       )}
 
-      {/* Empty state */}
-      {!error && products.length === 0 && (
-        <div className="text-center py-24 text-fashionos-muted">
-          <p className="text-4xl mb-4">🏷️</p>
-          <p className="text-sm tracking-widest uppercase">Chưa có sản phẩm nào</p>
-          <p className="text-xs mt-2">Thêm sản phẩm trong Odoo backend → Products</p>
-        </div>
-      )}
+      {/* Main layout: filters + grid */}
+      <div className="flex gap-10">
 
-      {/* Product grid */}
-      {products.length > 0 && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-          {products.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      )}
+        {/* Filter sidebar (desktop) + mobile trigger */}
+        <Suspense fallback={null}>
+          <ProductFilters
+            total={total}
+            initialSearch={search}
+            initialSort={sortBy}
+            initialMinPrice={sp.min_price ?? ''}
+            initialMaxPrice={sp.max_price ?? ''}
+          />
+        </Suspense>
 
-      {/* API info bar — helpful during dev */}
-      <div className="mt-16 rounded bg-fashionos-surface border border-fashionos-border p-4 text-xs text-fashionos-muted font-mono">
-        <p className="font-semibold text-fashionos-black mb-2">API Source</p>
-        <p>GET {process.env.NEXT_PUBLIC_ODOO_URL}/fashionos/api/v1/products</p>
-        <p className="mt-1">
-          Status: {error
-            ? <span className="text-red-500">⚠ Offline</span>
-            : <span className="text-green-600">✓ {total} products fetched</span>
-          }
-        </p>
+        {/* Products area */}
+        <div className="flex-1 min-w-0">
+
+          {/* Result count — desktop only (mobile shows in filter bar) */}
+          {!fetchError && (
+            <div className="hidden lg:flex items-center justify-between mb-5">
+              <p className="text-sm text-fashionos-muted">
+                {search ? `Kết quả cho "${search}" — ` : ''}{total} sản phẩm
+              </p>
+            </div>
+          )}
+
+          {/* Empty state */}
+          {!fetchError && products.length === 0 && (
+            <div className="text-center py-24 text-fashionos-muted">
+              <div className="text-5xl mb-5 opacity-30">🏷️</div>
+              <p className="text-sm tracking-widest uppercase mb-2">Không tìm thấy sản phẩm</p>
+              <p className="text-xs mb-6">Thử điều chỉnh bộ lọc hoặc từ khoá tìm kiếm</p>
+              <Link href="/products" className="btn-outline">
+                Xóa bộ lọc
+              </Link>
+            </div>
+          )}
+
+          {/* Grid */}
+          {products.length > 0 && (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-5">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-10 flex items-center justify-center gap-2">
+              {page > 1 && (
+                <PaginationLink
+                  href={buildHref(sp, page - 1)}
+                  label="← Trước"
+                />
+              )}
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter((p) => Math.abs(p - page) <= 2)
+                .map((p) => (
+                  <PaginationLink
+                    key={p}
+                    href={buildHref(sp, p)}
+                    label={String(p)}
+                    active={p === page}
+                  />
+                ))}
+              {page < totalPages && (
+                <PaginationLink
+                  href={buildHref(sp, page + 1)}
+                  label="Tiếp →"
+                />
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
+  )
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function buildHref(
+  sp: Record<string, string | undefined>,
+  targetPage: number,
+): string {
+  const params = new URLSearchParams()
+  if (sp.search) params.set('search', sp.search)
+  if (sp.sort_by) params.set('sort_by', sp.sort_by)
+  if (sp.min_price) params.set('min_price', sp.min_price)
+  if (sp.max_price) params.set('max_price', sp.max_price)
+  if (sp.category_id) params.set('category_id', sp.category_id)
+  if (targetPage > 1) params.set('page', String(targetPage))
+  const qs = params.toString()
+  return `/products${qs ? `?${qs}` : ''}`
+}
+
+function PaginationLink({
+  href,
+  label,
+  active = false,
+}: {
+  href: string
+  label: string
+  active?: boolean
+}) {
+  return (
+    <Link
+      href={href}
+      className={[
+        'px-3 py-1.5 text-sm border transition-colors',
+        active
+          ? 'bg-fashionos-black text-fashionos-white border-fashionos-black'
+          : 'border-fashionos-border hover:bg-fashionos-black hover:text-fashionos-white hover:border-fashionos-black',
+      ].join(' ')}
+    >
+      {label}
+    </Link>
   )
 }

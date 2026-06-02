@@ -167,9 +167,44 @@ class CheckoutController(http.Controller):
             write_vals['x_alt_receiver_name'] = alt_receiver_name
             write_vals['x_alt_receiver_phone'] = alt_receiver_phone
 
-        referral_code = body.get('referral_code')
-        if referral_code:
-            write_vals['x_referral_code'] = str(referral_code).strip()
+        referral_code_str = str(body.get('referral_code') or '').strip().upper()
+        if referral_code_str:
+            write_vals['x_referral_code'] = referral_code_str
+
+        # ── 6b. Validate & apply referral discount (before confirm) ───
+        referral_rec = None
+        referral_discount_applied = 0.0
+        if referral_code_str:
+            rc = su['referral.code'].search(
+                [('code', '=', referral_code_str), ('is_active', '=', True)],
+                limit=1,
+            )
+            if rc and rc.partner_id.id != partner.id:
+                first_order = su['sale.order'].search_count([
+                    ('partner_id', '=', partner.id),
+                    ('x_is_cart', '=', False),
+                    ('state', 'in', ['sale', 'done']),
+                ]) == 0
+                if first_order:
+                    try:
+                        discount_tmpl = su.ref('fashion_store_loyalty.product_referral_discount')
+                        discount_product = discount_tmpl.product_variant_ids[:1]
+                        if discount_product:
+                            _REFEREE_DISCOUNT = 50_000.0
+                            su['sale.order.line'].create({
+                                'order_id': cart.id,
+                                'product_id': discount_product.id,
+                                'product_uom_qty': 1,
+                                'price_unit': -_REFEREE_DISCOUNT,
+                                'name': f'Ưu đãi giới thiệu - {referral_code_str}',
+                            })
+                            referral_rec = rc
+                            referral_discount_applied = _REFEREE_DISCOUNT
+                    except Exception:
+                        _logger.warning(
+                            'Could not apply referral discount for code %s',
+                            referral_code_str, exc_info=True,
+                        )
 
         # ── 7. Write fields & confirm ──────────────────────────────────
         try:
@@ -210,6 +245,25 @@ class CheckoutController(http.Controller):
 
             # 3. Award CoolCash earned on this order (tier-based rate)
             LoyaltyTxn.award_order_coolcash(su_partner, cart)
+
+            # 4. Award referrer CoolCash if a referral code was applied
+            if referral_rec:
+                _REFERRER_REWARD = 100_000.0
+                referrer_partner = su['res.partner'].browse(referral_rec.partner_id.id)
+                LoyaltyTxn._create_txn(
+                    partner=referrer_partner,
+                    txn_type='earn',
+                    amount=_REFERRER_REWARD,
+                    description=f'Thưởng giới thiệu — {partner.name} đặt {cart.name}',
+                    order=cart,
+                )
+                su['referral.reward.log'].create({
+                    'referral_code_id': referral_rec.id,
+                    'referee_partner_id': partner.id,
+                    'order_id': cart.id,
+                    'referee_discount': referral_discount_applied,
+                    'referrer_reward': _REFERRER_REWARD,
+                })
         except Exception:  # noqa: BLE001
             _logger.exception(
                 'Loyalty post-processing failed for partner %s order %s '

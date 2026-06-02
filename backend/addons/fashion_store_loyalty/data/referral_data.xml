@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Service product used as a discount line on orders when a referral code is applied.
+        Price is always set to -50 000 VND in code; the list_price here is just a sentinel.
+    -->
+    <record id="product_referral_discount" model="product.template">
+        <field name="name">Ưu đãi giới thiệu</field>
+        <field name="detailed_type">service</field>
+        <field name="list_price">0</field>
+        <field name="sale_ok" eval="True"/>
+        <field name="purchase_ok" eval="False"/>
+        <field name="invoice_policy">order</field>
+        <field name="description_sale">Giảm giá khi sử dụng mã giới thiệu của bạn bè</field>
+    </record>
+</odoo>

@@ -14,6 +14,7 @@ from ..utils.response import error, ok, paginated
 _logger = logging.getLogger(__name__)
 
 _BASE = '/fashionos/api/v1/account/loyalty'
+_REFERRAL_BASE = '/fashionos/api/v1/account/referral'
 
 # Tier thresholds for FE display (must match res_partner.py values)
 _TIER_THRESHOLDS = {
@@ -35,7 +36,7 @@ class LoyaltyController(http.Controller):
     # ------------------------------------------------------------------
 
     @http.route(
-        [_BASE, f'{_BASE}/history'],
+        [_BASE, f'{_BASE}/history', _REFERRAL_BASE],
         type='http', auth='none', methods=['OPTIONS'], csrf=False,
     )
     def options(self, **_kw):
@@ -61,6 +62,31 @@ class LoyaltyController(http.Controller):
 
         su_partner = request.env(user=1)['res.partner'].browse(partner.id)
         return ok(_loyalty_status_dict(su_partner))
+
+    # ------------------------------------------------------------------
+    # GET /account/loyalty/history?page=1&limit=20
+    # ------------------------------------------------------------------
+
+    # ------------------------------------------------------------------
+    # GET /account/referral
+    # ------------------------------------------------------------------
+
+    @http.route(_REFERRAL_BASE, type='http', auth='none', methods=['GET'], csrf=False)
+    def get_referral(self, **_kw):
+        partner = get_partner_from_request()
+        if not partner:
+            return error('Unauthorized', 401, 'UNAUTHORIZED')
+
+        su = request.env(user=1)
+        rc = su['referral.code'].get_or_create(su['res.partner'].browse(partner.id))
+        total_referred, total_earned = rc.get_stats()
+
+        return ok({
+            'code': rc.code,
+            'is_active': rc.is_active,
+            'total_referred': total_referred,
+            'total_earned_coolcash': int(total_earned),
+        })
 
     # ------------------------------------------------------------------
     # GET /account/loyalty/history?page=1&limit=20

@@ -98,6 +98,12 @@ class AuthController(http.Controller):
             _logger.exception('register failed')
             return error(str(exc), 400, 'REGISTRATION_FAILED')
 
+        # Auto-create referral code for the new customer (best-effort)
+        try:
+            su['referral.code'].get_or_create(partner)
+        except Exception:
+            _logger.warning('Could not create referral code for partner %s', partner.id, exc_info=True)
+
         token = encode_jwt(env, partner.id)
         return ok({'token': token, 'partner_id': partner.id, 'name': name, 'email': email}, 201)
 

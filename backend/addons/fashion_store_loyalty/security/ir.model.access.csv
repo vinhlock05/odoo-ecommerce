@@ -1,3 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_loyalty_transaction_user,loyalty.transaction user,model_loyalty_transaction,base.group_user,1,0,0,0
 access_loyalty_transaction_manager,loyalty.transaction manager,model_loyalty_transaction,base.group_system,1,1,1,1
+access_referral_code_user,referral.code user,model_referral_code,base.group_user,1,0,0,0
+access_referral_code_manager,referral.code manager,model_referral_code,base.group_system,1,1,1,1
+access_referral_reward_log_user,referral.reward.log user,model_referral_reward_log,base.group_user,1,0,0,0
+access_referral_reward_log_manager,referral.reward.log manager,model_referral_reward_log,base.group_system,1,1,1,1

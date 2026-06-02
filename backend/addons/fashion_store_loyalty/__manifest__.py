@@ -38,6 +38,7 @@ CoolCash unit = 1 VND.
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/referral_data.xml',
         'data/cron.xml',
     ],
     'installable': True,

@@ -638,6 +638,27 @@ export async function getLoyaltyHistory(
   return clientFetch<LoyaltyHistoryResponse>(`/account/loyalty/history${query}`, { method: 'GET' }, token)
 }
 
+// ---------------------------------------------------------------------------
+// Client-side Referral API
+// ---------------------------------------------------------------------------
+
+export interface ReferralStatus {
+  code: string
+  is_active: boolean
+  total_referred: number
+  total_earned_coolcash: number
+}
+
+export interface ReferralStatusResponse {
+  success: boolean
+  data: ReferralStatus
+  error?: { code: string; message: string }
+}
+
+export async function getReferral(token: string): Promise<ReferralStatusResponse> {
+  return clientFetch<ReferralStatusResponse>('/account/referral', { method: 'GET' }, token)
+}
+
 export async function applyCoolCash(
   token: string,
   amount: number,

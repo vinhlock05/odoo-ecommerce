@@ -18,6 +18,8 @@
         'fashion_store_product',
         'fashion_store_sale',
         'fashion_store_loyalty',
+        'payment_vnpay',
+        'delivery_ghn',
     ],
     'data': [],
     'installable': True,

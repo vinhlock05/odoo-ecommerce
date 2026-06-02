@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- GHN defaults — override in Settings > Technical > Parameters -->
+    <record id="ghn_token" model="ir.config_parameter">
+        <field name="key">fashionos.ghn.token</field>
+        <field name="value">GHN_API_TOKEN_HERE</field>
+    </record>
+    <record id="ghn_shop_id" model="ir.config_parameter">
+        <field name="key">fashionos.ghn.shop_id</field>
+        <field name="value">0</field>
+    </record>
+    <record id="ghn_sandbox" model="ir.config_parameter">
+        <field name="key">fashionos.ghn.sandbox</field>
+        <field name="value">1</field>
+    </record>
+</odoo>

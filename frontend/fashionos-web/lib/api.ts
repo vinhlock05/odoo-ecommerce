@@ -639,6 +639,54 @@ export async function getLoyaltyHistory(
 }
 
 // ---------------------------------------------------------------------------
+// Client-side Payment API
+// ---------------------------------------------------------------------------
+
+export interface VnpayCreateResponse {
+  success: boolean
+  data?: {
+    payment_url: string
+    transaction_id: number
+    txn_ref: string
+    order_id: number
+    order_name: string
+    amount: number
+  }
+  error?: { code: string; message: string }
+}
+
+export interface VnpayReturnResponse {
+  success: boolean
+  data: {
+    success: boolean
+    txn_ref: string
+    order_id: number | null
+    order_name?: string
+    amount?: number
+    message: string
+  }
+  error?: { code: string; message: string }
+}
+
+export async function createVnpayPayment(
+  token: string,
+  orderId: number,
+): Promise<VnpayCreateResponse> {
+  return clientFetch<VnpayCreateResponse>(
+    '/payment/vnpay/create',
+    { method: 'POST', body: JSON.stringify({ order_id: orderId }) },
+    token,
+  )
+}
+
+export async function verifyVnpayReturn(
+  params: Record<string, string>,
+): Promise<VnpayReturnResponse> {
+  const qs = new URLSearchParams(params).toString()
+  return clientFetch<VnpayReturnResponse>(`/payment/vnpay/return?${qs}`, { method: 'GET' })
+}
+
+// ---------------------------------------------------------------------------
 // Client-side Referral API
 // ---------------------------------------------------------------------------
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- VNPay sandbox defaults — override in Settings > Technical > Parameters -->
+    <record id="vnpay_tmn_code" model="ir.config_parameter">
+        <field name="key">fashionos.vnpay.tmn_code</field>
+        <field name="value">SANDBOX_TMN_CODE</field>
+    </record>
+    <record id="vnpay_hash_secret" model="ir.config_parameter">
+        <field name="key">fashionos.vnpay.hash_secret</field>
+        <field name="value">SANDBOX_HASH_SECRET</field>
+    </record>
+    <record id="vnpay_return_url" model="ir.config_parameter">
+        <field name="key">fashionos.vnpay.return_url</field>
+        <field name="value">http://localhost:3000/payment/vnpay/result</field>
+    </record>
+    <record id="vnpay_ipn_url" model="ir.config_parameter">
+        <field name="key">fashionos.vnpay.ipn_url</field>
+        <field name="value">http://localhost:8069/fashionos/api/v1/payment/vnpay/ipn</field>
+    </record>
+    <record id="vnpay_sandbox" model="ir.config_parameter">
+        <field name="key">fashionos.vnpay.sandbox</field>
+        <field name="value">1</field>
+    </record>
+</odoo>

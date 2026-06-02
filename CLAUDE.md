@@ -374,10 +374,10 @@ npm run dev   # http://localhost:3000
 | S1 | Master Data | ✅ Done | Sizes, colors, categories trong `fashion_store_product` |
 | S2 | Foundation Modules | ✅ Done | `fashionos_base`, `fashion_store_config`, `fashion_store_product`, `fashion_store_sale` |
 | S3 | API Layer | ✅ Done | `fashion_store_api` với custom JWT — đúng approach cho Odoo 19 (OCA chưa có branch 19.0) |
-| S4 | CoolCash + CoolClub | ❌ Not started | Loyalty system |
+| S4 | CoolCash + CoolClub | ✅ Done | CoolCash earn/redeem, tiers, referral (50k discount + 100k reward), all API endpoints |
 | S5 | Payments + Delivery | ❌ Not started | VNPay/MoMo/ZaloPay + GHN/GHTK |
 | S6 | Killer Features | ❌ Not started | 5 KF modules |
-| S7 | Frontend Next.js | ❌ Not started | Full storefront |
+| S7 | Frontend Next.js | ✅ Done | Full storefront, API client wired to Odoo via Next.js proxy |
 | S8 | QA + Docs | ❌ Not started | Test coverage, final docs |
 
 ---

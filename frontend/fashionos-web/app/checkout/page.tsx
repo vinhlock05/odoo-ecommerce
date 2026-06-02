@@ -8,6 +8,7 @@ import {
   getAddresses,
   createAddress,
   checkoutCart,
+  createVnpayPayment,
   formatPrice,
   type Cart,
   type Address,
@@ -423,6 +424,28 @@ export default function CheckoutPage() {
 // ---------------------------------------------------------------------------
 
 function SuccessScreen({ order }: { order: CheckoutOrder }) {
+  const [payingVnpay, setPayingVnpay] = useState(false)
+  const [vnpayErr, setVnpayErr] = useState('')
+
+  async function handleVnpayPayment() {
+    const token = getToken()
+    if (!token) return
+    setPayingVnpay(true)
+    setVnpayErr('')
+    try {
+      const res = await createVnpayPayment(token, order.order_id)
+      if (res.success && res.data?.payment_url) {
+        window.location.href = res.data.payment_url
+      } else {
+        setVnpayErr(res.error?.message ?? 'Không thể tạo liên kết thanh toán')
+      }
+    } catch {
+      setVnpayErr('Lỗi kết nối')
+    } finally {
+      setPayingVnpay(false)
+    }
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center space-y-6">
@@ -471,6 +494,28 @@ function SuccessScreen({ order }: { order: CheckoutOrder }) {
             <span className="text-fashionos-muted">Trạng thái</span>
             <span className="text-green-700 font-medium">Đã xác nhận</span>
           </div>
+        </div>
+
+        {/* VNPay payment option */}
+        <div className="border border-fashionos-border p-4 text-left rounded-sm">
+          <p className="text-xs text-fashionos-muted mb-3">
+            Thanh toán ngay để được xử lý ưu tiên:
+          </p>
+          <button
+            onClick={handleVnpayPayment}
+            disabled={payingVnpay}
+            className="w-full bg-[#005BA6] text-white py-3 text-sm font-medium hover:bg-[#004a8c] transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+          >
+            {payingVnpay ? (
+              <span className="animate-pulse">Đang tạo liên kết...</span>
+            ) : (
+              <>
+                <span className="font-bold text-[#FFD700]">VNPay</span>
+                <span>— Thanh toán online</span>
+              </>
+            )}
+          </button>
+          {vnpayErr && <p className="text-red-500 text-xs mt-2">{vnpayErr}</p>}
         </div>
 
         <p className="text-xs text-fashionos-muted">

@@ -154,11 +154,17 @@ Tất cả custom modules nằm tại `backend/addons/`, được mount vào con
 
 | Module | Status | Depends | Mô tả |
 |--------|--------|---------|-------|
-| `fashionos_base` | ✅ Active | `product`, `sale` | Base module, health check endpoint, tiền đề cho mọi module khác |
-| `fashion_store_config` | ✅ Active | `base`, `mail` | Feature flags (FF-01..FF-20), business config, lưu trong `ir.config_parameter` |
-| `fashion_store_product` | ✅ Active | `product`, `fashion_store_config` | Fashion product fields, master data (sizes, colors, categories) |
-| `fashion_store_sale` | ✅ Active | `sale`, `fashion_store_config` | Fashion sale order fields: CoolCash, combo, routing, returns |
-| `fashion_store_api` | ⚠️ WRONG | `fashionos_base`, `fashion_store_config`, `fashion_store_product`, `fashion_store_sale` | **CUSTOM JWT/HTTP controllers — SAI APPROACH. Cần redo với OCA fastapi** |
+| `fashionos_base` | ✅ Active | `product`, `sale` | Base module, health check endpoint |
+| `fashion_store_config` | ✅ Active | `base`, `mail` | Feature flags, business config (ir.config_parameter) |
+| `fashion_store_product` | ✅ Active | `product`, `fashion_store_config` | Fashion product fields, combo, slug, sizes |
+| `fashion_store_sale` | ✅ Active | `sale`, `fashion_store_config` | Fashion order fields: CoolCash, combo, routing, returns, payment status |
+| `fashion_store_loyalty` | ✅ Active | `fashionos_base`, `fashion_store_sale` | CoolCash earn/redeem, tier system, referral codes + reward log |
+| `payment_vnpay` | ✅ Active | `fashionos_base`, `fashion_store_sale` | VNPay HMAC-SHA512 payment gateway, fashion.payment.transaction |
+| `delivery_ghn` | ✅ Active | `fashionos_base`, `payment_vnpay` | GHN delivery orders + tracking webhook |
+| `fashion_store_combo` | ✅ Active | `fashion_store_product`, `fashion_store_sale` | KF-3: Expand combo lines on order confirm |
+| `fashion_store_return` | ✅ Active | `fashion_store_sale`, `fashion_store_loyalty` | KF-1: Returns portal with CoolCash refund |
+| `fashion_store_routing` | ✅ Active | `fashion_store_sale`, `stock` | KF-2: Province-based warehouse routing |
+| `fashion_store_api` | ✅ Active | all above | REST API: auth, catalog, cart, checkout, account, loyalty, payment, returns, dashboard |
 
 ### Module version strings
 
@@ -375,10 +381,10 @@ npm run dev   # http://localhost:3000
 | S2 | Foundation Modules | ✅ Done | `fashionos_base`, `fashion_store_config`, `fashion_store_product`, `fashion_store_sale` |
 | S3 | API Layer | ✅ Done | `fashion_store_api` với custom JWT — đúng approach cho Odoo 19 (OCA chưa có branch 19.0) |
 | S4 | CoolCash + CoolClub | ✅ Done | CoolCash earn/redeem, tiers, referral (50k discount + 100k reward), all API endpoints |
-| S5 | Payments + Delivery | ❌ Not started | VNPay/MoMo/ZaloPay + GHN/GHTK |
-| S6 | Killer Features | ❌ Not started | 5 KF modules |
+| S5 | Payments + Delivery | ✅ Done | VNPay (HMAC-SHA512), GHN delivery webhook + shipment creation |
+| S6 | Killer Features | ✅ Done | Returns portal, Smart Routing, Combo Engine, AI Dashboard (Claude), AI Catalog recommendations |
 | S7 | Frontend Next.js | ✅ Done | Full storefront, API client wired to Odoo via Next.js proxy |
-| S8 | QA + Docs | ❌ Not started | Test coverage, final docs |
+| S8 | QA + Docs | ✅ Done | Unit tests (coolcash, referral, combo, routing), security checklist, test docs |
 
 ---
 

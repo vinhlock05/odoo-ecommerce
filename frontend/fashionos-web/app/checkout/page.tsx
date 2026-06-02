@@ -129,6 +129,7 @@ export default function CheckoutPage() {
       if (res.success) {
         setConfirmedOrder(res.data)
         setStep('success')
+        window.dispatchEvent(new CustomEvent('fashionos:cart', { detail: { count: 0 } }))
       } else {
         setErrorMsg(res.error?.message ?? 'Không thể đặt hàng. Vui lòng thử lại.')
       }

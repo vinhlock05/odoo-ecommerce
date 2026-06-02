@@ -51,7 +51,30 @@ class CartController(http.Controller):
         partner = get_partner_from_request()
         if not partner:
             return error('Unauthorized', 401, 'UNAUTHORIZED')
-        cart = _get_or_create_cart(request.env, partner)
+        su = request.env(user=1)
+        cart = su['sale.order'].search(
+            [('partner_id', '=', partner.id), ('x_is_cart', '=', True), ('state', '=', 'draft')],
+            limit=1,
+        )
+        if not cart:
+            ICP = su['ir.config_parameter']
+            threshold = float(ICP.get_param('fashionos.ff.free_shipping_threshold', str(_FREE_SHIPPING_THRESHOLD)) or _FREE_SHIPPING_THRESHOLD)
+            return ok({
+                'id': None,
+                'partner_id': partner.id,
+                'currency': 'VND',
+                'items': [],
+                'item_count': 0,
+                'subtotal': 0.0,
+                'subtotal_after_coolcash': 0.0,
+                'coolcash_applied': {'amount': 0, 'is_applied': False},
+                'free_shipping_progress': {
+                    'threshold': threshold,
+                    'subtotal': 0.0,
+                    'remaining': threshold,
+                    'unlocked': False,
+                },
+            })
         return ok(_cart_dict(cart))
 
     # ------------------------------------------------------------------

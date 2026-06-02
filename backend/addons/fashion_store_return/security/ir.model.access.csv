@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fashion_return_request_user,fashion.return.request user,model_fashion_return_request,base.group_user,1,0,1,0
+access_fashion_return_request_manager,fashion.return.request manager,model_fashion_return_request,base.group_system,1,1,1,1
+access_fashion_return_line_user,fashion.return.line user,model_fashion_return_line,base.group_user,1,0,1,0
+access_fashion_return_line_manager,fashion.return.line manager,model_fashion_return_line,base.group_system,1,1,1,1

@@ -6,3 +6,5 @@ from . import checkout
 from . import loyalty
 from . import orders
 from . import payment
+from . import returns
+from . import dashboard

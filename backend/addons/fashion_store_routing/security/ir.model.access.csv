@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fashion_warehouse_rule_user,fashion.warehouse.rule user,model_fashion_warehouse_rule,base.group_user,1,0,0,0
+access_fashion_warehouse_rule_manager,fashion.warehouse.rule manager,model_fashion_warehouse_rule,base.group_system,1,1,1,1

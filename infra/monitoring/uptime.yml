@@ -1,0 +1,52 @@
+# FashionOS — Uptime monitoring configuration
+#
+# Compatible with BetterStack (betterstack.com) and UptimeRobot (uptimerobot.com)
+# Replace yourdomain.com with actual domain before importing.
+#
+# BetterStack import:  Dashboard → Monitors → Import → paste this file
+# UptimeRobot:         use the URLs and settings below to create monitors manually
+
+monitors:
+
+  - name: "FashionOS Frontend"
+    url: "https://yourdomain.com/api/health"
+    type: https
+    check_frequency: 60          # seconds between checks
+    expected_status: 200
+    expected_keyword: '"status":"ok"'
+    alert_after: 2               # alert after 2 consecutive failures
+    regions: [us-east, eu-west, ap-southeast]
+    notify:
+      - email: ops@yourdomain.com
+
+  - name: "FashionOS API (Odoo)"
+    url: "https://yourdomain.com/fashionos/api/v1/health"
+    type: https
+    check_frequency: 60
+    expected_status: 200
+    expected_keyword: '"status":"ok"'
+    alert_after: 2
+    regions: [us-east, eu-west, ap-southeast]
+    notify:
+      - email: ops@yourdomain.com
+
+  - name: "FashionOS SSL Certificate"
+    url: "https://yourdomain.com"
+    type: ssl_expiry
+    alert_days_before_expiry: 14
+    notify:
+      - email: ops@yourdomain.com
+
+# ── Incident notification channels ─────────────────────────────────────────
+# Configure at least one of these in your uptime service dashboard:
+#
+#   Email:    ops@yourdomain.com
+#   Slack:    create an incoming webhook, add to notification settings
+#   Telegram: optional, good for mobile alerts
+#
+# Recommended: set up on-call rotation if > 1 person maintains this service.
+
+# ── SLA targets ────────────────────────────────────────────────────────────
+sla:
+  availability: 99.5%     # ~3.6 hours downtime/month acceptable
+  response_time_p95: 2000 # ms — alert if exceeded

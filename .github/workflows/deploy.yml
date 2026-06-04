@@ -75,3 +75,23 @@ jobs:
 
             echo "── Deploy complete ──"
             docker compose ps
+
+      # ── Post-deploy health verification ──────────────────────────────────
+      - name: Verify health endpoints
+        env:
+          BASE_URL: https://${{ secrets.SERVER_HOST }}
+        run: |
+          check() {
+            local url="$1" label="$2"
+            local status
+            status=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 "$url" || echo "000")
+            if [ "$status" = "200" ]; then
+              echo "✅ $label — HTTP $status"
+            else
+              echo "❌ $label — HTTP $status"
+              exit 1
+            fi
+          }
+          sleep 10   # give nginx + frontend time to stabilise
+          check "$BASE_URL/api/health"                  "Frontend health"
+          check "$BASE_URL/fashionos/api/v1/health"     "Odoo API health"

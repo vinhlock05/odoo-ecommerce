@@ -61,11 +61,25 @@ class FashionOSProductAPI(http.Controller):
     @http.route('/fashionos/api/v1/health', type='http',
                 auth='none', methods=['GET'], csrf=False)
     def health(self, **kwargs):
+        import time
+        checks = {}
+        overall = 'ok'
+
+        # DB connectivity check — lightweight query
+        try:
+            request.env.cr.execute('SELECT 1')
+            checks['db'] = 'ok'
+        except Exception as exc:
+            checks['db'] = f'error: {exc}'
+            overall = 'degraded'
+
         return json_response({
-            'status': 'ok',
+            'status': overall,
             'service': 'FashionOS API',
             'version': '1.0.0',
-        })
+            'timestamp': time.time(),
+            'checks': checks,
+        }, status=200 if overall == 'ok' else 503)
 
     # ------------------------------------------------------------------
     # GET /fashionos/api/v1/products

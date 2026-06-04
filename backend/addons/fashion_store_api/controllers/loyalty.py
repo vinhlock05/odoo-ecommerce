@@ -111,8 +111,6 @@ class LoyaltyController(http.Controller):
         total = env['loyalty.transaction'].search_count(domain)
         txns = env['loyalty.transaction'].search(domain, limit=limit_n, offset=offset)
 
-        total_pages = (total + limit_n - 1) // limit_n if total else 1
-
         return paginated(
             items=[_txn_dict(t) for t in txns],
             total=total,

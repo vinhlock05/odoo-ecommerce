@@ -6,6 +6,7 @@ from odoo.exceptions import AccessDenied, ValidationError
 from odoo.http import request
 
 from ..utils.jwt_auth import JWTError, decode_jwt, encode_jwt, get_partner_from_request
+from ..utils.rate_limit import rate_limit
 from ..utils.response import error, ok, parse_body
 
 _logger = logging.getLogger(__name__)
@@ -40,6 +41,7 @@ class AuthController(http.Controller):
     # ------------------------------------------------------------------
 
     @http.route(f'{_BASE}/register', type='http', auth='none', methods=['POST'], csrf=False)
+    @rate_limit(max_calls=10, window_seconds=60)
     def register(self, **_kw):
         try:
             body = parse_body()
@@ -112,6 +114,7 @@ class AuthController(http.Controller):
     # ------------------------------------------------------------------
 
     @http.route(f'{_BASE}/login', type='http', auth='none', methods=['POST'], csrf=False)
+    @rate_limit(max_calls=10, window_seconds=60)
     def login(self, **_kw):
         try:
             body = parse_body()

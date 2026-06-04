@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+
+    <record id="mail_template_order_confirmation" model="mail.template">
+      <field name="name">FashionOS: Xác nhận đơn hàng</field>
+      <field name="model_id" ref="sale.model_sale_order"/>
+      <field name="email_to">${object.partner_id.email or '' | safe}</field>
+      <field name="subject">✅ Đơn hàng ${object.name} đã được xác nhận — FashionOS</field>
+      <field name="auto_delete" eval="True"/>
+      <field name="body_html" type="html">
+<![CDATA[
+<div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a;">
+
+  <!-- Header -->
+  <div style="background:#1a1a1a;padding:28px 32px;">
+    <p style="margin:0;font-size:22px;font-weight:700;color:#ffffff;letter-spacing:0.08em;">FASHIONOS</p>
+  </div>
+
+  <!-- Body -->
+  <div style="padding:32px;">
+    <p style="font-size:15px;margin:0 0 8px;">
+      Xin chào
+      % if object.x_gender_title == 'anh':
+      Anh
+      % elif object.x_gender_title == 'chi':
+      Chị
+      % endif
+      <strong>${object.partner_id.name}</strong>,
+    </p>
+    <p style="font-size:14px;color:#555;margin:0 0 24px;">
+      Đơn hàng <strong>${object.name}</strong> của bạn đã được xác nhận thành công.
+      Chúng tôi sẽ sớm liên hệ để xác nhận giao hàng.
+    </p>
+
+    <!-- Order lines -->
+    <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+      <thead>
+        <tr style="border-bottom:2px solid #1a1a1a;">
+          <th style="text-align:left;padding:8px 0;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;">Sản phẩm</th>
+          <th style="text-align:center;padding:8px 0;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;">SL</th>
+          <th style="text-align:right;padding:8px 0;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;">Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        % for line in object.order_line:
+        % if not line.display_type:
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:10px 0;font-size:13px;">
+            ${line.product_id.product_tmpl_id.name}
+            % if line.product_id.product_template_attribute_value_ids:
+            <span style="color:#888;font-size:12px;">
+              — ${', '.join(line.product_id.product_template_attribute_value_ids.mapped('product_attribute_value_id.name'))}
+            </span>
+            % endif
+          </td>
+          <td style="padding:10px 0;font-size:13px;text-align:center;">${int(line.product_uom_qty)}</td>
+          <td style="padding:10px 0;font-size:13px;text-align:right;">${'{:,.0f}'.format(line.price_subtotal)} đ</td>
+        </tr>
+        % endif
+        % endfor
+      </tbody>
+    </table>
+
+    <!-- Totals -->
+    <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+      <tr>
+        <td style="font-size:13px;color:#888;padding:4px 0;">Tạm tính</td>
+        <td style="font-size:13px;text-align:right;padding:4px 0;">${'{:,.0f}'.format(object.amount_untaxed)} đ</td>
+      </tr>
+      <tr>
+        <td style="font-size:13px;color:#888;padding:4px 0;">Thuế VAT</td>
+        <td style="font-size:13px;text-align:right;padding:4px 0;">${'{:,.0f}'.format(object.amount_tax)} đ</td>
+      </tr>
+      % if object.x_coolcash_amount_used and object.x_coolcash_amount_used > 0:
+      <tr>
+        <td style="font-size:13px;color:#16a34a;padding:4px 0;">CoolCash đã dùng</td>
+        <td style="font-size:13px;color:#16a34a;text-align:right;padding:4px 0;">−${'{:,.0f}'.format(object.x_coolcash_amount_used)} đ</td>
+      </tr>
+      % endif
+      <tr style="border-top:2px solid #1a1a1a;">
+        <td style="font-size:15px;font-weight:700;padding:10px 0 4px;">Tổng cộng</td>
+        <td style="font-size:15px;font-weight:700;text-align:right;padding:10px 0 4px;">${'{:,.0f}'.format(object.amount_total)} đ</td>
+      </tr>
+    </table>
+
+    <!-- CoolCash earned -->
+    % if object.x_coolcash_earned and object.x_coolcash_earned > 0:
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;padding:12px 16px;margin-bottom:24px;font-size:13px;color:#15803d;">
+      🎉 Bạn đã tích lũy <strong>${'{:,.0f}'.format(object.x_coolcash_earned)} CoolCash</strong> từ đơn hàng này.
+    </div>
+    % endif
+
+    <!-- Shipping address -->
+    % if object.partner_shipping_id:
+    <div style="border:1px solid #e5e5e5;padding:14px 16px;margin-bottom:24px;">
+      <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#888;">Địa chỉ giao hàng</p>
+      <p style="margin:0;font-size:13px;font-weight:600;">${object.partner_shipping_id.name}</p>
+      % if object.partner_shipping_id.phone:
+      <p style="margin:2px 0 0;font-size:12px;color:#555;">${object.partner_shipping_id.phone}</p>
+      % endif
+      <p style="margin:2px 0 0;font-size:12px;color:#555;">
+        ${', '.join(filter(None, [object.partner_shipping_id.street, object.partner_shipping_id.city]))}
+      </p>
+    </div>
+    % endif
+
+    <p style="font-size:13px;color:#555;margin:0;">
+      Nếu có câu hỏi, vui lòng liên hệ chúng tôi qua email này.<br/>
+      Cảm ơn bạn đã tin tưởng <strong>FashionOS</strong>!
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div style="background:#f5f5f5;padding:16px 32px;text-align:center;">
+    <p style="margin:0;font-size:11px;color:#aaa;letter-spacing:0.04em;">
+      © FashionOS — Email này được gửi tự động, vui lòng không reply.
+    </p>
+  </div>
+
+</div>
+]]>
+      </field>
+    </record>
+
+  </data>
+</odoo>

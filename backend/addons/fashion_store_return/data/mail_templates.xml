@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+
+    <record id="mail_template_return_received" model="mail.template">
+      <field name="name">FashionOS: Yêu cầu đổi trả đã tiếp nhận</field>
+      <field name="model_id" ref="fashion_store_return.model_fashion_return_request"/>
+      <field name="email_to">${object.partner_id.email or '' | safe}</field>
+      <field name="subject">🔄 Yêu cầu đổi trả ${object.name} đã được tiếp nhận — FashionOS</field>
+      <field name="auto_delete" eval="True"/>
+      <field name="body_html" type="html">
+<![CDATA[
+<div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a;">
+
+  <!-- Header -->
+  <div style="background:#1a1a1a;padding:28px 32px;">
+    <p style="margin:0;font-size:22px;font-weight:700;color:#ffffff;letter-spacing:0.08em;">FASHIONOS</p>
+  </div>
+
+  <!-- Body -->
+  <div style="padding:32px;">
+    <p style="font-size:15px;margin:0 0 8px;">
+      Xin chào <strong>${object.partner_id.name}</strong>,
+    </p>
+    <p style="font-size:14px;color:#555;margin:0 0 24px;">
+      Yêu cầu đổi trả <strong>${object.name}</strong> cho đơn hàng
+      <strong>${object.order_id.name}</strong> đã được tiếp nhận thành công.
+      Chúng tôi sẽ xem xét và phản hồi trong vòng <strong>1–3 ngày làm việc</strong>.
+    </p>
+
+    <!-- Return summary -->
+    <div style="border:1px solid #e5e5e5;padding:16px;margin-bottom:24px;">
+      <table style="width:100%;border-collapse:collapse;">
+        <tr>
+          <td style="font-size:12px;color:#888;padding:4px 0;letter-spacing:0.06em;text-transform:uppercase;">Mã yêu cầu</td>
+          <td style="font-size:13px;font-weight:600;text-align:right;padding:4px 0;">${object.name}</td>
+        </tr>
+        <tr>
+          <td style="font-size:12px;color:#888;padding:4px 0;letter-spacing:0.06em;text-transform:uppercase;">Đơn hàng gốc</td>
+          <td style="font-size:13px;text-align:right;padding:4px 0;">${object.order_id.name}</td>
+        </tr>
+        <tr>
+          <td style="font-size:12px;color:#888;padding:4px 0;letter-spacing:0.06em;text-transform:uppercase;">Lý do</td>
+          <td style="font-size:13px;text-align:right;padding:4px 0;">
+            % if object.reason == 'wrong_size':
+            Sai size
+            % elif object.reason == 'defective':
+            Hàng lỗi/hỏng
+            % elif object.reason == 'wrong_item':
+            Sai sản phẩm
+            % elif object.reason == 'not_as_desc':
+            Không đúng mô tả
+            % elif object.reason == 'changed_mind':
+            Đổi ý
+            % else:
+            Lý do khác
+            % endif
+          </td>
+        </tr>
+        <tr>
+          <td style="font-size:12px;color:#888;padding:4px 0;letter-spacing:0.06em;text-transform:uppercase;">Hình thức hoàn tiền</td>
+          <td style="font-size:13px;text-align:right;padding:4px 0;">
+            % if object.refund_method == 'coolcash':
+            CoolCash
+            % else:
+            Chuyển khoản
+            % endif
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Return lines -->
+    <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+      <thead>
+        <tr style="border-bottom:2px solid #1a1a1a;">
+          <th style="text-align:left;padding:8px 0;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;">Sản phẩm đổi trả</th>
+          <th style="text-align:center;padding:8px 0;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;">SL</th>
+          <th style="text-align:right;padding:8px 0;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;">Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        % for line in object.return_lines:
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:10px 0;font-size:13px;">${line.product_id.product_tmpl_id.name if line.product_id else '—'}</td>
+          <td style="padding:10px 0;font-size:13px;text-align:center;">${int(line.return_qty)}</td>
+          <td style="padding:10px 0;font-size:13px;text-align:right;">${'{:,.0f}'.format(line.subtotal)} đ</td>
+        </tr>
+        % endfor
+      </tbody>
+    </table>
+
+    <!-- Estimated refund -->
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;padding:12px 16px;margin-bottom:24px;font-size:13px;color:#0369a1;">
+      Dự kiến hoàn: <strong>${'{:,.0f}'.format(object.refund_amount)} đ</strong>
+      % if object.refund_method == 'coolcash':
+      (CoolCash)
+      % else:
+      (Chuyển khoản ngân hàng)
+      % endif
+    </div>
+
+    <!-- Next steps -->
+    <div style="border-left:3px solid #1a1a1a;padding:12px 16px;margin-bottom:24px;background:#fafafa;">
+      <p style="margin:0 0 6px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;">Các bước tiếp theo</p>
+      <ol style="margin:0;padding-left:18px;font-size:13px;color:#555;line-height:1.8;">
+        <li>Đội ngũ FashionOS sẽ xem xét yêu cầu trong 1–3 ngày làm việc</li>
+        <li>Khi được duyệt, bạn sẽ nhận hướng dẫn gửi hàng hoàn</li>
+        <li>Sau khi nhận hàng, chúng tôi sẽ xử lý hoàn tiền trong 24 giờ</li>
+      </ol>
+    </div>
+
+    <p style="font-size:13px;color:#555;margin:0;">
+      Nếu có câu hỏi, vui lòng liên hệ qua email này với mã yêu cầu <strong>${object.name}</strong>.<br/>
+      Cảm ơn bạn đã tin tưởng <strong>FashionOS</strong>!
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div style="background:#f5f5f5;padding:16px 32px;text-align:center;">
+    <p style="margin:0;font-size:11px;color:#aaa;letter-spacing:0.04em;">
+      © FashionOS — Email này được gửi tự động, vui lòng không reply.
+    </p>
+  </div>
+
+</div>
+]]>
+      </field>
+    </record>
+
+  </data>
+</odoo>

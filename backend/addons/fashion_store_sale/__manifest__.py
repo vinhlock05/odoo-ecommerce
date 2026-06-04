@@ -22,7 +22,7 @@ sale.order.line:
 ''',
     'author': 'FashionOS',
     'depends': ['sale', 'fashion_store_config', 'stock'],
-    'data': [],
+    'data': ['data/mail_templates.xml'],
     'installable': True,
     'application': False,
     'auto_install': False,

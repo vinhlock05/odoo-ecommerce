@@ -10,6 +10,7 @@ from odoo import http
 from odoo.exceptions import AccessError, UserError, ValidationError
 
 from ..utils.jwt_auth import get_partner_from_request
+from ..utils.mail import send_mail_safe
 from ..utils.response import error, ok, parse_body
 
 _logger = logging.getLogger(__name__)
@@ -270,6 +271,9 @@ class CheckoutController(http.Controller):
                 '(order is confirmed, loyalty update skipped)',
                 partner.id, cart.name,
             )
+
+        # ── 7c. Send order confirmation email ─────────────────────────
+        send_mail_safe('fashion_store_sale.mail_template_order_confirmation', cart.id)
 
         # ── 8. Return order summary ────────────────────────────────────
         su_partner = su['res.partner'].browse(partner.id)

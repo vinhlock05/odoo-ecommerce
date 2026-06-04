@@ -10,6 +10,7 @@ from odoo import http
 from odoo.http import request
 
 from ..utils.jwt_auth import get_partner_from_request
+from ..utils.mail import send_mail_safe
 from ..utils.response import error, ok, paginated, parse_body
 
 _logger = logging.getLogger(__name__)
@@ -102,6 +103,7 @@ class ReturnsController(http.Controller):
             _logger.exception('Create return failed for partner %s order %s', partner.id, order_id)
             return error('Failed to create return request', 500, 'SERVER_ERROR')
 
+        send_mail_safe('fashion_store_return.mail_template_return_received', ret.id)
         return ok(_return_dict(ret), 201)
 
     # ------------------------------------------------------------------

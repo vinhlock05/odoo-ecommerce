@@ -47,8 +47,10 @@ const nextConfig: NextConfig = {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       odooRemotePattern(ODOO_URL),
-      // Docker internal
+      // Docker internal service name
       { protocol: 'http', hostname: 'odoo', port: '8069', pathname: '/web/image/**' },
+      // Localhost dev (NEXT_PUBLIC_ODOO_URL may be localhost when browser fetches images)
+      { protocol: 'http', hostname: 'localhost', port: '8069', pathname: '/web/image/**' },
       // Placeholder images used as fallback
       { protocol: 'https', hostname: 'placehold.co' },
     ],

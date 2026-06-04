@@ -51,4 +51,9 @@ playwright-report/
 *.bak
 *.tmp
 
+# Security scan outputs (generated, not source)
+inventory.json
+scan_results.json
+security-report-*.md
+
 .claude/

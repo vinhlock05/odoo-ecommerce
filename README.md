@@ -1,118 +1,125 @@
-# FashionOS — Headless Odoo eCommerce Template
+# FashionOS — Headless Fashion eCommerce
 
-> MVP v0.1 | Odoo v19 + Next.js 15 | Kiến trúc Headless Fashion eCommerce
+Production-ready headless eCommerce platform built on **Odoo 19** (backend/ERP) + **Next.js 16** (frontend), communicating via a custom REST API with JWT authentication.
 
----
+Designed as a reference architecture for Vietnamese fashion brands wanting Odoo ERP power with a modern custom storefront — similar to Coolmate/Gymbody.
 
-## Quick Start
+## Architecture
 
-### 1. Cập nhật image Odoo trong `.env`
-
-```bash
-# .env
-ODOO_IMAGE=odoo:19.0   # hoặc image v19 của bạn
+```
+[Next.js 16 + TypeScript]  ←  REST API  →  [Odoo 19 + Python]
+   App Router + Tailwind        JWT            11 custom modules
+        :3000                               PostgreSQL 16 + :8069
+              ↑
+         [nginx + SSL]
 ```
 
-### 2. Khởi động Odoo + PostgreSQL
+## Features
+
+| Area | What's built |
+|------|-------------|
+| Auth | Custom JWT (HS256), register/login/refresh |
+| Catalog | Products, variants, slug-based URLs, categories |
+| Cart | Draft order pattern (`x_is_cart`), CoolCash apply |
+| Checkout | Address validation, referral codes, order confirmation |
+| Payments | VNPay HMAC-SHA512 gateway |
+| Delivery | GHN API v2 shipment + tracking webhook |
+| Loyalty | CoolCash earn/redeem, tier system (Member/Silver/Gold) |
+| Referral | Auto-generate codes, 50k referee discount, 100k referrer reward |
+| Returns | Customer portal — submit request, CoolCash refund |
+| Smart Routing | Province-based warehouse routing |
+| Combo Engine | Expand combo product lines on order confirm |
+| Account | Profile, addresses, order history, returns, CoolCash history |
+| Admin AI | Claude API dashboard + catalog recommendations |
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Backend | Odoo 19, Python 3.11 |
+| Frontend | Next.js 16, TypeScript, Tailwind CSS v4 |
+| Database | PostgreSQL 16 |
+| Auth | Custom JWT via Python stdlib |
+| Payment | VNPay |
+| Delivery | GHN |
+| DevOps | Docker Compose, GitHub Actions CI/CD |
+| Monitoring | Sentry, nginx uptime, `/api/health` endpoint |
+| Infra | nginx reverse proxy, SSL, automated pg_dump backup |
+
+## Quick Start (Development)
+
+**Prerequisites:** Docker, Docker Compose, Node.js 20+
 
 ```bash
+# 1. Clone and configure
+git clone https://github.com/YOUR_USER/odoo-ecommerce.git
+cd odoo-ecommerce
+cp .env.example .env   # fill in passwords
+
+# 2. Start backend
 docker compose up -d
-```
 
-Odoo chạy tại: http://localhost:8069
+# 3. Install Odoo modules (first time only)
+docker compose exec odoo odoo -d fashionos \
+  --init=fashion_store_api --stop-after-init
 
-### 3. Cài module `fashionos_base`
-
-1. Vào http://localhost:8069
-2. Tạo database mới (hoặc dùng database có sẵn)
-3. Settings → Activate Developer Mode
-4. Apps → Update App List
-5. Tìm **FashionOS - Base** → Install
-
-### 4. Test API
-
-```bash
-# Health check
-curl http://localhost:8069/fashionos/api/v1/health
-
-# Product list
-curl http://localhost:8069/fashionos/api/v1/products
-
-# Single product
-curl http://localhost:8069/fashionos/api/v1/products/1
-```
-
-### 5. Chạy Frontend
-
-```bash
+# 4. Start frontend
 cd frontend/fashionos-web
 npm install
-npm run dev
+npm run dev   # http://localhost:3000
 ```
 
-Frontend tại: http://localhost:3000
+Odoo admin: http://localhost:8069 — database: `fashionos`
 
----
+## Production Deployment
+
+```bash
+# On a fresh Ubuntu 22.04 VPS:
+curl -sL https://raw.githubusercontent.com/YOUR_USER/odoo-ecommerce/main/infra/setup/server-setup.sh | sudo bash
+
+# Then as the deploy user:
+cd /opt/fashionos
+cp .env.example .env && nano .env
+bash infra/setup/first-deploy.sh
+sudo certbot --nginx -d yourdomain.com
+```
+
+CI/CD via GitHub Actions — configure `SERVER_HOST`, `SERVER_USER`, `SSH_PRIVATE_KEY` in repository secrets.
 
 ## Project Structure
 
 ```
-fashionos/
-├── custom_addons/
-│   └── fashionos_base/          # Odoo custom module
-│       ├── __manifest__.py
-│       └── controllers/
-│           └── main.py          # REST API endpoints
-├── frontend/
-│   └── fashionos-web/           # Next.js 15 App Router
-│       ├── app/
-│       │   └── products/page.tsx
-│       ├── components/
-│       │   └── ProductCard.tsx
-│       └── lib/
-│           └── api.ts           # API client + types
+├── backend/
+│   ├── addons/           # 11 custom Odoo modules
+│   │   ├── fashionos_base/
+│   │   ├── fashion_store_api/      # JWT + 50+ REST endpoints
+│   │   ├── fashion_store_loyalty/  # CoolCash + tiers
+│   │   ├── payment_vnpay/          # VNPay gateway
+│   │   ├── delivery_ghn/           # GHN delivery
+│   │   └── ...
+│   ├── Dockerfile
+│   └── requirements.txt
+├── frontend/fashionos-web/
+│   ├── app/              # Next.js App Router pages
+│   ├── components/       # Shared UI components
+│   └── lib/api.ts        # Typed API client (30+ functions)
+├── infra/
+│   ├── nginx/            # nginx config with rate limiting + SSL
+│   ├── backup/           # pg_dump + restore scripts
+│   ├── monitoring/       # uptime config for BetterStack/UptimeRobot
+│   └── setup/            # server provisioning scripts
+├── .github/workflows/    # CI (typecheck + lint) + CD (SSH deploy)
 ├── docker-compose.yml
-└── .env
+└── docker-compose.prod.yml
 ```
 
-## API Endpoints (MVP)
+## API Reference
 
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | `/fashionos/api/v1/health` | None | Health check |
-| GET | `/fashionos/api/v1/products` | Public | Product list (paginated) |
-| GET | `/fashionos/api/v1/products/<id>` | Public | Product detail + variants |
+Base URL: `/fashionos/api/v1/`  
+Auth: `Authorization: Bearer <jwt_token>`
 
-### Query Parameters (products list)
+Key endpoints: `POST /auth/login`, `GET /catalog/products`, `POST /cart/items`, `POST /cart/checkout`, `GET /account/orders`, `POST /account/returns`
 
-| Param | Default | Description |
-|-------|---------|-------------|
-| `limit` | 20 | Max 100 |
-| `offset` | 0 | Pagination offset |
-| `category_id` | — | Filter by Odoo product category |
+## License
 
----
-
-## Roadmap
-
-| Sprint | Feature | Status |
-|--------|---------|--------|
-| S0 | Module scaffold + health/products API | ✅ MVP Done |
-| S1 | JWT Auth (OCA fastapi_auth_partner_jwt) | Next |
-| S2 | Cart + Checkout (ShopInvader) | Planned |
-| S3 | CoolCash loyalty + CoolClub membership | Planned |
-| S4 | VNPay / MoMo / ZaloPay payments | Planned |
-| S5 | GHN / GHTK delivery integration | Planned |
-| S6 | Killer Features (Returns, Smart Routing, Combo) | Planned |
-| S7 | AI Recommendations + P&L Dashboard | Planned |
-
----
-
-## Tech Stack
-
-- **Backend**: Odoo v19 Enterprise + OCA FastAPI + ShopInvader
-- **Frontend**: Next.js 15 App Router + TypeScript + Tailwind CSS
-- **Database**: PostgreSQL 16
-- **Auth**: JWT (OCA `fastapi_auth_partner_jwt`)
-- **Payments**: VNPay · MoMo · ZaloPay
-- **Delivery**: GHN · GHTK
+MIT

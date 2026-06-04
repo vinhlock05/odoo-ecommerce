@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next'
+import { withSentryConfig } from '@sentry/nextjs'
 
 // Mock global localStorage on server-side (Node.js 25+) to prevent SSR TypeError
 if (typeof globalThis !== 'undefined') {
@@ -11,14 +12,14 @@ if (typeof globalThis !== 'undefined') {
         clear: () => {},
         key: () => null,
         length: 0,
-      };
+      }
       Object.defineProperty(globalThis, 'localStorage', {
         value: mockStorage,
         writable: true,
         configurable: true,
-      });
+      })
     }
-  } catch (e) {
+  } catch {
     // Avoid crashing if property is not configurable
   }
 }
@@ -47,7 +48,6 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        // Proxy all /api/odoo/** → Odoo backend (server-side, no CORS)
         source: '/api/odoo/:path*',
         destination: `${ODOO_URL}/fashionos/api/v1/:path*`,
       },
@@ -55,5 +55,17 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default nextConfig
+export default withSentryConfig(nextConfig, {
+  // Sentry org + project (set in env or CI secrets)
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  // Upload source maps only in CI (SENTRY_AUTH_TOKEN must be set)
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: !process.env.CI,
+  // Disable source map upload when no auth token — won't break local builds
+  sourcemaps: {
+    disable: !process.env.SENTRY_AUTH_TOKEN,
+  },
+  telemetry: false,
+})
 

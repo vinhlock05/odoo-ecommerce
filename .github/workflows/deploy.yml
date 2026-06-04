@@ -27,6 +27,10 @@ jobs:
 
       - name: Install & typecheck
         working-directory: frontend/fashionos-web
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         run: |
           npm ci --legacy-peer-deps
           npx tsc --noEmit

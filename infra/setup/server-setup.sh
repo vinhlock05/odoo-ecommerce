@@ -2,7 +2,7 @@
 # FashionOS — First-time server provisioning
 #
 # Run as root on a fresh Ubuntu 22.04 / 24.04 VPS:
-#   curl -sL https://raw.githubusercontent.com/YOUR_USER/odoo-ecommerce/main/infra/setup/server-setup.sh | bash
+#   curl -sL https://raw.githubusercontent.com/vinhlock05/odoo-ecommerce/main/infra/setup/server-setup.sh | bash
 #
 # What this script does:
 #   1. System update + essential packages
@@ -15,7 +15,7 @@
 set -euo pipefail
 
 DEPLOY_USER="fashionos"
-REPO_URL="${REPO_URL:-https://github.com/YOUR_USER/odoo-ecommerce.git}"
+REPO_URL="${REPO_URL:-https://github.com/vinhlock05/odoo-ecommerce.git}"
 INSTALL_DIR="/opt/fashionos"
 
 log()  { echo -e "\033[1;32m[setup]\033[0m $*"; }

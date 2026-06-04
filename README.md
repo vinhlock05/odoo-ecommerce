@@ -52,7 +52,7 @@ Designed as a reference architecture for Vietnamese fashion brands wanting Odoo 
 
 ```bash
 # 1. Clone and configure
-git clone https://github.com/YOUR_USER/odoo-ecommerce.git
+git clone https://github.com/vinhlock05/odoo-ecommerce.git
 cd odoo-ecommerce
 cp .env.example .env   # fill in passwords
 
@@ -75,7 +75,7 @@ Odoo admin: http://localhost:8069 — database: `fashionos`
 
 ```bash
 # On a fresh Ubuntu 22.04 VPS:
-curl -sL https://raw.githubusercontent.com/YOUR_USER/odoo-ecommerce/main/infra/setup/server-setup.sh | sudo bash
+curl -sL https://raw.githubusercontent.com/vinhlock05/odoo-ecommerce/main/infra/setup/server-setup.sh | sudo bash
 
 # Then as the deploy user:
 cd /opt/fashionos

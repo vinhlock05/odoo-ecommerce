@@ -26,23 +26,31 @@ if (typeof globalThis !== 'undefined') {
 
 const ODOO_URL = process.env.ODOO_INTERNAL_URL ?? process.env.NEXT_PUBLIC_ODOO_URL ?? 'http://localhost:8069'
 
+function odooRemotePattern(urlStr: string) {
+  try {
+    const u = new URL(urlStr)
+    return {
+      protocol: u.protocol.replace(':', '') as 'http' | 'https',
+      hostname: u.hostname,
+      port: u.port || undefined,
+      pathname: '/web/image/**',
+    }
+  } catch {
+    return { protocol: 'http' as const, hostname: 'localhost', port: '8069', pathname: '/web/image/**' }
+  }
+}
+
 const nextConfig: NextConfig = {
   turbopack: {},
   output: process.env.BUILD_STANDALONE === '1' ? 'standalone' : undefined,
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '8069',
-        pathname: '/web/image/**',
-      },
-      {
-        protocol: 'http',
-        hostname: 'odoo',
-        port: '8069',
-        pathname: '/web/image/**',
-      },
+      odooRemotePattern(ODOO_URL),
+      // Docker internal
+      { protocol: 'http', hostname: 'odoo', port: '8069', pathname: '/web/image/**' },
+      // Placeholder images used as fallback
+      { protocol: 'https', hostname: 'placehold.co' },
     ],
   },
   async rewrites() {

@@ -4,12 +4,36 @@ import Header from '@/components/Header'
 import Toaster from '@/components/Toast'
 import CartDrawer from '@/components/CartDrawer'
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fashionos.vn'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'FashionOS',
+    default: 'FashionOS — Thời Trang Thể Thao Việt Nam',
     template: '%s | FashionOS',
   },
-  description: 'Headless eCommerce Platform for Fashion Brands — Powered by Odoo v19',
+  description:
+    'Thời trang thể thao chất lượng cao thuần Việt — free ship từ 500k, đổi trả 30 ngày, tích CoolCash mỗi đơn. Coolmate, Gymbody alternative.',
+  keywords: ['thời trang thể thao', 'áo thun', 'quần short', 'coolmate', 'gymwear', 'vietnam fashion'],
+  openGraph: {
+    type: 'website',
+    locale: 'vi_VN',
+    url: SITE_URL,
+    siteName: 'FashionOS',
+    title: 'FashionOS — Thời Trang Thể Thao Việt Nam',
+    description: 'Thời trang thể thao chất lượng cao thuần Việt — free ship, đổi trả 30 ngày, tích CoolCash.',
+    images: [{ url: '/og-default.png', width: 1200, height: 630, alt: 'FashionOS' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FashionOS — Thời Trang Thể Thao Việt Nam',
+    description: 'Thời trang thể thao chất lượng cao — free ship, đổi trả 30 ngày.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
 }
 
 export default function RootLayout({
@@ -54,7 +78,7 @@ function Footer() {
           </div>
           <div className="text-sm text-gray-500">
             <p>Backend: <span className="text-gray-300">Odoo v19 + REST API</span></p>
-            <p>Frontend: <span className="text-gray-300">Next.js 15 App Router</span></p>
+            <p>Frontend: <span className="text-gray-300">Next.js 16 App Router</span></p>
             <p className="mt-4 text-xs">MVP v0.1 — FashionOS 2026</p>
           </div>
         </div>

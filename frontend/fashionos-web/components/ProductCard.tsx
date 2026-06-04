@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Product } from '@/lib/api'
 import { formatPrice, imageUrl, addToCart } from '@/lib/api'
 import { getToken } from '@/lib/auth'
@@ -120,17 +121,15 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Image area — overflow clip stays here, NOT on the Link */}
       <div className="relative overflow-hidden aspect-[3/4] bg-fashionos-surface">
         <Link href={`/products/${product.id}`} className="absolute inset-0 block">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={imageUrl(product.image_url)}
             alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-            loading="lazy"
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             onError={(e) => {
-              const t = e.target as HTMLImageElement
-              t.src = `https://placehold.co/400x533/F4F4F4/9CA3AF?text=${encodeURIComponent(
-                product.name.slice(0, 14),
-              )}`
+              (e.target as HTMLImageElement).src =
+                `https://placehold.co/400x533/F4F4F4/9CA3AF?text=${encodeURIComponent(product.name.slice(0, 14))}`
             }}
           />
         </Link>

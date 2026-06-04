@@ -1,0 +1,64 @@
+# Production docker-compose — NO --dev=all, proper workers, no source mounts
+# Usage: docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+services:
+  db:
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+  odoo:
+    ports: []
+    expose:
+      - "8069"
+    volumes:
+      - ./backend/addons:/mnt/extra-addons:ro
+      - odoodata:/var/lib/odoo
+    environment:
+      HOST: db
+      USER: ${DB_USER}
+      PASSWORD: ${DB_PASSWORD}
+    command: >
+      odoo
+        --db_host=db
+        --db_user=${DB_USER}
+        --db_password=${DB_PASSWORD}
+        --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons
+        --workers=4
+        --max-cron-threads=2
+        --logfile=/var/lib/odoo/odoo.log
+        --log-level=warn
+
+  frontend:
+    build:
+      context: ./frontend/fashionos-web
+      dockerfile: Dockerfile
+      target: production
+      args:
+        NEXT_PUBLIC_ODOO_URL: ${NEXT_PUBLIC_ODOO_URL}
+    volumes: []
+    ports: []
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_ODOO_URL: ${NEXT_PUBLIC_ODOO_URL}
+      ODOO_INTERNAL_URL: http://odoo:8069
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infra/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./infra/nginx/certs:/etc/nginx/certs:ro
+      - nginx_cache:/var/cache/nginx
+    depends_on:
+      - odoo
+      - frontend
+
+volumes:
+  nginx_cache:

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { verifyVnpayReturn, formatPrice } from '@/lib/api'
 
@@ -13,7 +13,7 @@ interface PaymentResult {
   message: string
 }
 
-export default function VnpayResultPage() {
+function VnpayResultContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [result, setResult] = useState<PaymentResult | null>(null)
@@ -32,16 +32,7 @@ export default function VnpayResultPage() {
       .finally(() => setLoading(false))
   }, [searchParams])
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">Đang xác nhận thanh toán...</p>
-        </div>
-      </div>
-    )
-  }
+  if (loading) return null
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -115,5 +106,20 @@ export default function VnpayResultPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function VnpayResultPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">Đang xác nhận thanh toán...</p>
+        </div>
+      </div>
+    }>
+      <VnpayResultContent />
+    </Suspense>
   )
 }

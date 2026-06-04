@@ -27,6 +27,7 @@ const ODOO_URL = process.env.ODOO_INTERNAL_URL ?? process.env.NEXT_PUBLIC_ODOO_U
 
 const nextConfig: NextConfig = {
   turbopack: {},
+  output: process.env.BUILD_STANDALONE === '1' ? 'standalone' : undefined,
   images: {
     remotePatterns: [
       {

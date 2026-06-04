@@ -1,23 +1,21 @@
-version: '3.8'
-
 services:
   db:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_DB: fashionos
-      POSTGRES_USER: odoo
-      POSTGRES_PASSWORD: odoo_secret
+      POSTGRES_DB: ${DB_NAME:-fashionos}
+      POSTGRES_USER: ${DB_USER:-odoo}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-odoo_secret}
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U odoo -d fashionos" ]
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER:-odoo} -d ${DB_NAME:-fashionos}" ]
       interval: 5s
       timeout: 3s
       retries: 10
 
   odoo:
-    image: odoo:19.0
+    image: ${ODOO_IMAGE:-odoo:19.0}
     restart: unless-stopped
     depends_on:
       db:
@@ -29,11 +27,11 @@ services:
       - odoodata:/var/lib/odoo
     environment:
       HOST: db
-      USER: odoo
-      PASSWORD: odoo_secret
+      USER: ${DB_USER:-odoo}
+      PASSWORD: ${DB_PASSWORD:-odoo_secret}
     # v19 command tối ưu cho development, tự động reload khi sửa code Python
     command: >
-      odoo --db_host=db --db_user=odoo --db_password=odoo_secret --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons --dev=all
+      odoo --db_host=db --db_user=${DB_USER:-odoo} --db_password=${DB_PASSWORD:-odoo_secret} --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons --dev=all
     healthcheck:
       test: [ "CMD-SHELL", "curl -sf http://localhost:8069/web/health || exit 1" ]
       interval: 15s

@@ -6,7 +6,7 @@
     -->
     <record id="product_referral_discount" model="product.template">
         <field name="name">Ưu đãi giới thiệu</field>
-        <field name="detailed_type">service</field>
+        <field name="type">service</field>
         <field name="list_price">0</field>
         <field name="sale_ok" eval="True"/>
         <field name="purchase_ok" eval="False"/>

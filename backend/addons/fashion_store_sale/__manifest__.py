@@ -22,7 +22,7 @@ sale.order.line:
 ''',
     'author': 'FashionOS',
     'depends': ['sale', 'fashion_store_config', 'stock'],
-    'data': ['data/mail_templates.xml'],
+    'data': [],  # mail_templates.xml deferred: needs QWeb conversion for Odoo 19
     'installable': True,
     'application': False,
     'auto_install': False,

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+  <data noupdate="1">
         <!--
             S1 Master Data — Product Attributes
             noupdate="1": created once, not overwritten on upgrade.
@@ -154,5 +154,5 @@
             <field name="html_color">#DC2626</field>
             <field name="sequence">8</field>
         </record>
-    </data>
+  </data>
 </odoo>

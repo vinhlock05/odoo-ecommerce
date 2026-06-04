@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+  <data noupdate="1">
         <!--
             S1 Master Data — Product Category Tree
             Root → Áo / Quần / Phụ kiện / Đồ lót / Đồ thể thao
@@ -106,6 +106,5 @@
             <field name="name">Bộ thể thao</field>
             <field name="parent_id" ref="cat_the_thao"/>
         </record>
-
-    </data>
+  </data>
 </odoo>

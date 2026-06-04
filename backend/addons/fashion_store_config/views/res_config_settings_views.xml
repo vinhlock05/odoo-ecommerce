@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
         <!-- Extend the main Settings form to add a FashionOS tab -->
         <record id="res_config_settings_view_fashionos" model="ir.ui.view">
             <field name="name">res.config.settings.view.fashionos</field>
@@ -267,5 +266,4 @@
                 </xpath>
             </field>
         </record>
-    </data>
 </odoo>

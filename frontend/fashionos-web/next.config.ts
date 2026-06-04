@@ -26,6 +26,7 @@ if (typeof globalThis !== 'undefined') {
 const ODOO_URL = process.env.ODOO_INTERNAL_URL ?? process.env.NEXT_PUBLIC_ODOO_URL ?? 'http://localhost:8069'
 
 const nextConfig: NextConfig = {
+  turbopack: {},
   images: {
     remotePatterns: [
       {
@@ -50,15 +51,6 @@ const nextConfig: NextConfig = {
         destination: `${ODOO_URL}/fashionos/api/v1/:path*`,
       },
     ]
-  },
-  webpack: (config, { dev }) => {
-    if (dev) {
-      config.watchOptions = {
-        poll: 1000,          // Check for changes every second
-        aggregateTimeout: 300, // Delay rebuild slightly to batch changes
-      }
-    }
-    return config
   },
 }
 

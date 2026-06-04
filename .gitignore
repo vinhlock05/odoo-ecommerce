@@ -38,6 +38,10 @@ pgdata/
 odoo_data/
 *.log
 
+# DB backups — never commit
+backups/*.sql.gz
+backups/*.sql
+
 # Playwright
 .playwright-mcp/
 test-results/

@@ -687,6 +687,77 @@ export async function verifyVnpayReturn(
 }
 
 // ---------------------------------------------------------------------------
+// Client-side Returns API
+// ---------------------------------------------------------------------------
+
+export interface ReturnLine {
+  id: number
+  product_name: string
+  return_qty: number
+  price_unit: number
+  subtotal: number
+}
+
+export interface ReturnSummary {
+  id: number
+  name: string
+  order_id: number
+  order_name: string
+  state: string
+  reason: string
+  note: string
+  refund_amount: number
+  refund_method: string
+  create_date: string
+  lines: ReturnLine[]
+}
+
+export interface ReturnsResponse {
+  success: boolean
+  data: ReturnSummary[]
+  meta?: Pagination
+  error?: { code: string; message: string }
+}
+
+export interface ReturnResponse {
+  success: boolean
+  data: ReturnSummary
+  error?: { code: string; message: string }
+}
+
+export async function getReturns(
+  token: string,
+  params?: { page?: number; limit?: number },
+): Promise<ReturnsResponse> {
+  const qs = new URLSearchParams()
+  if (params?.page)  qs.set('page', String(params.page))
+  if (params?.limit) qs.set('limit', String(params.limit))
+  const query = qs.toString() ? `?${qs}` : ''
+  return clientFetch<ReturnsResponse>(`/account/returns${query}`, { method: 'GET' }, token)
+}
+
+export async function getReturn(token: string, returnId: number): Promise<ReturnResponse> {
+  return clientFetch<ReturnResponse>(`/account/returns/${returnId}`, { method: 'GET' }, token)
+}
+
+export async function createReturn(
+  token: string,
+  data: {
+    order_id: number
+    reason: string
+    note?: string
+    refund_method?: 'coolcash' | 'bank'
+    lines: { order_line_id: number; return_qty: number }[]
+  },
+): Promise<ReturnResponse> {
+  return clientFetch<ReturnResponse>(
+    '/account/returns',
+    { method: 'POST', body: JSON.stringify(data) },
+    token,
+  )
+}
+
+// ---------------------------------------------------------------------------
 // Client-side Referral API
 // ---------------------------------------------------------------------------
 

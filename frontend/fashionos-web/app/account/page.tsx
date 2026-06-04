@@ -11,6 +11,8 @@ import {
   deleteAddress,
   getOrders,
   getOrder,
+  getReturns,
+  createReturn,
   getLoyalty,
   getLoyaltyHistory,
   formatPrice,
@@ -18,12 +20,13 @@ import {
   type Address,
   type OrderSummary,
   type Order,
+  type ReturnSummary,
   type LoyaltyStatus,
   type LoyaltyTransaction,
 } from '@/lib/api'
 import { getToken, isLoggedIn, logout } from '@/lib/auth'
 
-type Tab = 'profile' | 'addresses' | 'orders' | 'loyalty'
+type Tab = 'profile' | 'addresses' | 'orders' | 'returns' | 'loyalty'
 
 // ---------------------------------------------------------------------------
 // Root page
@@ -72,6 +75,7 @@ export default function AccountPage() {
     { id: 'profile', label: 'Thông tin' },
     { id: 'addresses', label: 'Địa chỉ' },
     { id: 'orders', label: 'Đơn hàng' },
+    { id: 'returns', label: 'Đổi trả' },
     { id: 'loyalty', label: 'CoolCash' },
   ]
 
@@ -131,6 +135,7 @@ export default function AccountPage() {
       )}
       {activeTab === 'addresses' && <AddressesTab />}
       {activeTab === 'orders' && <OrdersTab />}
+      {activeTab === 'returns' && <ReturnsTab />}
       {activeTab === 'loyalty' && <LoyaltyTab />}
     </div>
   )
@@ -922,6 +927,538 @@ function OrderDetail({ orderId, onBack }: { orderId: number; onBack: () => void 
       ) : null}
     </div>
   )
+}
+
+// ---------------------------------------------------------------------------
+// Returns tab
+// ---------------------------------------------------------------------------
+
+const RETURN_REASON_LABELS: Record<string, string> = {
+  wrong_size:   'Sai size',
+  defective:    'Hàng lỗi/hỏng',
+  wrong_item:   'Sai sản phẩm',
+  not_as_desc:  'Không đúng mô tả',
+  changed_mind: 'Đổi ý',
+  other:        'Lý do khác',
+}
+
+const RETURN_STATE_CONFIG: Record<string, { label: string; color: string }> = {
+  draft:    { label: 'Chờ duyệt',      color: 'text-amber-600' },
+  approved: { label: 'Đã duyệt',       color: 'text-blue-600' },
+  shipped:  { label: 'Đang hoàn hàng', color: 'text-blue-600' },
+  done:     { label: 'Hoàn tất',       color: 'text-green-700' },
+  rejected: { label: 'Từ chối',        color: 'text-red-600' },
+}
+
+type ReturnStep = 'list' | 'select_order' | 'select_items' | 'fill_details' | 'success'
+
+interface SelectedLine {
+  order_line_id: number
+  product_name: string
+  variant_name: string
+  max_qty: number
+  return_qty: number
+  price_unit: number
+}
+
+function ReturnsTab() {
+  const [step, setStep]           = useState<ReturnStep>('list')
+  const [returns, setReturns]     = useState<ReturnSummary[]>([])
+  const [loading, setLoading]     = useState(true)
+  const [errorMsg, setErrorMsg]   = useState('')
+  const [page, setPage]           = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+
+  // New return form state
+  const [orders, setOrders]               = useState<OrderSummary[]>([])
+  const [ordersLoading, setOrdersLoading] = useState(false)
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
+  const [orderLoading, setOrderLoading]   = useState(false)
+  const [selectedLines, setSelectedLines] = useState<SelectedLine[]>([])
+  const [reason, setReason]               = useState('')
+  const [note, setNote]                   = useState('')
+  const [refundMethod, setRefundMethod]   = useState<'coolcash' | 'bank'>('coolcash')
+  const [submitting, setSubmitting]       = useState(false)
+  const [formError, setFormError]         = useState('')
+  const [successReturn, setSuccessReturn] = useState<ReturnSummary | null>(null)
+
+  const loadReturns = useCallback(async (p: number) => {
+    const token = getToken()!
+    setLoading(true)
+    setErrorMsg('')
+    try {
+      const res = await getReturns(token, { page: p, limit: 10 })
+      if (res.success) {
+        setReturns(res.data)
+        setTotalPages(res.meta?.total_pages ?? 1)
+      } else {
+        setErrorMsg('Không thể tải danh sách đổi trả.')
+      }
+    } catch {
+      setErrorMsg('Lỗi kết nối. Vui lòng thử lại.')
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    loadReturns(page)
+  }, [loadReturns, page])
+
+  async function startNewReturn() {
+    setOrdersLoading(true)
+    setFormError('')
+    try {
+      const token = getToken()!
+      const res = await getOrders(token, { page: 1, limit: 50 })
+      if (res.success) {
+        // only confirmed / done orders can be returned
+        setOrders(res.data.filter((o) => o.state === 'sale' || o.state === 'done'))
+      }
+    } catch {
+      setFormError('Không thể tải đơn hàng. Vui lòng thử lại.')
+    } finally {
+      setOrdersLoading(false)
+      setStep('select_order')
+    }
+  }
+
+  async function handleSelectOrder(orderId: number) {
+    setOrderLoading(true)
+    setFormError('')
+    try {
+      const token = getToken()!
+      const res = await getOrder(token, orderId)
+      if (res.success) {
+        setSelectedOrder(res.data)
+        setSelectedLines(
+          res.data.lines.map((l) => ({
+            order_line_id: l.id,
+            product_name: l.product_name,
+            variant_name: l.variant_name,
+            max_qty: l.quantity,
+            return_qty: 0,
+            price_unit: l.price_unit,
+          }))
+        )
+        setStep('select_items')
+      } else {
+        setFormError('Không thể tải chi tiết đơn hàng.')
+      }
+    } catch {
+      setFormError('Lỗi kết nối. Vui lòng thử lại.')
+    } finally {
+      setOrderLoading(false)
+    }
+  }
+
+  function updateLineQty(orderLineId: number, qty: number) {
+    setSelectedLines((prev) =>
+      prev.map((l) =>
+        l.order_line_id === orderLineId
+          ? { ...l, return_qty: Math.max(0, Math.min(qty, l.max_qty)) }
+          : l
+      )
+    )
+  }
+
+  async function handleSubmit() {
+    const linesToReturn = selectedLines
+      .filter((l) => l.return_qty > 0)
+      .map((l) => ({
+        order_line_id: l.order_line_id,
+        product_name: l.product_name,
+        variant_name: l.variant_name,
+        price_unit: l.price_unit,
+        return_qty: Math.min(l.return_qty, l.max_qty),
+        max_qty: l.max_qty,
+      }))
+    if (linesToReturn.length === 0) {
+      setFormError('Vui lòng chọn ít nhất một sản phẩm để đổi trả.')
+      return
+    }
+    if (!reason) {
+      setFormError('Vui lòng chọn lý do đổi trả.')
+      return
+    }
+    const token = getToken()!
+    setSubmitting(true)
+    setFormError('')
+    try {
+      const res = await createReturn(token, {
+        order_id: selectedOrder!.id,
+        reason,
+        note: note.trim() || undefined,
+        refund_method: refundMethod,
+        lines: linesToReturn.map((l) => ({
+          order_line_id: l.order_line_id,
+          return_qty: l.return_qty,
+        })),
+      })
+      if (res.success) {
+        setSuccessReturn(res.data)
+        setStep('success')
+        loadReturns(1)
+        setPage(1)
+      } else {
+        setFormError(res.error?.message ?? 'Không thể tạo yêu cầu đổi trả.')
+      }
+    } catch {
+      setFormError('Lỗi kết nối. Vui lòng thử lại.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  function resetForm() {
+    setStep('list')
+    setPage(1)
+    setSelectedOrder(null)
+    setSelectedLines([])
+    setReason('')
+    setNote('')
+    setRefundMethod('coolcash')
+    setFormError('')
+    setSuccessReturn(null)
+  }
+
+  // --- STEP: List ---
+  if (step === 'list') {
+    return (
+      <div className="max-w-2xl">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-sm font-medium tracking-widest uppercase">Đổi trả hàng</h2>
+          <button
+            onClick={startNewReturn}
+            className="text-xs tracking-widest uppercase font-medium border border-fashionos-border px-4 py-2 hover:border-fashionos-black hover:bg-fashionos-black hover:text-fashionos-white transition-colors"
+          >
+            + Tạo yêu cầu mới
+          </button>
+        </div>
+
+        {errorMsg && (
+          <div className="mb-5 px-4 py-3 bg-red-50 border border-red-200 text-red-700 text-sm">
+            {errorMsg}
+          </div>
+        )}
+
+        {loading ? (
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => <div key={i} className="h-20 bg-fashionos-surface animate-pulse" />)}
+          </div>
+        ) : returns.length === 0 ? (
+          <div className="border border-dashed border-fashionos-border p-12 text-center">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-fashionos-muted mx-auto mb-4">
+              <polyline points="1 4 1 10 7 10" />
+              <path d="M3.51 15a9 9 0 1 0 .49-4.98" />
+            </svg>
+            <p className="text-fashionos-muted text-sm mb-4">Bạn chưa có yêu cầu đổi trả nào.</p>
+            <button
+              onClick={startNewReturn}
+              className="text-xs tracking-widest uppercase font-medium border border-fashionos-border px-5 py-2.5 hover:border-fashionos-black hover:bg-fashionos-black hover:text-fashionos-white transition-colors"
+            >
+              Tạo yêu cầu đầu tiên
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="space-y-3">
+              {returns.map((ret) => {
+                const stateCfg = RETURN_STATE_CONFIG[ret.state] ?? { label: ret.state, color: 'text-fashionos-muted' }
+                return (
+                  <div key={ret.id} className="border border-fashionos-border p-4 bg-white">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium">{ret.name}</p>
+                        <p className="text-xs text-fashionos-muted mt-0.5">
+                          Đơn hàng: {ret.order_name}
+                          {' · '}{RETURN_REASON_LABELS[ret.reason] ?? ret.reason}
+                        </p>
+                        <p className="text-xs text-fashionos-muted mt-0.5">
+                          {new Date(ret.create_date).toLocaleDateString('vi-VN', {
+                            day: '2-digit', month: '2-digit', year: 'numeric',
+                          })}
+                        </p>
+                      </div>
+                      <div className="text-right flex-shrink-0">
+                        <p className="text-sm font-medium">{formatPrice(ret.refund_amount)}</p>
+                        <p className={`text-xs mt-0.5 ${stateCfg.color}`}>{stateCfg.label}</p>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-4 mt-6">
+                <button disabled={page === 1} onClick={() => setPage((p) => p - 1)}
+                  className="text-xs tracking-widest uppercase text-fashionos-muted hover:text-fashionos-black disabled:opacity-40 transition-colors">
+                  ← Trước
+                </button>
+                <span className="text-xs text-fashionos-muted">{page} / {totalPages}</span>
+                <button disabled={page === totalPages} onClick={() => setPage((p) => p + 1)}
+                  className="text-xs tracking-widest uppercase text-fashionos-muted hover:text-fashionos-black disabled:opacity-40 transition-colors">
+                  Tiếp →
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    )
+  }
+
+  // --- STEP: Select order ---
+  if (step === 'select_order') {
+    return (
+      <div className="max-w-2xl">
+        <button onClick={resetForm} className="flex items-center gap-2 text-xs text-fashionos-muted hover:text-fashionos-black transition-colors mb-6 tracking-widest uppercase">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
+          Quay lại
+        </button>
+
+        <h2 className="text-sm font-medium tracking-widest uppercase mb-6">Chọn đơn hàng cần đổi trả</h2>
+
+        {formError && (
+          <div className="mb-4 px-4 py-3 bg-red-50 border border-red-200 text-red-700 text-sm">{formError}</div>
+        )}
+
+        {ordersLoading ? (
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => <div key={i} className="h-16 bg-fashionos-surface animate-pulse" />)}
+          </div>
+        ) : orders.length === 0 ? (
+          <div className="border border-dashed border-fashionos-border p-12 text-center">
+            <p className="text-fashionos-muted text-sm">Không có đơn hàng nào đủ điều kiện đổi trả.</p>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {orders.map((order) => (
+              <button
+                key={order.id}
+                onClick={() => handleSelectOrder(order.id)}
+                disabled={orderLoading}
+                className="w-full text-left border border-fashionos-border p-4 hover:border-fashionos-black transition-colors bg-white group disabled:opacity-60"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium group-hover:text-fashionos-accent transition-colors">{order.name}</p>
+                    <p className="text-xs text-fashionos-muted mt-0.5">
+                      {new Date(order.date_order).toLocaleDateString('vi-VN', {
+                        day: '2-digit', month: '2-digit', year: 'numeric',
+                      })}
+                      {' · '}{order.item_count} sản phẩm
+                    </p>
+                  </div>
+                  <p className="text-sm font-medium">{formatPrice(order.amount_total)}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  // --- STEP: Select items ---
+  if (step === 'select_items') {
+    const hasAnyQty = selectedLines.some((l) => l.return_qty > 0)
+
+    return (
+      <div className="max-w-2xl">
+        <button onClick={() => setStep('select_order')} className="flex items-center gap-2 text-xs text-fashionos-muted hover:text-fashionos-black transition-colors mb-6 tracking-widest uppercase">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
+          Quay lại
+        </button>
+
+        <h2 className="text-sm font-medium tracking-widest uppercase mb-1">Chọn sản phẩm đổi trả</h2>
+        <p className="text-xs text-fashionos-muted mb-6">Đơn hàng: {selectedOrder?.name}</p>
+
+        {formError && (
+          <div className="mb-4 px-4 py-3 bg-red-50 border border-red-200 text-red-700 text-sm">{formError}</div>
+        )}
+
+        <div className="border border-fashionos-border divide-y divide-fashionos-border mb-6">
+          {selectedLines.map((line) => (
+            <div key={line.order_line_id} className="p-4 flex items-center gap-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium">{line.product_name}</p>
+                {line.variant_name && (
+                  <p className="text-xs text-fashionos-muted mt-0.5">{line.variant_name}</p>
+                )}
+                <p className="text-xs text-fashionos-muted mt-0.5">
+                  {formatPrice(line.price_unit)} · Đã mua: {line.max_qty}
+                </p>
+              </div>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <button
+                  onClick={() => updateLineQty(line.order_line_id, line.return_qty - 1)}
+                  disabled={line.return_qty === 0}
+                  className="w-8 h-8 border border-fashionos-border flex items-center justify-center text-fashionos-muted hover:border-fashionos-black hover:text-fashionos-black transition-colors disabled:opacity-30"
+                >
+                  −
+                </button>
+                <span className="w-8 text-center text-sm tabular-nums">{line.return_qty}</span>
+                <button
+                  onClick={() => updateLineQty(line.order_line_id, line.return_qty + 1)}
+                  disabled={line.return_qty >= line.max_qty}
+                  className="w-8 h-8 border border-fashionos-border flex items-center justify-center text-fashionos-muted hover:border-fashionos-black hover:text-fashionos-black transition-colors disabled:opacity-30"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button
+          onClick={() => { setFormError(''); setStep('fill_details') }}
+          disabled={!hasAnyQty}
+          className="w-full bg-fashionos-black text-fashionos-white py-3.5 text-xs tracking-widest uppercase font-medium hover:bg-fashionos-accent transition-colors disabled:opacity-40"
+        >
+          Tiếp theo
+        </button>
+      </div>
+    )
+  }
+
+  // --- STEP: Fill details ---
+  if (step === 'fill_details') {
+    const linesToReturn = selectedLines.filter((l) => l.return_qty > 0)
+    const estimatedRefund = linesToReturn.reduce(
+      (sum, l) => sum + l.return_qty * l.price_unit, 0
+    )
+
+    return (
+      <div className="max-w-2xl">
+        <button onClick={() => setStep('select_items')} className="flex items-center gap-2 text-xs text-fashionos-muted hover:text-fashionos-black transition-colors mb-6 tracking-widest uppercase">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
+          Quay lại
+        </button>
+
+        <h2 className="text-sm font-medium tracking-widest uppercase mb-6">Chi tiết yêu cầu đổi trả</h2>
+
+        {formError && (
+          <div className="mb-4 px-4 py-3 bg-red-50 border border-red-200 text-red-700 text-sm">{formError}</div>
+        )}
+
+        {/* Summary of selected items */}
+        <div className="border border-fashionos-border p-4 mb-6 space-y-1">
+          <p className="text-xs tracking-widest uppercase font-medium mb-2">Sản phẩm đổi trả</p>
+          {linesToReturn.map((l) => (
+            <div key={l.order_line_id} className="flex justify-between text-xs text-fashionos-muted">
+              <span>{l.product_name}{l.variant_name ? ` — ${l.variant_name}` : ''} × {l.return_qty}</span>
+              <span>{formatPrice(l.return_qty * l.price_unit)}</span>
+            </div>
+          ))}
+          <div className="flex justify-between text-sm font-medium pt-2 border-t border-fashionos-border mt-2">
+            <span>Dự kiến hoàn</span>
+            <span>{formatPrice(estimatedRefund)}</span>
+          </div>
+        </div>
+
+        <div className="space-y-5">
+          {/* Reason */}
+          <div>
+            <label className="block text-xs tracking-widest uppercase font-medium mb-2">
+              Lý do đổi trả *
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+              {Object.entries(RETURN_REASON_LABELS).map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setReason(value)}
+                  className={`py-2.5 px-3 border text-xs font-medium transition-colors text-left ${
+                    reason === value
+                      ? 'bg-fashionos-black text-fashionos-white border-fashionos-black'
+                      : 'border-fashionos-border text-fashionos-muted hover:border-fashionos-black hover:text-fashionos-black'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Refund method */}
+          <div>
+            <label className="block text-xs tracking-widest uppercase font-medium mb-2">
+              Hình thức hoàn tiền
+            </label>
+            <div className="flex gap-3">
+              {(['coolcash', 'bank'] as const).map((m) => (
+                <button
+                  key={m}
+                  type="button"
+                  onClick={() => setRefundMethod(m)}
+                  className={`flex-1 py-2.5 border text-xs tracking-widest uppercase font-medium transition-colors ${
+                    refundMethod === m
+                      ? 'bg-fashionos-black text-fashionos-white border-fashionos-black'
+                      : 'border-fashionos-border text-fashionos-muted hover:border-fashionos-black hover:text-fashionos-black'
+                  }`}
+                >
+                  {m === 'coolcash' ? 'CoolCash' : 'Chuyển khoản'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Note */}
+          <div>
+            <label className="block text-xs tracking-widest uppercase font-medium mb-1.5">
+              Ghi chú thêm
+            </label>
+            <textarea
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              rows={3}
+              placeholder="Mô tả thêm về tình trạng sản phẩm…"
+              className="w-full border border-fashionos-border px-4 py-3 text-sm focus:outline-none focus:border-fashionos-black transition-colors resize-none"
+            />
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            disabled={submitting || !reason}
+            className="w-full bg-fashionos-black text-fashionos-white py-3.5 text-xs tracking-widest uppercase font-medium hover:bg-fashionos-accent transition-colors disabled:opacity-40"
+          >
+            {submitting ? 'Đang gửi…' : 'Gửi yêu cầu đổi trả'}
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  // --- STEP: Success ---
+  if (step === 'success') {
+    if (!successReturn) { resetForm(); return null }
+    return (
+      <div className="max-w-2xl">
+        <div className="border border-fashionos-border p-8 text-center">
+          <div className="w-12 h-12 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mx-auto mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-green-600">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <h2 className="text-sm font-medium tracking-widest uppercase mb-2">Yêu cầu đã được gửi</h2>
+          <p className="text-xs text-fashionos-muted mb-1">Mã yêu cầu: <span className="font-medium text-fashionos-black">{successReturn.name}</span></p>
+          <p className="text-xs text-fashionos-muted mb-6">
+            Chúng tôi sẽ xem xét và phản hồi trong vòng 1–3 ngày làm việc.
+          </p>
+          <button
+            onClick={resetForm}
+            className="text-xs tracking-widest uppercase font-medium border border-fashionos-border px-6 py-2.5 hover:border-fashionos-black hover:bg-fashionos-black hover:text-fashionos-white transition-colors"
+          >
+            Về danh sách đổi trả
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  return null
 }
 
 // ---------------------------------------------------------------------------

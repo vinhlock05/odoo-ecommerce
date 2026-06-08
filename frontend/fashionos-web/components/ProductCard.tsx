@@ -7,6 +7,7 @@ import type { Product } from '@/lib/api'
 import { formatPrice, imageUrl, addToCart } from '@/lib/api'
 import { getToken } from '@/lib/auth'
 import { showToast } from '@/components/Toast'
+import { getProductPhoto } from '@/lib/photos'
 
 interface ProductCardProps {
   product: Product
@@ -26,6 +27,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [selectedColor, setSelectedColor] = useState<string | null>(null)
   const [selectedSize, setSelectedSize] = useState<string | null>(null)
   const [adding, setAdding] = useState(false)
+  const [imgError, setImgError] = useState(false)
+  const fallbackPhoto = getProductPhoto(product.category, product.id)
+  // Priority: Odoo image → Unsplash fallback → CSS placeholder
+  const imgSrc = product.image_url ? imageUrl(product.image_url) : fallbackPhoto
+  const showImage = !!imgSrc && !imgError
 
   // Derived badge flags
   const isSale =
@@ -121,17 +127,27 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Image area — overflow clip stays here, NOT on the Link */}
       <div className="relative overflow-hidden aspect-[3/4] bg-fashionos-surface">
         <Link href={`/products/${product.id}`} className="absolute inset-0 block">
-          <Image
-            src={imageUrl(product.image_url)}
-            alt={product.name}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src =
-                `https://placehold.co/400x533/F4F4F4/9CA3AF?text=${encodeURIComponent(product.name.slice(0, 14))}`
-            }}
-          />
+          {showImage ? (
+            <Image
+              src={imgSrc!}
+              alt={product.name}
+              fill
+              unoptimized
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#F7F5F2] to-[#EDE9E3] select-none">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="opacity-20 mb-3" aria-hidden>
+                <path d="M24 4C24 4 16 10 8 10v4l8 4v20h16V18l8-4v-4c-8 0-16-6-16-6z" stroke="#6B6055" strokeWidth="2" strokeLinejoin="round"/>
+                <path d="M16 18h16" stroke="#6B6055" strokeWidth="1.5"/>
+              </svg>
+              <span className="text-[10px] tracking-widest uppercase text-[#9B9189] font-medium px-4 text-center line-clamp-2 leading-relaxed">
+                {product.name}
+              </span>
+            </div>
+          )}
         </Link>
 
         {/* Hover panel — sibling to Link so buttons are valid HTML */}

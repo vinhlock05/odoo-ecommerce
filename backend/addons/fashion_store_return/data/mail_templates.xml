@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <data noupdate="1">
-
     <record id="mail_template_return_received" model="mail.template">
       <field name="name">FashionOS: Yêu cầu đổi trả đã tiếp nhận</field>
       <field name="model_id" ref="fashion_store_return.model_fashion_return_request"/>
@@ -127,6 +126,5 @@
 ]]>
       </field>
     </record>
-
   </data>
 </odoo>

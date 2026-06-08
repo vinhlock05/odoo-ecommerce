@@ -177,7 +177,7 @@ def _product_summary(tmpl) -> dict:
         'currency_id': tmpl.currency_id.name if tmpl.currency_id else 'VND',
         'categ_id': tmpl.categ_id.id if tmpl.categ_id else None,
         'categ_name': tmpl.categ_id.name if tmpl.categ_id else '',
-        'image_url': f'/web/image/product.template/{tmpl.id}/image_128',
+        'image_url': f'/web/image/product.template/{tmpl.id}/image_128' if tmpl.image_128 else None,
         'variant_count': len(tmpl.product_variant_ids),
         'variants': variants,
     }
@@ -226,7 +226,7 @@ def _product_detail(tmpl) -> dict:
         'x_season': getattr(tmpl, 'x_season', '') or '',
         'x_gender': getattr(tmpl, 'x_gender', '') or '',
         'x_style_tags': getattr(tmpl, 'x_style_tags', '') or '',
-        'image_url': f'/web/image/product.template/{tmpl.id}/image_1920',
+        'image_url': f'/web/image/product.template/{tmpl.id}/image_1920' if tmpl.image_1920 else None,
         'attributes': attributes,
         'variants': variants,
     })

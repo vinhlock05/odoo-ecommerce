@@ -246,6 +246,16 @@ async function clientFetch<T>(
 
   const res = await fetch(url, { ...options, headers })
   const json = (await res.json()) as T
+
+  // Token expired or invalid — clear auth and redirect to login
+  if (res.status === 401 && token) {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('fashionos_token')
+      localStorage.removeItem('fashionos_user')
+      window.location.href = `/login?session=expired`
+    }
+  }
+
   return json
 }
 

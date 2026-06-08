@@ -53,6 +53,8 @@ const nextConfig: NextConfig = {
       { protocol: 'http', hostname: 'localhost', port: '8069', pathname: '/web/image/**' },
       // Placeholder images used as fallback
       { protocol: 'https', hostname: 'placehold.co' },
+      // Unsplash CDN for product & category photos
+      { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
   },
   async rewrites() {

@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { getProducts, type Product } from '@/lib/api'
 import ProductCard from '@/components/ProductCard'
+import { CATEGORY_HERO } from '@/lib/photos'
 
 // ─── Homepage ────────────────────────────────────────────────────────────────
 
@@ -220,7 +222,19 @@ function CategoryBento() {
               cat.size,
             ].join(' ')}
           >
-            <div className={['absolute inset-0 bg-gradient-to-br opacity-90 transition-opacity group-hover:opacity-75', cat.gradient].join(' ')} />
+            {/* Real photo background */}
+            {CATEGORY_HERO[cat.slug] && (
+              <Image
+                src={CATEGORY_HERO[cat.slug]}
+                alt={cat.label}
+                fill
+                unoptimized
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            )}
+            {/* Gradient overlay — darker for text legibility */}
+            <div className={['absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10 transition-opacity group-hover:from-black/70', cat.gradient, 'opacity-70 group-hover:opacity-50'].join(' ')} />
             <div className="relative z-10 h-full flex flex-col justify-end p-5 lg:p-7">
               <p className="eyebrow text-fashionos-white/50 mb-1">Danh mục</p>
               <h3 className="text-xl lg:text-2xl font-bold text-white mb-1">{cat.label}</h3>

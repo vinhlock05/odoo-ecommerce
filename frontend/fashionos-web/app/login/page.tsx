@@ -2,12 +2,14 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { loginUser } from '@/lib/api'
 import { setToken, setUser } from '@/lib/auth'
 
 export default function LoginPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const sessionExpired = searchParams.get('session') === 'expired'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -57,6 +59,13 @@ export default function LoginPage() {
             </Link>
             <p className="mt-3 text-fashionos-muted text-sm">Đăng nhập để tiếp tục mua sắm</p>
           </div>
+
+          {/* Session expired banner */}
+          {sessionExpired && !errorMsg && (
+            <div className="mb-6 px-4 py-3 bg-amber-50 border border-amber-200 text-amber-800 text-sm rounded">
+              Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.
+            </div>
+          )}
 
           {/* Error */}
           {errorMsg && (

@@ -66,6 +66,16 @@ class ProductTemplate(models.Model):
     )
 
     # -------------------------------------------------------------------------
+    # Pricing / Sale Badge
+    # -------------------------------------------------------------------------
+
+    x_compare_price = fields.Float(
+        string='Compare at Price',
+        default=0.0,
+        help='Original price before discount. If > list_price, a sale badge is shown on the storefront.',
+    )
+
+    # -------------------------------------------------------------------------
     # CoolCash Override
     # -------------------------------------------------------------------------
 

@@ -100,11 +100,18 @@ class CatalogController(http.Controller):
             except (ValueError, TypeError):
                 return error('max_price must be a valid number', 400, 'VALIDATION_ERROR')
 
+        # tag=sale — products where compare_price > list_price
+        tag = (params.get('tag') or '').strip().lower()
+        if tag == 'sale':
+            domain.append(('x_compare_price', '>', 0))
+
         order_map = {
             'name': 'name asc',
             'price_asc': 'list_price asc',
             'price_desc': 'list_price desc',
             'newest': 'create_date desc',
+            'name_asc': 'name asc',
+            'name_desc': 'name desc',
         }
         order = order_map.get(sort_by, 'name asc')
 
@@ -169,11 +176,16 @@ def _product_summary(tmpl) -> dict:
             'attributes': attr_values,
         })
 
+    compare_price = tmpl.x_compare_price if (
+        hasattr(tmpl, 'x_compare_price') and tmpl.x_compare_price and tmpl.x_compare_price > tmpl.list_price
+    ) else None
+
     return {
         'id': tmpl.id,
         'name': tmpl.name,
         'slug': tmpl.x_slug or '',
         'list_price': tmpl.list_price,
+        'compare_price': compare_price,
         'currency_id': tmpl.currency_id.name if tmpl.currency_id else 'VND',
         'categ_id': tmpl.categ_id.id if tmpl.categ_id else None,
         'categ_name': tmpl.categ_id.name if tmpl.categ_id else '',

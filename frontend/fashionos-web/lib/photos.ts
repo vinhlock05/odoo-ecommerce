@@ -61,7 +61,7 @@ const PHOTOS: Record<string, string[]> = {
 
 const DEFAULT = `${B}1521572163474-6864f9cf17ab${P}`
 
-export function getProductPhoto(category: string | undefined, productId: number): string {
+export function getProductPhoto(category: string | null | undefined, productId: number): string {
   const photos = PHOTOS[category?.trim() ?? '']
   if (!photos?.length) return DEFAULT
   return photos[productId % photos.length]
